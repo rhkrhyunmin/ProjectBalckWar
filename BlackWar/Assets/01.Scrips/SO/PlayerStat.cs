@@ -22,7 +22,10 @@ public class PlayerStat : ScriptableObject
     [Header("Situation")]
     public Stat MaxHp;
     public Stat MoveSpeed;
+    [Header("Attack")]
     public Stat AttackPower;
+    public Stat AttackDistance;
+    public Stat AttackDelay;
 
     [Header("UseCost")]
     public Stat UseCost;

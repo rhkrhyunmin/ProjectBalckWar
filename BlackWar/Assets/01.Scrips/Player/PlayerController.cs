@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -11,13 +9,13 @@ public class PlayerController : MonoBehaviour
         Attacking
     }
 
+    public PlayerStat stat;
     private State currentState;
-    public float moveSpeed = 2.0f;
-    public float attackDuration = 1.0f; // 공격이 지속되는 시간
-    private float attackTimer = 0.0f;
 
-    public Transform enemy; // 적의 Transform
-    public float attackRange = 5.0f; // 공격 가능한 거리
+    public LayerMask enemyLayer; // 적이 포함된 레이어
+    public float attackRange = 5.0f; // 공격 범위
+
+    private float attackTimer; // 공격의 남은 시간
 
     private void Start()
     {
@@ -30,7 +28,6 @@ public class PlayerController : MonoBehaviour
         switch (currentState)
         {
             case State.Idle:
-                // 현재 상태가 Idle일 때의 동작을 정의할 수 있습니다.
                 break;
 
             case State.Moving:
@@ -55,13 +52,13 @@ public class PlayerController : MonoBehaviour
 
         if (currentState == State.Attacking)
         {
-            attackTimer = attackDuration;
+            attackTimer = stat.AttackDelay.GetValue(); // 공격 시작 시 타이머를 AttackDelay로 초기화
         }
     }
 
     private void Move()
     {
-        transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
+        transform.Translate(Vector2.right * stat.MoveSpeed.GetValue() * Time.deltaTime);
         if (transform.position.x > 10.0f) // 예를 들어 x=10에서 Idle 상태로 전환
         {
             ChangeState(State.Idle);
@@ -70,10 +67,10 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        attackTimer -= Time.deltaTime;
+        attackTimer -= Time.deltaTime; // 공격 시간이 경과함에 따라 감소
         if (attackTimer <= 0.0f)
         {
-            ChangeState(State.Idle);
+            ChangeState(State.Idle); // 공격이 끝나면 Idle 상태로 전환
         }
         else
         {
@@ -84,12 +81,17 @@ public class PlayerController : MonoBehaviour
 
     private void CheckForAttack()
     {
-        if (enemy == null) return;
+        // 적 탐지 범위 내에서 적이 있는지 확인
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, stat.AttackDistance.GetValue(), enemyLayer);
 
-        float distance = Vector2.Distance(transform.position, enemy.position);
-        if (distance <= attackRange)
+        if (enemies.Length > 0)
         {
+            Debug.Log("Enemy detected within attack range.");
             StartAttacking();
+        }
+        else
+        {
+            Debug.Log("No enemies detected within attack range.");
         }
     }
 
