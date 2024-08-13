@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerChooseUI : MonoBehaviour
 {
-    public List<Button> buttons; // 버튼을 담을 리스트
+    public List<Button> buttons;
+    public GameObject Spawner;
 
     private void Start()
     {
@@ -21,11 +22,30 @@ public class PlayerChooseUI : MonoBehaviour
         int index = buttons.IndexOf(button);
         if (index >= 0 && index < buttons.Count)
         {
-            PoolManager.Instance.Pop(PoolType.knight, Vector3.zero);
+            // 인덱스를 통해 적절한 PoolType을 선택합니다.
+            PoolType type = GetPoolTypeByIndex(index);
+            PoolManager.Instance.Pop(type, Spawner.transform.position);
         }
         else
         {
-            
+            Debug.Log("에러");
+        }
+    }
+
+    private PoolType GetPoolTypeByIndex(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                return PoolType.knight;
+            case 1:
+                return PoolType.Archer;
+            case 2:
+                return PoolType.Ninja;
+            case 3:
+                return PoolType.Spearman;
+            default:
+                return PoolType.None; 
         }
     }
 }
