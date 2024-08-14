@@ -116,11 +116,12 @@ public class PlayerController : PlayerBrain
 
     private void Attack()
     {
+        isAttack = true;
         if (attackCooldownTimer <= 0.0f)
         {
             // 공격 로직 처리 후, 공격 쿨다운 설정
             attackCooldownTimer = stat.AttackDelay.GetValue();
-            //ChangeState(State.Moving); // 공격 후 Moving으로 전환
+            isAttack = false;
         }
     }
 
