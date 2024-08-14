@@ -22,8 +22,11 @@ public class PlayerController : PlayerBrain
 
     [HideInInspector]
     public bool isWalk;
+    [HideInInspector]
     public bool isAttack;
+    [HideInInspector]
     public bool isHit;
+    [HideInInspector]
     public bool isDie;
 
     private void Start()

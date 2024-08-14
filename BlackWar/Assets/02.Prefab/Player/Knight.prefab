@@ -198,8 +198,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7569e280033d5cb4eb6c840168322290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolType: 1
+  sameLifeCycle: 0
   stat: {fileID: 11400000, guid: d0e1680959d7f774088166e5b774e303, type: 2}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  attackRange: 5
+  CurrentHp: 0
+  isWalk: 0
+  isAttack: 0
+  isHit: 0
+  isDie: 0
