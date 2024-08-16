@@ -1,85 +1,68 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RangedAttack : MonoBehaviour
 {
-    public float speed = 10f;                      // 투사체 속도
-    public float height = 1f;                      // 포물선 높이
-    public Vector3 targetPosition;                 // 목표 위치
-    public bool isHoming = false;                  // 유도 여부
-
-    public GameObject targetObject;                // 목표로 할 오브젝트 (유도 투사체의 경우)
-
-    private Vector3 startPosition;                 // 투사체의 시작 위치
-    private float timeToTarget;                    // 목표까지 걸리는 시간
-    private float elapsedTime = 0f;                // 경과된 시간
-    private bool isLaunched = false;               // 발사 상태 확인
-
-    // 초기화 함수
-    public void Initialize(Vector3 target, float projectileSpeed, float projectileHeight, GameObject targetObj = null, bool homing = false)
+    public virtual void LaunchProjectile(Vector3 initialTarget, float projectileSpeed, float projectileHeight, PoolableMono targetObj, bool homing = false, bool isParabolic = true)
     {
-        startPosition = transform.position;
-        targetPosition = target;
-        speed = projectileSpeed;
-        height = projectileHeight;
-        targetObject = targetObj;
-        isHoming = homing;
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = initialTarget;
+        float timeToTarget = Vector3.Distance(startPosition, targetPosition) / projectileSpeed;
 
-        // 목표까지 걸리는 시간 계산
-        timeToTarget = Vector3.Distance(startPosition, targetPosition) / speed;
-        elapsedTime = 0f;
-        isLaunched = true; // 발사 상태로 설정
+        // Create an instance of the projectile from the pool
+        PoolableMono projectile = PoolManager.Instance.Pop(targetObj.poolType, startPosition);
+        projectile.transform.position = startPosition;
+
+        StartCoroutine(ProjectileCoroutine(projectile, startPosition, targetPosition, timeToTarget, projectileHeight, targetObj, homing, isParabolic));
     }
 
-    void Update()
+    // Coroutine to manage projectile trajectory
+    private IEnumerator ProjectileCoroutine(PoolableMono projectile, Vector3 startPosition, Vector3 initialTargetPosition, float timeToTarget, float height, PoolableMono targetObject, bool isHoming = false, bool isParabolic = true)
     {
-        if(Input.GetKeyDown(KeyCode.L))
+        float elapsedTime = 0f;
+        Vector3 currentTargetPosition = initialTargetPosition;
+
+        while (elapsedTime < timeToTarget)
         {
-            Initialize(new Vector3(5,0,0), 5, 2);
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / timeToTarget);
+
+            // Update target position if homing
+            if (isHoming && targetObject != null)
+            {
+                currentTargetPosition = targetObject.transform.position;
+            }
+
+            // Calculate the projectile's current position
+            Vector3 currentPos;
+            if (isParabolic)
+            {
+                // Parabolic path
+                currentPos = Vector3.Lerp(startPosition, currentTargetPosition, t);
+                float heightAtT = Mathf.Sin(t * Mathf.PI) * height;
+                currentPos.y += heightAtT;
+            }
+            else
+            {
+                // Linear path
+                currentPos = Vector3.Lerp(startPosition, currentTargetPosition, t);
+            }
+
+            // Update projectile position
+            projectile.transform.position = currentPos;
+
+            yield return null;
         }
 
-        if (isLaunched)
-        {
-            LaunchProjectile();
-        }
+        // Ensure the projectile ends up at the target position
+        projectile.transform.position = initialTargetPosition;
+
+        OnProjectileHit(projectile);
     }
 
-    // 투사체의 발사 로직
-    private void LaunchProjectile()
+    // Method called when the projectile hits the target
+    public virtual void OnProjectileHit(PoolableMono projectile)
     {
-        elapsedTime += Time.deltaTime;
-
-        // 진행 상태 계산
-        float t = Mathf.Clamp01(elapsedTime / timeToTarget);
-
-        // 유도 투사체의 경우 목표 위치 갱신
-        if (isHoming && targetObject != null)
-        {
-            targetPosition = targetObject.transform.position;
-        }
-
-        // 포물선 경로 계산
-        Vector3 currentPos = Vector3.Lerp(startPosition, targetPosition, t);
-
-        // 포물선 효과 추가
-        float heightAtT = Mathf.Sin(t * Mathf.PI) * height;
-        currentPos.y += heightAtT;
-
-        // 현재 위치로 이동
-        transform.position = currentPos;
-
-        // 목표에 도달한 경우
-        if (t >= 1f)
-        {
-            isLaunched = false;
-            OnProjectileHit();
-        }
-    }
-
-    // 목표에 도달했을 때 호출되는 함수
-    private void OnProjectileHit()
-    {
-        Destroy(gameObject); // 투사체 제거
+        PoolManager.Instance.Push(projectile);
     }
 }
