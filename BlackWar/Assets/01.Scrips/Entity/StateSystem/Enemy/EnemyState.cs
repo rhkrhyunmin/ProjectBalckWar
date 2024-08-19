@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class EnemyState
@@ -17,9 +18,33 @@ public class EnemyState
         _stateMachine = stateMachine;
     }
 
+    #region Enter
+    protected void MoveEnter()
+    {
+        _triggerCalled = true;
+    }
+
+    protected void AttackEnter()
+    {
+        _triggerCalled = false;
+    }
+    #endregion
+
+    #region Exit
+    protected void MoveExit()
+    {
+
+    }
+
+    protected void AttackExit()
+    {
+        _enemy.AnimatorCompo.speed = 1;
+    }
+    #endregion
+
     public virtual void OnEnterState()
     {
-        _enemy.AnimatorCompo.SetBool(_animBoolHash, true); //들어오면 내 애니메이션을 활성화 해주는 것
+        _enemy.AnimatorCompo.SetBool(_animBoolHash, true); //들어오면 내 애니메이션을 활성화
 
     }
 

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmyAttackState : ArmyState
+public class EnemyAttackState : EnemyState
 {
-    public ArmyAttackState(Army army, ArmyStateMachine armyStateMachine, string animationBoolName) : base(army, armyStateMachine, animationBoolName)
+    public EnemyAttackState(Enemy enemy, EnemyStateMachine enemyStateMachine, string animationBoolName) : base(enemy, enemyStateMachine, animationBoolName)
     {
     }
 
@@ -14,12 +14,12 @@ public class ArmyAttackState : ArmyState
 
         AttackEnter();
     }
-
+    
     public override void OnUpdateState()
     {
         base.OnUpdateState();
 
-        if(_triggerCalled) //공격
+        if (_triggerCalled) //공격
         {
             //코드 작성
         }
