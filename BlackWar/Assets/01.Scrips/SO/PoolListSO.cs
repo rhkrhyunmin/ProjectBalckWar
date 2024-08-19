@@ -9,7 +9,8 @@ public enum PoolType
     knight,
     Spearman,
     Archer,
-    Ninja,
+    Ninja = 100,
+    Arrow,
 }
 
 [Serializable]

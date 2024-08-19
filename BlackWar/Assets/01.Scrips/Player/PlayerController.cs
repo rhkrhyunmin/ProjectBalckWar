@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : PlayerBrain
 {
     private enum State
     {
@@ -18,29 +18,47 @@ public class PlayerController : MonoBehaviour
 
     public float CurrentHp;
 
-    //private float attackTimer;
     private float attackCooldownTimer;
 
     [HideInInspector]
     public bool isWalk;
+    [HideInInspector]
     public bool isAttack;
+    [HideInInspector]
     public bool isHit;
+    [HideInInspector]
     public bool isDie;
 
     private void Start()
     {
+        CurrentHp = stat.MaxHp.GetValue();
         currentState = State.Idle;
-        //attackTimer = 0.0f;
-        attackCooldownTimer = 0.0f; // 쿨다운 타이머 초기화
+        attackCooldownTimer = 0.0f;
         ChangeState(State.Moving); // 초기 상태를 Moving으로 설정
     }
 
     private void Update()
     {
+        HandleState();
+
+        // 쿨다운 타이머 업데이트
+        if (attackCooldownTimer > 0.0f)
+        {
+            attackCooldownTimer -= Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            ChangeState(State.Hitting);
+        }
+    }
+
+    private void HandleState()
+    {
         switch (currentState)
         {
             case State.Idle:
-                // Idle 상태에서 별도의 동작 없음
+                CheckForAttack();
                 break;
 
             case State.Moving:
@@ -49,7 +67,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case State.Hitting:
-                OnHit();
+                OnHit(5f);
                 break;
 
             case State.Attacking:
@@ -57,30 +75,35 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case State.Die:
-                // 죽음 상태에서 별도의 동작 없음
+                OnDie();
                 break;
         }
-
-        // 쿨다운 타이머 업데이트
-        if (attackCooldownTimer > 0.0f)
-        {
-            attackCooldownTimer -= Time.deltaTime;
-        }
+       // Debug.Log(isAttack);
     }
 
     private void ChangeState(State newState)
     {
-        if (currentState == State.Attacking && newState != State.Attacking)
-        {
-            isAttack = true;
-        }
+        // 상태 전환 규칙에 따라 상태 변경 허용 여부 결정
+        if (currentState == newState) return; // 같은 상태는 무시
 
+        // 상태 변경
         currentState = newState;
+        UpdateStateFlags();
 
-        if (currentState == State.Attacking)
+        // Attack 상태로 변경 시 이동 중지
+        if (newState == State.Attacking)
         {
-            isAttack = false;
+            isWalk = false;
         }
+    }
+
+    private void UpdateStateFlags()
+    {
+        isAttack = currentState == State.Attacking;
+        isWalk = currentState == State.Moving;
+        isHit = currentState == State.Hitting;
+        isDie = currentState == State.Die;
+        Debug.Log(currentState);
     }
 
     private void Move()
@@ -88,70 +111,55 @@ public class PlayerController : MonoBehaviour
         if (currentState == State.Moving)
         {
             transform.Translate(Vector2.right * stat.MoveSpeed.GetValue() * Time.deltaTime);
-
-            // 특정 위치에서 Idle 상태로 전환
-            if (transform.position.x > 10.0f)
-            {
-                ChangeState(State.Idle);
-            }
         }
     }
 
     private void Attack()
     {
-        if (!isAttack)
+        isAttack = true;
+        if (attackCooldownTimer <= 0.0f)
         {
-            ChangeState(State.Attacking);
-            isAttack = true;
-            Debug.Log("123");
-        }
-        else
-        {
-            ChangeState(State.Idle);
-            attackCooldownTimer = stat.AttackDelay.GetValue(); // 쿨다운 시간 설정
+            // 공격 로직 처리 후, 공격 쿨다운 설정
+            attackCooldownTimer = stat.AttackDelay.GetValue();
+            isAttack = false;
         }
     }
 
     private void CheckForAttack()
     {
-        if (currentState == State.Moving && attackCooldownTimer <= 0.0f)
+        if (currentState == State.Moving && !isAttack)
         {
             // 적 탐지 범위 내에서 적이 있는지 확인
             Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, stat.AttackDistance.GetValue(), enemyLayer);
 
             if (enemies.Length > 0)
             {
+                ChangeState(State.Attacking);
                 Attack();
-            }
-            else
-            {
-                isAttack = false;
             }
         }
     }
 
-   /* private void StartAttacking()
+    public void OnHit(float damage)
     {
-        if (currentState != State.Attacking)
-        {
-            ChangeState(State.Attacking);
-        }
-    }*/
-
-    public void OnHit()
-    {
+        CurrentHp -= damage;
         if (CurrentHp <= 0)
         {
-            OnDie();
+            ChangeState(State.Die);
+            isDie = true;
         }
+        else
+        {
+            ChangeState(State.Idle);
+        }
+
     }
 
     private void OnDie()
     {
         if (isDie)
         {
-            // PoolManager.Instance.Push();
-            Debug.Log("Player died.");
+            PoolManager.Instance.Push(this); // 필요시 활성화
         }
     }
 }
