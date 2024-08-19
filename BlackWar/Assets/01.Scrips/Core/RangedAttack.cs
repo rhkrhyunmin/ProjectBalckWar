@@ -3,66 +3,47 @@ using UnityEngine;
 
 public class RangedAttack : MonoBehaviour
 {
-    public virtual void LaunchProjectile(Vector3 initialTarget, float projectileSpeed, float projectileHeight, PoolableMono targetObj, bool homing = false, bool isParabolic = true)
+    public void StartShooting(Transform firePoint, PoolableMono Obj, Transform target, float fireRate, float projectileSpeed)
     {
-        Vector3 startPosition = transform.position;
-        Vector3 targetPosition = initialTarget;
-        float timeToTarget = Vector3.Distance(startPosition, targetPosition) / projectileSpeed;
-
-        // Create an instance of the projectile from the pool
-        PoolableMono projectile = PoolManager.Instance.Pop(targetObj.poolType, startPosition);
-        projectile.transform.position = startPosition;
-
-        StartCoroutine(ProjectileCoroutine(projectile, startPosition, targetPosition, timeToTarget, projectileHeight, targetObj, homing, isParabolic));
+        
+        StartCoroutine(ShootProjectile(firePoint, Obj, target, fireRate, projectileSpeed));
     }
 
-    // Coroutine to manage projectile trajectory
-    private IEnumerator ProjectileCoroutine(PoolableMono projectile, Vector3 startPosition, Vector3 initialTargetPosition, float timeToTarget, float height, PoolableMono targetObject, bool isHoming = false, bool isParabolic = true)
+    public void StopShooting()
     {
-        float elapsedTime = 0f;
-        Vector3 currentTargetPosition = initialTargetPosition;
+        StopAllCoroutines();
+    }
 
-        while (elapsedTime < timeToTarget)
+    IEnumerator ShootProjectile(Transform firePoint, PoolableMono OBj, Transform target, float fireRate, float projectileSpeed)
+    {
+        while (true)
         {
-            elapsedTime += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsedTime / timeToTarget);
-
-            // Update target position if homing
-            if (isHoming && targetObject != null)
-            {
-                currentTargetPosition = targetObject.transform.position;
-            }
-
-            // Calculate the projectile's current position
-            Vector3 currentPos;
-            if (isParabolic)
-            {
-                // Parabolic path
-                currentPos = Vector3.Lerp(startPosition, currentTargetPosition, t);
-                float heightAtT = Mathf.Sin(t * Mathf.PI) * height;
-                currentPos.y += heightAtT;
-            }
-            else
-            {
-                // Linear path
-                currentPos = Vector3.Lerp(startPosition, currentTargetPosition, t);
-            }
-
-            // Update projectile position
-            projectile.transform.position = currentPos;
-
-            yield return null;
+            Fire(firePoint, OBj, target, projectileSpeed);
+            yield return new WaitForSeconds(fireRate);
         }
-
-        // Ensure the projectile ends up at the target position
-        projectile.transform.position = initialTargetPosition;
-
-        OnProjectileHit(projectile);
     }
 
-    // Method called when the projectile hits the target
-    public virtual void OnProjectileHit(PoolableMono projectile)
+    void Fire(Transform firePoint, PoolableMono Obj, Transform target, float projectileSpeed)
     {
-        PoolManager.Instance.Push(projectile);
+        //PoolManager.Instance.Pop(Obj.poolType, transform.position);
+        Rigidbody2D rb = Obj.GetComponent<Rigidbody2D>();
+        Vector3 launchVelocity = CalculateLaunchVelocity(firePoint.position, target.position, projectileSpeed);
+        rb.velocity = launchVelocity;
+    }
+
+    Vector3 CalculateLaunchVelocity(Vector3 startPosition, Vector3 targetPosition, float speed)
+    {
+        Vector3 direction = targetPosition - startPosition;
+        float distance = direction.magnitude;
+        float heightDifference = direction.y;
+        Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z);
+        float horizontalDistance = horizontalDirection.magnitude;
+        float angle = Mathf.Deg2Rad * 45f;
+        float gravity = Physics.gravity.magnitude;
+        float initialVelocity = Mathf.Sqrt(gravity * horizontalDistance * horizontalDistance / (2 * (horizontalDistance * Mathf.Tan(angle) - heightDifference)));
+        Vector3 horizontalVelocity = horizontalDirection.normalized * initialVelocity;
+        Vector3 verticalVelocity = Vector3.up * Mathf.Tan(angle) * initialVelocity;
+        return horizontalVelocity + verticalVelocity;
     }
 }
+
