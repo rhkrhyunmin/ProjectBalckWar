@@ -18,9 +18,33 @@ public class ArmyState
         _stateMachine = stateMachine;
     }
 
+    #region Enter
+    protected void MoveEnter()
+    {
+        _triggerCalled = true;
+    }
+
+    protected void AttackEnter()
+    {
+        _triggerCalled = false;
+    }
+    #endregion
+
+    #region Exit
+    protected void MoveExit()
+    {
+
+    }
+
+    protected void AttackExit()
+    {
+        _army.AnimatorCompo.speed = 1;
+    }
+    #endregion
+
     public virtual void OnEnterState()
     {
-        _army.AnimatorCompo.SetBool(_animBoolHash, true); //들어오면 내 애니메이션을 활성화 해주는 것
+        _army.AnimatorCompo.SetBool(_animBoolHash, true); //들어오면 내 애니메이션을 활성화
 
     }
 
