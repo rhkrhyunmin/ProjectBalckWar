@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CastleControl : RangedAttack
 {
     public LayerMask enemyLayer; // 적 레이어
     public float detectionRadius = 10f; // 탐지 반경
+    private float timer = 0.0f;
 
     private void Update()
     {
@@ -26,7 +28,12 @@ public class CastleControl : RangedAttack
 
     private void HandleEnemyEncounter(Collider2D enemy)
     {
-        Debug.Log("Handling enemy encounter");
-        LaunchProjectile(enemy.transform.position, 10, 2, PoolManager.Instance.Pop(PoolType.Arrow,transform.position), false, false);
+        timer += Time.deltaTime; // timer에 경과 시간을 누적
+
+        if (timer > 0.5f)
+        {
+            StartShooting(transform, PoolManager.Instance.Pop(PoolType.Arrow, transform.position), enemy.transform, 5, 5);
+            timer = 0;
+        }
     }
 }

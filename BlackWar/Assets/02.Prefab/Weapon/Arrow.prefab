@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7276121630843132374}
   - component: {fileID: 4029230087814437051}
   - component: {fileID: -7374406207818989667}
+  - component: {fileID: 4545351729576635519}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -112,3 +113,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolType: 101
   sameLifeCycle: 0
+--- !u!50 &4545351729576635519
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110698442132420229}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
