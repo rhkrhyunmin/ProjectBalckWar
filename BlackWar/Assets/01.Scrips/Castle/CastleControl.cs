@@ -36,4 +36,32 @@ public class CastleControl : RangedAttack
             timer = 0;
         }
     }
+
+    public void UpRotation()
+    {
+        // 현재 각도를 eulerAngles로 변환
+        Vector3 currentRotation = transform.eulerAngles;
+
+        // Z축의 각도가 0에서 80 사이일 때만 증가
+        if (currentRotation.z > -40 || currentRotation.z < 0)
+        {
+            currentRotation.z -= 1f;  
+        }
+
+        transform.eulerAngles = currentRotation;
+    }
+
+    public void DownRotation()
+    {
+        // 현재 각도를 eulerAngles로 변환
+        Vector3 currentRotation = transform.eulerAngles;
+
+        // Z축의 각도가 0에서 80 사이일 때만 증가
+        if (currentRotation.z > 40 || currentRotation.z < 0)
+        {
+            currentRotation.z += 1f;
+        }
+
+        transform.eulerAngles = currentRotation;
+    }
 }
