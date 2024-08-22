@@ -22,6 +22,7 @@ public class ArmyState
     protected void MoveEnter()
     {
         _triggerCalled = true;
+        _army.MoveArmy();
     }
 
     protected void AttackEnter()

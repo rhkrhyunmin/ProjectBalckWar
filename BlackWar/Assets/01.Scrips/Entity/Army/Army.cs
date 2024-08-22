@@ -5,8 +5,16 @@ using UnityEngine;
 
 public class Army : MonoBehaviour
 {
-    public Animator AnimatorCompo { get; protected set; } //나중에 Entity를 만들어 따로 옮길 것입니다.
+    [SerializeField] protected PlayerStat _armyStat;
+    public LayerMask enemyLayer;
 
+    public PlayerStat _arkyStat
+    {
+        get => _armyStat;
+        set => _armyStat = value;
+    }
+
+    public Animator AnimatorCompo { get; protected set; } //나중에 Entity를 만들어 따로 옮길 것입니다.
     public ArmyStateMachine StateMachine { get; private set; }
 
     protected virtual void Awake()
@@ -53,4 +61,22 @@ public class Army : MonoBehaviour
             }
         }
     }
+
+    #region 움직임
+    public void MoveArmy()
+    {
+        transform.Translate(Vector2.right * _armyStat.MoveSpeed.GetValue() * Time.deltaTime);
+    }
+
+    public bool CheckForAttack()
+    {
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _armyStat.AttackDistance.GetValue(), enemyLayer);
+
+        if(enemies.Length > 0)
+            return true;
+        else
+            return false;
+    }
+
+    #endregion
 }
