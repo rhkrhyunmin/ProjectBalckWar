@@ -13,7 +13,6 @@ public class ExampleScript : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         else
             SceneManager.LoadScene(0);
-
     }
 
     void Update()

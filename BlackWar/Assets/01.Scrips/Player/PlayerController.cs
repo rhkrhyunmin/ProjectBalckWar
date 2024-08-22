@@ -1,4 +1,22 @@
 using UnityEngine;
+using System.IO;
+
+[System.Serializable]
+public class PlayerStatData
+{
+    public float MaxHp;
+    public float MoveSpeed;
+    public float AttackDelay;
+    public float AttackDistance;
+
+    public PlayerStatData(PlayerStat stat)
+    {
+        MaxHp = stat.MaxHp.GetValue();
+        MoveSpeed = stat.MoveSpeed.GetValue();
+        AttackDelay = stat.AttackDelay.GetValue();
+        AttackDistance = stat.AttackDistance.GetValue();
+    }
+}
 
 public class PlayerController : PlayerBrain
 {
@@ -47,10 +65,28 @@ public class PlayerController : PlayerBrain
             attackCooldownTimer -= Time.deltaTime;
         }
 
+        if(Input.GetKeyDown(KeyCode.E)) 
+        {
+            stat.MaxHp.AddModifier(10f);
+            Debug.Log("10");
+        }
+
         if (Input.GetKeyDown(KeyCode.F))
         {
-            ChangeState(State.Hitting);
+            SaveStatToJson();
         }
+    }
+
+    public void SaveStatToJson()
+    {
+        PlayerStatData data = new PlayerStatData(stat);
+        string json = JsonUtility.ToJson(data, true);
+
+        string path = Path.Combine(Application.persistentDataPath, "player_stat.json");
+
+        File.WriteAllText(path, json);
+
+        Debug.Log("Player stats saved to JSON: " + data.MaxHp);
     }
 
     private void HandleState()

@@ -17,6 +17,7 @@ public class PlayerChooseUI : MonoBehaviour
         }
     }
 
+
     private void OnButtonClick(Button button)
     {
         int index = buttons.IndexOf(button);
