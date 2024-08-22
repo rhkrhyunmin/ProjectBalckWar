@@ -21,6 +21,9 @@ MonoBehaviour:
   AttackPower:
     _baseValue: 3
     modifiers: []
+  AttackTimer:
+    _baseValue: 0
+    modifiers: []
   AttackDistance:
     _baseValue: 6
     modifiers: []

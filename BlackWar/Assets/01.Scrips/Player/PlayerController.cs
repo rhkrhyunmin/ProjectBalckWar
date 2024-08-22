@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.IO;
+using UnityEngine;
 
 [System.Serializable]
 public class PlayerStatData
@@ -18,7 +18,7 @@ public class PlayerStatData
     }
 }
 
-public class PlayerController : PlayerBrain
+public class PlayerController : PoolableMono
 {
     private enum State
     {
@@ -52,7 +52,7 @@ public class PlayerController : PlayerBrain
         CurrentHp = stat.MaxHp.GetValue();
         currentState = State.Idle;
         attackCooldownTimer = 0.0f;
-        ChangeState(State.Moving); // 초기 상태를 Moving으로 설정
+        ChangeState(State.Moving); 
     }
 
     private void Update()
@@ -65,10 +65,14 @@ public class PlayerController : PlayerBrain
             attackCooldownTimer -= Time.deltaTime;
         }
 
-        if(Input.GetKeyDown(KeyCode.E)) 
+        if (Input.GetKeyDown(KeyCode.E))
         {
             stat.MaxHp.AddModifier(10f);
-            Debug.Log("10");
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            ChangeState(State.Hitting);
         }
 
         if (Input.GetKeyDown(KeyCode.F))
@@ -107,14 +111,13 @@ public class PlayerController : PlayerBrain
                 break;
 
             case State.Attacking:
-                Attack();
+                Attack(stat.AttackPower.GetValue());
                 break;
 
             case State.Die:
                 OnDie();
                 break;
         }
-       // Debug.Log(isAttack);
     }
 
     private void ChangeState(State newState)
@@ -150,7 +153,7 @@ public class PlayerController : PlayerBrain
         }
     }
 
-    private void Attack()
+    public virtual void Attack(float damage)
     {
         isAttack = true;
         if (attackCooldownTimer <= 0.0f)
@@ -171,7 +174,7 @@ public class PlayerController : PlayerBrain
             if (enemies.Length > 0)
             {
                 ChangeState(State.Attacking);
-                Attack();
+                Attack(stat.AttackPower.GetValue());
             }
         }
     }
@@ -179,6 +182,8 @@ public class PlayerController : PlayerBrain
     public void OnHit(float damage)
     {
         CurrentHp -= damage;
+        ChangeState(State.Hitting);
+        Debug.Log(CurrentHp);
         if (CurrentHp <= 0)
         {
             ChangeState(State.Die);
@@ -195,7 +200,7 @@ public class PlayerController : PlayerBrain
     {
         if (isDie)
         {
-            PoolManager.Instance.Push(this); // 필요시 활성화
+            PoolManager.Instance.Push(this);
         }
     }
 }

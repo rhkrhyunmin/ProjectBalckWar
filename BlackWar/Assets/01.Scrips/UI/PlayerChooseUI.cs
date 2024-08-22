@@ -27,10 +27,6 @@ public class PlayerChooseUI : MonoBehaviour
             PoolType type = GetPoolTypeByIndex(index);
             PoolManager.Instance.Pop(type, Spawner.transform.position);
         }
-        else
-        {
-            Debug.Log("¿¡·¯");
-        }
     }
 
     private PoolType GetPoolTypeByIndex(int index)
