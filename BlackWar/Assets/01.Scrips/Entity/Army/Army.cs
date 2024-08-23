@@ -8,11 +8,12 @@ public class Army : PoolableMono
     [SerializeField] protected PlayerStat _armyStat;
     public LayerMask enemyLayer;
 
-    public PlayerStat _arkyStat
+    public PlayerStat Stat
     {
         get => _armyStat;
         set => _armyStat = value;
     }
+
     public Animator AnimatorCompo { get; protected set; }
     public ArmyStateMachine StateMachine { get; private set; }
 
