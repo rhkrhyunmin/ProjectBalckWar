@@ -5,7 +5,6 @@ public class RangedAttack : MonoBehaviour
 {
     public void StartShooting(Transform firePoint, PoolableMono Obj, Transform target, float fireRate, float projectileSpeed)
     {
-        
         StartCoroutine(ShootProjectile(firePoint, Obj, target, fireRate, projectileSpeed));
     }
 
@@ -14,69 +13,63 @@ public class RangedAttack : MonoBehaviour
         StopAllCoroutines();
     }
 
-    IEnumerator ShootProjectile(Transform firePoint, PoolableMono OBj, Transform target, float fireRate, float projectileSpeed)
+    IEnumerator ShootProjectile(Transform firePoint, PoolableMono Obj, Transform target, float fireRate, float projectileSpeed)
     {
         while (true)
         {
-            Fire(firePoint, OBj, target, projectileSpeed);
+            Fire(firePoint, Obj, target, projectileSpeed);
             yield return new WaitForSeconds(fireRate);
         }
     }
 
     void Fire(Transform firePoint, PoolableMono Obj, Transform target, float projectileSpeed)
     {
-        //PoolManager.Instance.Pop(Obj.poolType, transform.position);
+        // PoolManager를 통해 발사체 가져오기 (필요 시 구현)
         Rigidbody2D rb = Obj.GetComponent<Rigidbody2D>();
-        Vector3 launchVelocity = CalculateLaunchVelocity(firePoint.position, target.position, projectileSpeed, Obj);
+
+        // 발사 속도 계산 (포물선 운동)
+        Vector2 launchVelocity = CalculateLaunchVelocity(firePoint.position, target.position, projectileSpeed);
+
+        // Rigidbody2D의 속도 설정
         rb.velocity = launchVelocity;
+
+        // 발사체가 목표를 향해 회전하도록 설정
+        RotateTowardsTarget(Obj.transform, target.position);
     }
 
-    Vector3 CalculateLaunchVelocity(Vector3 startPosition, Vector3 targetPosition, float speed, PoolableMono Obj)
+    Vector2 CalculateLaunchVelocity(Vector3 startPosition, Vector3 targetPosition, float projectileSpeed)
     {
-        Vector3 direction = targetPosition - startPosition;
+        Vector2 direction = targetPosition - startPosition;
+
+        // 목표까지의 거리
         float distance = direction.magnitude;
-        float heightDifference = direction.y;
-        Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z);
-        float horizontalDistance = horizontalDirection.magnitude;
-        float angle = Mathf.Deg2Rad * 45f;
-        float gravity = Physics.gravity.magnitude;
 
-        float initialVelocity = Mathf.Sqrt(gravity * horizontalDistance * horizontalDistance /
-            (2 * (horizontalDistance * Mathf.Tan(angle) - heightDifference)));
+        // 발사 각도 (45도로 고정)
+        float angle = 45f * Mathf.Deg2Rad;
 
-        Vector3 horizontalVelocity = horizontalDirection.normalized * initialVelocity;
-        Vector3 verticalVelocity = Vector3.up * Mathf.Tan(angle) * initialVelocity;
+        // 중력 값 (Physics2D의 중력 사용)
+        float gravity = Mathf.Abs(Physics2D.gravity.y);
 
-        // Calculate the final launch velocity
-        Vector3 launchVelocity = horizontalVelocity + verticalVelocity;
+        // 포물선 운동 속도 계산 공식
+        float vSquared = (gravity * distance * distance) / (2 * Mathf.Cos(angle) * Mathf.Cos(angle) * (distance * Mathf.Tan(angle) - direction.y));
 
-        // Make sure the object is always oriented correctly
-        if (launchVelocity != Vector3.zero)
-        {
-            // Calculate the direction of the target
-            Quaternion targetRotation = Quaternion.LookRotation(launchVelocity);
+        // 속도는 sqrt로 구함
+        float velocity = Mathf.Sqrt(vSquared);
 
-            // Check if the object is facing too far downward (for example, if y-axis is pointing too low)
-            float currentPitch = targetRotation.eulerAngles.x; // This gives the X rotation angle (pitch)
+        // 속도 성분 구하기
+        Vector2 launchVelocity = new Vector2(Mathf.Cos(angle) * velocity, Mathf.Sin(angle) * velocity);
 
-            // Set a minimum and maximum pitch range to prevent too steep angles
-            float minPitch = -60f;  // Prevent the object from tilting downward too much
-            float maxPitch = 60f;   // Prevent the object from tilting upward too much
-
-            // Clamp the pitch (X rotation) to stay within limits
-            currentPitch = Mathf.Clamp(currentPitch, minPitch, maxPitch);
-
-            // Apply the clamped pitch back to the rotation
-            targetRotation = Quaternion.Euler(currentPitch, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
-
-            // Smoothly interpolate between the current rotation and the target rotation for smoother transitions
-            Obj.transform.rotation = Quaternion.Slerp(Obj.transform.rotation, targetRotation, Time.deltaTime * 5f);
-        }
-
-        return launchVelocity;
+        // 타겟 위치에 맞게 속도 방향을 조정
+        return launchVelocity.normalized * projectileSpeed;
     }
 
+    void RotateTowardsTarget(Transform objTransform, Vector3 targetPosition)
+    {
+        // 현재 위치와 목표 위치 사이의 방향 벡터 계산
+        Vector3 direction = (targetPosition - objTransform.position).normalized;
 
-
+        // 발사체의 회전을 목표 방향으로 설정
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        objTransform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
 }
-

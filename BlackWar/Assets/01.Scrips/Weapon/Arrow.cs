@@ -4,10 +4,25 @@ using UnityEngine;
 
 public class Arrow : WeaponBrain
 {
-    private void Update()
+    private Quaternion rotation;
+
+    public Quaternion Rotation
     {
-        transform.rotation = Quaternion.identity;
+        get { return rotation; }
+        set
+        {
+            // Y축 회전을 고정한 상태에서 X와 Z축 회전만 변경
+            rotation = Quaternion.Euler(value.eulerAngles.x, rotation.eulerAngles.y, value.eulerAngles.z);
+
+            // 오브젝트에 적용
+            transform.rotation = rotation;
+        }
     }
 
+    void Start()
+    {
+        // 초기 회전값을 설정
+        rotation = transform.rotation;
+    }
 
 }
