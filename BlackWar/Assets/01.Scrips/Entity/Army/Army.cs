@@ -3,18 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Army : MonoBehaviour
+public class Army : PoolableMono
 {
     [SerializeField] protected PlayerStat _armyStat;
     public LayerMask enemyLayer;
 
-    public PlayerStat _arkyStat
+    public PlayerStat Stat
     {
         get => _armyStat;
         set => _armyStat = value;
     }
 
-    public Animator AnimatorCompo { get; protected set; } //나중에 Entity를 만들어 따로 옮길 것입니다.
+    public Animator AnimatorCompo { get; protected set; }
     public ArmyStateMachine StateMachine { get; private set; }
 
     protected virtual void Awake()

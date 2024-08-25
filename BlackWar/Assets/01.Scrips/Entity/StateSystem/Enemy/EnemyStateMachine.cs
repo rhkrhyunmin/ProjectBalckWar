@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyStateMachine
 {
     public EnemyState CurrentState { get; private set; }
-    public EnemyState PrevState { get; private set; }
     public Dictionary<EnemyStateEnum, EnemyState> StateDictionary { get; private set; } = new();
 
     public void Init(EnemyStateEnum state)

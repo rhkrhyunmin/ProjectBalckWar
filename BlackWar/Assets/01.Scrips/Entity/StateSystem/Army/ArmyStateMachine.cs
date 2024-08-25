@@ -6,7 +6,6 @@ using UnityEngine;
 public class ArmyStateMachine
 {
     public ArmyState CurrentState { get; private set; }
-    public ArmyState PrevState { get; private set; }
     public Dictionary<ArmyStateEnum, ArmyState> StateDictionary { get; private set; } = new();
 
     public void Init(ArmyStateEnum state)
