@@ -19,5 +19,5 @@ MonoBehaviour:
     itemAmount: 10
   - name: Arrow
     type: 101
-    prefab: {fileID: -7374406207818989667, guid: 5528e65f10716994094811a796d85749, type: 3}
+    prefab: {fileID: 7415778321604365205, guid: 5528e65f10716994094811a796d85749, type: 3}
     itemAmount: 10
