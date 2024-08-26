@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum CostType
+{
+    KnightCost,
+    ArcherCost,
+    NinjaCost,
+    SpearmanCost,
+    None,
+}
+
 public class PlayerChooseUI : MonoBehaviour
 {
-    public List<Button> buttons; // 버튼 리스트
-    public GameObject Spawner; // 유닛이 스폰될 위치
-    public PlayerCost playerCost; // PlayerCost 스크립트 참조
+    public List<Button> buttons;
+    public GameObject Spawner; 
+    private Dictionary<CostType, float> costDictionary;
 
     private void Start()
     {
@@ -16,6 +25,14 @@ public class PlayerChooseUI : MonoBehaviour
         {
             button.onClick.AddListener(() => OnButtonClick(button));
         }
+
+        costDictionary = new Dictionary<CostType, float>
+        {
+            { CostType.KnightCost, 5f },
+            { CostType.ArcherCost, 8f },
+            { CostType.NinjaCost, 10f },
+            { CostType.SpearmanCost, 13f},
+        };
     }
 
     private void OnButtonClick(Button button)
@@ -24,20 +41,16 @@ public class PlayerChooseUI : MonoBehaviour
 
         if (index >= 0 && index < buttons.Count)
         {
-            // 인덱스에 해당하는 CostType 가져오기
-            CostType costType = GetCostTypeByIndex(index);
+            var (costType, poolType) = GetCostAndPoolTypeByIndex(index);
 
-            // 해당 CostType의 비용을 가져옴
-            float cost = playerCost.GetCost(costType);
+            float cost = GetCost(costType);
 
-            // GameManager의 현재 비용과 비교
             if (GameManager.Instance.currentCost >= cost)
             {
-                // 인덱스를 통해 적절한 PoolType을 선택합니다.
-                PoolType type = GetPoolTypeByIndex(index);
-                PoolManager.Instance.Pop(type, Spawner.transform.position);
+                // PoolManager를 통해 스폰
+                PoolManager.Instance.Pop(poolType, Spawner.transform.position);
 
-                // 비용을 차감 (예시로 비용을 차감)
+                // 비용을 차감
                 GameManager.Instance.currentCost -= cost;
             }
             else
@@ -47,39 +60,33 @@ public class PlayerChooseUI : MonoBehaviour
         }
     }
 
-    private CostType GetCostTypeByIndex(int index)
+    // CostType과 PoolType을 동시에 반환하는 함수
+    private (CostType, PoolType) GetCostAndPoolTypeByIndex(int index)
     {
         switch (index)
         {
             case 0:
-                return CostType.KnightCost;
+                return (CostType.KnightCost, PoolType.knight);
             case 1:
-                return CostType.ArcherCost;
+                return (CostType.ArcherCost, PoolType.Archer);
             case 2:
-                return CostType.NinjaCost;
+                return (CostType.NinjaCost, PoolType.Ninja);
             case 3:
-                return CostType.SpearmanCost;
+                return (CostType.SpearmanCost, PoolType.Spearman);
             default:
-                Debug.LogError("Invalid index for cost type.");
-                return CostType.None; // 예외 처리용
+                return (CostType.None, PoolType.None);
         }
     }
 
-    private PoolType GetPoolTypeByIndex(int index)
+    public float GetCost(CostType type)
     {
-        switch (index)
+        if (costDictionary.TryGetValue(type, out float cost))
         {
-            case 0:
-                return PoolType.knight;
-            case 1:
-                return PoolType.Archer;
-            case 2:
-                return PoolType.Ninja;
-            case 3:
-                return PoolType.Spearman;
-            default:
-                Debug.LogError("Invalid index for pool type.");
-                return PoolType.None;
+            return cost;
+        }
+        else
+        {
+            return 0f;
         }
     }
 }

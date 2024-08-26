@@ -26,6 +26,6 @@ public class GameManager : MonoSingleton<GameManager>
             currentCost = Mathf.Clamp(currentCost, 0, MaxCost); // Ensure it stays within bounds
         }
 
-        //Debug.Log(currentCost);
+        Debug.Log(currentCost);
     }
 }
