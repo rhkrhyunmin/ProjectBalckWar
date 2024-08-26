@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class PlayerBrain : PoolableMono
 {
-    
+    protected Animator animation;
+
+    private void Start()
+    {
+        animation = GetComponent<Animator>();
+    }
 }

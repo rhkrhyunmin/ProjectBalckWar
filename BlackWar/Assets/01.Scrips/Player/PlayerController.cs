@@ -18,19 +18,21 @@ public class PlayerStatData
     }
 }
 
-public class PlayerController : PoolableMono
+public enum State
 {
-    private enum State
-    {
-        Idle,
-        Moving,
-        Attacking,
-        Hitting,
-        Die
-    }
+    Idle,
+    Moving,
+    Attacking,
+    Hitting,
+    Die
+}
 
+public class PlayerController : PlayerBrain
+{
     public PlayerStat stat;
+
     private State currentState;
+    private PlayerAnimation anmation;
 
     public LayerMask enemyLayer;
 
@@ -47,11 +49,17 @@ public class PlayerController : PoolableMono
     [HideInInspector]
     public bool isDie;
 
+    private void Awake()
+    {
+        anmation = GetComponent<PlayerAnimation>();
+    }
+
     private void Start()
     {
         CurrentHp = stat.MaxHp.GetValue();
         currentState = State.Idle;
         attackCooldownTimer = 0.0f;
+
         ChangeState(State.Moving); 
     }
 
@@ -142,7 +150,8 @@ public class PlayerController : PoolableMono
         isWalk = currentState == State.Moving;
         isHit = currentState == State.Hitting;
         isDie = currentState == State.Die;
-        Debug.Log(currentState);
+
+        anmation.SetState(currentState);
     }
 
     private void Move()
@@ -150,6 +159,7 @@ public class PlayerController : PoolableMono
         if (currentState == State.Moving)
         {
             transform.Translate(Vector2.right * stat.MoveSpeed.GetValue() * Time.deltaTime);
+            
         }
     }
 
@@ -170,9 +180,9 @@ public class PlayerController : PoolableMono
         {
             // 적 탐지 범위 내에서 적이 있는지 확인
             Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, stat.AttackDistance.GetValue(), enemyLayer);
-
             if (enemies.Length > 0)
             {
+
                 ChangeState(State.Attacking);
                 Attack(stat.AttackPower.GetValue());
             }
