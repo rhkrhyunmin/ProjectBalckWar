@@ -21,7 +21,6 @@ public class CastleControl : RangedAttack
 
         foreach (Collider2D enemy in enemiesInRange)
         {
-            Debug.Log("Enemy detected");
             HandleEnemyEncounter(enemy);
         }
     }

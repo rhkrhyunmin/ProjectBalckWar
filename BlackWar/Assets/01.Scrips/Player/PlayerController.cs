@@ -21,9 +21,9 @@ public class PlayerStatData
 public enum State
 {
     Idle,
-    Moving,
     Attacking,
     Hitting,
+    Moving,
     Die
 }
 
