@@ -15,6 +15,8 @@ public class Army : PoolableMono
     }
 
     public Animator AnimatorCompo { get; protected set; }
+    public ArmyEntityAttackData AttackCompo { get; private set; }
+    public DamageCaster DamageCasterCompo { get; protected set; }
     public ArmyStateMachine StateMachine { get; private set; }
 
     protected virtual void Awake()
