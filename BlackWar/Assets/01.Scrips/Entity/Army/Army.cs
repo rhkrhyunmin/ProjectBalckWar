@@ -15,11 +15,15 @@ public class Army : PoolableMono
     }
 
     public Animator AnimatorCompo { get; protected set; }
+    public ArmyEntityAttackData AttackCompo { get; private set; }
+    public DamageCaster DamageCasterCompo { get; protected set; }
     public ArmyStateMachine StateMachine { get; private set; }
 
     protected virtual void Awake()
     {
-        
+        AnimatorCompo = GetComponentInChildren<Animator>();
+        DamageCasterCompo = GetComponentInChildren<DamageCaster>();
+        AttackCompo = GetComponent<ArmyEntityAttackData>();
     }
 
     protected virtual void Start()
