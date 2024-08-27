@@ -43,7 +43,6 @@ public class WeaponBrain : PoolableMono
 
         if (hit.collider != null)
         {
-            //playerController.Attack(playerController.stat.AttackPower.GetValue());
             Debug.Log("123");
         }
     }
@@ -58,13 +57,11 @@ public class WeaponBrain : PoolableMono
 
             if (IsInLayerMask(hitLayer, enemyLayer))
             {
-               // playerController.Attack(playerController.stat.AttackPower.GetValue());
                 PoolManager.Instance.Push(this);
             }
             // 장애물을 맞췄을 경우
             else if (IsInLayerMask(hitLayer, obstacleLayer))
             {
-                Debug.Log("Ranged weapon hit an obstacle: " + hit.collider.name);
                 PoolManager.Instance.Push(this); 
             }
         }

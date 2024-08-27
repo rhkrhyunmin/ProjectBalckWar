@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Army : PoolableMono
 {
-    [SerializeField] protected PlayerStat _armyStat;
+    public PlayerStat _armyStat;
     public LayerMask enemyLayer;
 
     public PlayerStat Stat
