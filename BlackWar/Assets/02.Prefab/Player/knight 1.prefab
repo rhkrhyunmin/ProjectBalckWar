@@ -529,7 +529,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 0
-  rayDistance: 10
+  playerController: {fileID: -5201271619770513990}
 --- !u!1 &2979208165617414362
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,6 +1000,7 @@ MonoBehaviour:
   poolType: 1
   sameLifeCycle: 0
   stat: {fileID: 11400000, guid: d0e1680959d7f774088166e5b774e303, type: 2}
+  WeaponBrain: {fileID: 2653045722140790702}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64

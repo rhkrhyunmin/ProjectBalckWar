@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: Archer
   m_EditorClassIdentifier: 
   MaxHp:
-    _baseValue: 0
+    _baseValue: 15
     modifiers: []
   MoveSpeed:
     _baseValue: 0
     modifiers: []
   AttackPower:
+    _baseValue: 0
+    modifiers: []
+  AttackTimer:
     _baseValue: 0
     modifiers: []
   AttackDistance:
