@@ -25,4 +25,9 @@ public class PlayerAnimation : MonoBehaviour
         // 새로운 상태를 활성화
         animator.SetBool("is" + newState, true);
     }
+
+    public void OnPlayAnmationEvent(string eventer)
+    {
+        
+    }
 }
