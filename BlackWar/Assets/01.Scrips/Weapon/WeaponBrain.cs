@@ -13,75 +13,82 @@ public class WeaponBrain : PoolableMono
 {
     // 무기 타입 설정
     public WeaponType weaponType;
+    protected State currentState;
 
     // 미리 정의된 레이어 상수
     public LayerMask enemyLayer;
     public LayerMask obstacleLayer;
 
     // Raycast 관련 변수
-    public float rayDistance = 10f; // Raycast 사정 거리
+    private float meleeRayDistance = 1f; 
+    private float rangedRayDistance = 5f; 
 
     private void Update()
     {
-        // 원거리 무기일 경우 Raycast를 계속해서 쏩니다.
-        if (weaponType == WeaponType.Ranged)
-        {
-            ShootRaycast();
-        }
-    }
-
-    // 근접 무기 충돌 처리 함수 (Collider 사용)
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
         if (weaponType == WeaponType.Melee)
         {
-            int otherLayer = collision.gameObject.layer;
+            ShootMeleeRaycast();
+        }
 
-            if (IsInLayerMask(otherLayer, enemyLayer))
-            {
-                HandleMeleeCollision(collision);
-            }
+        else if (weaponType == WeaponType.Ranged)
+        {
+            ShootRangedRaycast();
         }
     }
 
-    // 근접 무기 충돌 처리 함수
-    private void HandleMeleeCollision(Collider2D other)
+    private void ShootMeleeRaycast()
     {
-        Debug.Log("Melee weapon hit an enemy: " + other.name);
-        // 적에게 데미지를 입히는 로직 추가
-        // DamageEnemy(other.gameObject);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, meleeRayDistance, enemyLayer);
+
+        if (hit.collider != null)
+        {
+            Debug.Log("Melee weapon hit an enemy: " + hit.collider.name);
+            HandleMeleeCollision(hit.collider);
+        }
     }
 
-    // 원거리 무기 Raycast 발사 함수
-    private void ShootRaycast()
+    private void ShootRangedRaycast()
     {
-        // 무기의 위치에서 Raycast 발사
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, rayDistance, enemyLayer | obstacleLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, rangedRayDistance, enemyLayer | obstacleLayer);
 
         if (hit.collider != null)
         {
             int hitLayer = hit.collider.gameObject.layer;
 
-            // 적을 맞췄을 경우
             if (IsInLayerMask(hitLayer, enemyLayer))
             {
                 Debug.Log("Ranged weapon hit an enemy: " + hit.collider.name);
                 // 적에게 데미지를 입히는 로직 추가
-                // DamageEnemy(hit.collider.gameObject);
-                PoolManager.Instance.Push(this); // 발사체 회수
+                PoolManager.Instance.Push(this);
             }
             // 장애물을 맞췄을 경우
             else if (IsInLayerMask(hitLayer, obstacleLayer))
             {
                 Debug.Log("Ranged weapon hit an obstacle: " + hit.collider.name);
-                PoolManager.Instance.Push(this); // 발사체 회수
+                PoolManager.Instance.Push(this); 
             }
         }
     }
 
-    // 특정 레이어가 지정된 LayerMask에 속하는지 확인하는 함수
+    private void HandleMeleeCollision(Collider2D other)
+    {
+        Debug.Log("Melee weapon hit an enemy: " + other.name);
+        // 적에게 데미지를 입히는 로직 추가
+    }
+
     private bool IsInLayerMask(int layer, LayerMask layerMask)
     {
         return ((layerMask.value & (1 << layer)) != 0);
+    }
+
+    public void Attack()
+    {
+        if(currentState == State.Attacking)
+        {
+            if(poolType == PoolType.knight)
+            {
+
+            }
+        }
     }
 }

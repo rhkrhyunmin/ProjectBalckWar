@@ -1767,9 +1767,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cb3826f2846984594a85e37a92acea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolType: 0
+  sameLifeCycle: 0
+  weaponType: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
   detectionRadius: 10
 --- !u!61 &1360083437
 BoxCollider2D:
