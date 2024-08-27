@@ -13,6 +13,7 @@ public class WeaponBrain : PoolableMono
 {
     // 무기 타입 설정
     public WeaponType weaponType;
+    protected State currentState;
 
     // 미리 정의된 레이어 상수
     public LayerMask enemyLayer;
@@ -58,7 +59,6 @@ public class WeaponBrain : PoolableMono
             {
                 Debug.Log("Ranged weapon hit an enemy: " + hit.collider.name);
                 // 적에게 데미지를 입히는 로직 추가
-                // DamageEnemy(hit.collider.gameObject);
                 PoolManager.Instance.Push(this);
             }
             // 장애물을 맞췄을 경우
@@ -74,11 +74,21 @@ public class WeaponBrain : PoolableMono
     {
         Debug.Log("Melee weapon hit an enemy: " + other.name);
         // 적에게 데미지를 입히는 로직 추가
-        // DamageEnemy(other.gameObject);
     }
 
     private bool IsInLayerMask(int layer, LayerMask layerMask)
     {
         return ((layerMask.value & (1 << layer)) != 0);
+    }
+
+    public void Attack()
+    {
+        if(currentState == State.Attacking)
+        {
+            if(poolType == PoolType.knight)
+            {
+
+            }
+        }
     }
 }
