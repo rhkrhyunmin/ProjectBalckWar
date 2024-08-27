@@ -22,6 +22,7 @@ public class ArmyAttackState : ArmyState
         if(_triggerCalled) //공격
         {
             //코드 작성
+            Debug.Log("아니");
         }
     }
 

@@ -46,7 +46,6 @@ public class ArmyState
     public virtual void OnEnterState()
     {
         _army.AnimatorCompo.SetBool(_animBoolHash, true); //들어오면 내 애니메이션을 활성화
-
     }
 
     public virtual void OnUpdateState()

@@ -11,15 +11,15 @@ public class ArmyMoveState : ArmyState
     public override void OnEnterState()
     {
         base.OnEnterState();
-
-        MoveEnter();
     }
 
     public override void OnUpdateState()
     {
         base.OnUpdateState();
 
-        if(_army.CheckForAttack())
+        MoveEnter();
+
+        if (_army.CheckForAttack())
         {
             _stateMachine.ChangeState(ArmyStateEnum.Attack);
         }

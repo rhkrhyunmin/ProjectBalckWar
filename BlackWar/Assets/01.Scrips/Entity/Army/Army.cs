@@ -21,7 +21,9 @@ public class Army : PoolableMono
 
     protected virtual void Awake()
     {
-        
+        AnimatorCompo = GetComponentInChildren<Animator>();
+        DamageCasterCompo = GetComponentInChildren<DamageCaster>();
+        AttackCompo = GetComponent<ArmyEntityAttackData>();
     }
 
     protected virtual void Start()
@@ -68,6 +70,7 @@ public class Army : PoolableMono
     public void MoveArmy()
     {
         transform.Translate(Vector2.right * _armyStat.MoveSpeed.GetValue() * Time.deltaTime);
+        Debug.Log("움직인당");
     }
 
     public bool CheckForAttack()

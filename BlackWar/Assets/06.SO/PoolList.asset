@@ -15,7 +15,7 @@ MonoBehaviour:
   poolList:
   - name: Knight
     type: 1
-    prefab: {fileID: 1839671576602342893, guid: 191d2a7d18255fc4199e5b34f77061f9, type: 3}
+    prefab: {fileID: 6246663238802593784, guid: 4693ebd4a6cb7c541a57799ec078f5a0, type: 3}
     itemAmount: 10
   - name: Arrow
     type: 101
