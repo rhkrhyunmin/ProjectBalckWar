@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class RangedAttack : MonoBehaviour
+public class RangedAttack : WeaponBrain
 {
     // 발사체 발사를 시작하는 함수
     public void StartShooting(Transform firePoint, PoolableMono Obj, Transform target, float fireRate, float projectileSpeed)
@@ -31,6 +31,12 @@ public class RangedAttack : MonoBehaviour
         // 발사체 인스턴스 생성
         Rigidbody2D rb = Obj.GetComponent<Rigidbody2D>();
 
+        if (rb == null)
+        {
+            Debug.LogWarning("Rigidbody2D not found on Obj.");
+            return;
+        }
+
         // 발사 속도 계산 (포물선 운동)
         Vector2 launchVelocity = CalculateLaunchVelocity(firePoint.position, target.position, projectileSpeed);
 
@@ -40,8 +46,14 @@ public class RangedAttack : MonoBehaviour
         // 발사체의 회전을 초기 속도에 맞춰 설정 (첫 발사 시)
         RotateTowardsTarget(Obj.transform, rb.velocity);
 
-        // 발사체가 계속해서 진행 방향으로 회전하도록 함
-        Obj.StartCoroutine(UpdateRotation(Obj.transform, rb));
+        // 발사체의 회전을 계속 업데이트하는 컴포넌트 추가
+        if (Obj.TryGetComponent<ProjectileUpdater>(out ProjectileUpdater updater) == false)
+        {
+            updater = Obj.gameObject.AddComponent<ProjectileUpdater>();
+        }
+
+        // 발사체의 Rigidbody2D와 연관된 회전 업데이트
+        updater.Initialize(rb);
     }
 
     // 포물선 운동의 발사 속도를 계산하는 함수
@@ -82,19 +94,30 @@ public class RangedAttack : MonoBehaviour
         // 발사체의 up 방향을 속도 벡터와 일치시키도록 회전 설정
         objTransform.rotation = Quaternion.Euler(0, 0, angle - 90f);
     }
+}
 
-    // 발사체가 진행 중일 때 계속 회전하도록 하는 코루틴
-    IEnumerator UpdateRotation(Transform objTransform, Rigidbody2D rb)
+public class ProjectileUpdater : MonoBehaviour
+{
+    private Rigidbody2D rb;
+
+    // Rigidbody2D 초기화
+    public void Initialize(Rigidbody2D rigidbody2D)
     {
-        while (true)
-        {
-            // 속도 벡터가 있는 경우에만 회전
-            if (rb.velocity != Vector2.zero)
-            {
-                RotateTowardsTarget(objTransform, rb.velocity);
-            }
+        rb = rigidbody2D;
+    }
 
-            yield return null; // 다음 프레임까지 대기
+    void Update()
+    {
+        if (rb != null && rb.velocity != Vector2.zero)
+        {
+            RotateTowardsTarget(transform, rb.velocity);
         }
+    }
+
+    // 발사체가 나아가는 방향으로 회전시키는 함수
+    void RotateTowardsTarget(Transform objTransform, Vector2 velocity)
+    {
+        float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+        objTransform.rotation = Quaternion.Euler(0, 0, angle - 90f);
     }
 }

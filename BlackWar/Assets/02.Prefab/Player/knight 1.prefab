@@ -523,6 +523,13 @@ MonoBehaviour:
   poolType: 0
   sameLifeCycle: 0
   weaponType: 0
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  rayDistance: 10
 --- !u!1 &2979208165617414362
 GameObject:
   m_ObjectHideFlags: 0

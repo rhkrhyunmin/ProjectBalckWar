@@ -99,6 +99,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3587810c52fbd574e969dc2f65aa13a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolType: 0
+  sameLifeCycle: 0
+  weaponType: 0
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &4545351729576635519
 Rigidbody2D:
   serializedVersion: 4
@@ -140,3 +149,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolType: 101
   sameLifeCycle: 0
+  weaponType: 1
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
