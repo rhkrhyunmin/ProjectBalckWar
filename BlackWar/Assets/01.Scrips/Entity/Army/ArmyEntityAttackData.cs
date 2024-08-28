@@ -18,15 +18,15 @@ public class ArmyEntityAttackData : MonoBehaviour
 
     }
 
-    public virtual void MeleeAttack(float damage)
+    public virtual void OnTriggerEnter2D(Collider2D other)
     {
-        RaycastHit2D hit = Physics2D.Raycast(army._weapon.transform.position, army._weapon.transform.right, army._armyStat.AttackDistance.GetValue(), army.enemyLayer);
-        if (hit.collider != null)
+        if (other.CompareTag("Weapon"))
         {
-
+            army.OnHit(army._armyStat.AttackPower.GetValue());
             Debug.Log("123");
         }
     }
+
 
     public virtual void RangerAttack(float damage)
     {

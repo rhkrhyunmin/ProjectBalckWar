@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoolManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3887175144425174561, guid: 005dc6f43504cbd4f8c39cd64ef104f1, type: 3}
+      propertyPath: _uiLayer.m_Bits
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 5315478501968689425, guid: 005dc6f43504cbd4f8c39cd64ef104f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1769,7 +1773,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolType: 0
   sameLifeCycle: 0
-  weaponType: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1933,6 +1936,8 @@ GameObject:
   - component: {fileID: 1431684898}
   - component: {fileID: 1431684900}
   - component: {fileID: 1431684901}
+  - component: {fileID: 1431684902}
+  - component: {fileID: 1431684903}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -2051,21 +2056,56 @@ MonoBehaviour:
   m_GameObject: {fileID: 1431684897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7569e280033d5cb4eb6c840168322290, type: 3}
+  m_Script: {fileID: 11500000, guid: 2da1f660f09b11144abe37adb3228ea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 0
+  poolType: 2
   sameLifeCycle: 0
-  stat: {fileID: 11400000, guid: aa4e7ed443b14e846b7957256498de94, type: 2}
-  WeaponBrain: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
-  CurrentHp: 0
-  isWalk: 0
-  isAttack: 0
-  isHit: 0
-  isDie: 0
+  _armyStat: {fileID: 11400000, guid: aa4e7ed443b14e846b7957256498de94, type: 2}
+  _currentHp: 0
+  _weapon: {fileID: 1413716372}
+--- !u!50 &1431684902
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431684897}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &1431684903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431684897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d9181768fb12b540a15e9263a819369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1480403217
 GameObject:
   m_ObjectHideFlags: 0

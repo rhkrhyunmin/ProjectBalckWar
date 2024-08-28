@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 7554673915864180331}
   m_Layer: 0
   m_Name: sword
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1757,11 +1757,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolType: 1
   sameLifeCycle: 0
-  _armyStat: {fileID: 11400000, guid: d0e1680959d7f774088166e5b774e303, type: 2}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  weaponType: 0
+  _armyStat: {fileID: 11400000, guid: d0e1680959d7f774088166e5b774e303, type: 2}
   _currentHp: 0
   _weapon: {fileID: 500859790496852886}
 --- !u!114 &6072397701881978561

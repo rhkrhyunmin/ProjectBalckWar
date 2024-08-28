@@ -89,18 +89,31 @@ public class Army : Entity
     #endregion
 
     #region ����
-    public void Attack()
+/*    public void Attack(float damage, LayerMask enemy)
     {
-        /*if (weaponType == WeaponType.Melee)
+        if(enemyLayer == enemy)
         {
-            AttackCompo.MeleeAttack(_armyStat.AttackPower.GetValue());
+           
         }
-
-        else if (weaponType == WeaponType.Ranged)
-        {
-            AttackCompo.RangerAttack(_armyStat.AttackPower.GetValue());
-        }*/
-    }
+        _currentHp -= damage;
+    }*/
 
     #endregion
+
+    public void OnHit(float damager)
+    {   
+        _currentHp -= damager;
+
+        if(_currentHp < 0)
+        {
+            OnDie();
+        }
+    }
+
+    public void OnDie()
+    {
+        PoolManager.Instance.Push(this);
+    }
+
+    
 }
