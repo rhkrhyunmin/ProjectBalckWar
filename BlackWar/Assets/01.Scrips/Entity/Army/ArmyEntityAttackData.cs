@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ArmyEntityAttackData : MonoBehaviour
+public class ArmyEntityAttackData : Army
 {
     protected Army army;
     DamageCaster DamageCasterCompo => army.DamageCasterCompo;

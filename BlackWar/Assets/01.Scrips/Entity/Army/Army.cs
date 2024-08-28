@@ -3,16 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponType
-{
-    Melee,
-    Ranged
-}
-
-public class Army : PoolableMono
+public class Army : Entity
 {
     public PlayerStat _armyStat;
-    public LayerMask enemyLayer;
+
+    //public WeaponType weaponType;
 
     public WeaponType weaponType;
 
@@ -22,29 +17,32 @@ public class Army : PoolableMono
         set => _armyStat = value;
     }
 
-    public Animator AnimatorCompo { get; protected set; }
+    #region Components
     public ArmyEntityAttackData AttackCompo { get; private set; }
-    public DamageCaster DamageCasterCompo { get; protected set; }
     public ArmyStateMachine StateMachine { get; private set; }
+    #endregion
+
+    public float _currentHp;
+    public GameObject _weapon;
 
     public float _currentHp;
     public GameObject _weapon;
 
     protected virtual void Awake()
     {
-        AnimatorCompo = GetComponentInChildren<Animator>();
-        DamageCasterCompo = GetComponentInChildren<DamageCaster>();
+        base.Awake();
         AttackCompo = GetComponent<ArmyEntityAttackData>();
+        SetBaseState();
     }
 
-    protected virtual void Start()
+    protected override void Start()
     {
         _currentHp = _armyStat.MaxHp.GetValue();
     }
 
-    protected virtual void Update()
+    protected override void Update()
     {
-        
+        base.Update();
     }
 
     public virtual void StateInit() { }
@@ -77,7 +75,7 @@ public class Army : PoolableMono
         }
     }
 
-    #region ¿òÁ÷ÀÓ
+    #region ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void MoveArmy()
     {
         transform.Translate(Vector2.right * _armyStat.MoveSpeed.GetValue() * Time.deltaTime);
@@ -95,7 +93,7 @@ public class Army : PoolableMono
 
     #endregion
 
-    #region °ø°Ý
+    #region ï¿½ï¿½ï¿½ï¿½
     public void Attack()
     {
         /*if (weaponType == WeaponType.Melee)
