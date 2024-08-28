@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Army : PoolableMono
+public class Army : Entity
 {
     [SerializeField] protected PlayerStat _armyStat;
-    public LayerMask enemyLayer;
 
     public PlayerStat Stat
     {
@@ -14,26 +13,26 @@ public class Army : PoolableMono
         set => _armyStat = value;
     }
 
-    public Animator AnimatorCompo { get; protected set; }
+    #region Components
     public ArmyEntityAttackData AttackCompo { get; private set; }
-    public DamageCaster DamageCasterCompo { get; protected set; }
     public ArmyStateMachine StateMachine { get; private set; }
+    #endregion
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
-        AnimatorCompo = GetComponentInChildren<Animator>();
-        DamageCasterCompo = GetComponentInChildren<DamageCaster>();
+        base.Awake();
         AttackCompo = GetComponent<ArmyEntityAttackData>();
+        SetBaseState();
     }
 
-    protected virtual void Start()
+    protected override void Start()
     {
-        
+        base.Start();
     }
 
-    protected virtual void Update()
+    protected override void Update()
     {
-        
+        base.Update();
     }
 
     public virtual void StateInit() { }
@@ -69,8 +68,7 @@ public class Army : PoolableMono
     #region 움직임
     public void MoveArmy()
     {
-        transform.Translate(Vector2.right * _armyStat.MoveSpeed.GetValue() * Time.deltaTime);
-        Debug.Log("움직인당");
+        transform.Translate(Vector2.right * _armyStat.MoveSpeed.GetValue() * Time.deltaTime);-
     }
 
     public bool CheckForAttack()
