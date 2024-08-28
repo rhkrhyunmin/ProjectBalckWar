@@ -42,8 +42,8 @@ Material:
     m_Ints: []
     m_Floats:
     - Vector1_55182e8aaba14ee08852316fce0c0045: 0
-    - _Effect: 3
-    - _Speed: -0.05
+    - _Effect: 0
+    - _Speed: 0.09
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
