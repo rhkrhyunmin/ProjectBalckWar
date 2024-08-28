@@ -9,8 +9,6 @@ public class Army : Entity
 
     //public WeaponType weaponType;
 
-    public WeaponType weaponType;
-
     public PlayerStat Stat
     {
         get => _armyStat;
@@ -21,9 +19,6 @@ public class Army : Entity
     public ArmyEntityAttackData AttackCompo { get; private set; }
     public ArmyStateMachine StateMachine { get; private set; }
     #endregion
-
-    public float _currentHp;
-    public GameObject _weapon;
 
     public float _currentHp;
     public GameObject _weapon;
