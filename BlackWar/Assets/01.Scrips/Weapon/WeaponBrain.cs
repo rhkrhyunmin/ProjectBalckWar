@@ -18,10 +18,11 @@ public class WeaponBrain : PoolableMono
     // 미리 정의된 레이어 상수
     public LayerMask enemyLayer;
     public LayerMask obstacleLayer;
+    public PlayerController playerController;
 
     // Raycast 관련 변수
     private float meleeRayDistance = 1f; 
-    private float rangedRayDistance = 5f; 
+    private float rangedRayDistance = 5f;
 
     private void Update()
     {
@@ -36,18 +37,18 @@ public class WeaponBrain : PoolableMono
         }
     }
 
-    private void ShootMeleeRaycast()
+    public void ShootMeleeRaycast()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, meleeRayDistance, enemyLayer);
 
         if (hit.collider != null)
         {
-            Debug.Log("Melee weapon hit an enemy: " + hit.collider.name);
-            HandleMeleeCollision(hit.collider);
+            //playerController.Attack(playerController.stat.AttackPower.GetValue());
+            Debug.Log("123");
         }
     }
 
-    private void ShootRangedRaycast()
+    public void ShootRangedRaycast()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, rangedRayDistance, enemyLayer | obstacleLayer);
 
@@ -57,8 +58,7 @@ public class WeaponBrain : PoolableMono
 
             if (IsInLayerMask(hitLayer, enemyLayer))
             {
-                Debug.Log("Ranged weapon hit an enemy: " + hit.collider.name);
-                // 적에게 데미지를 입히는 로직 추가
+               // playerController.Attack(playerController.stat.AttackPower.GetValue());
                 PoolManager.Instance.Push(this);
             }
             // 장애물을 맞췄을 경우
@@ -70,25 +70,8 @@ public class WeaponBrain : PoolableMono
         }
     }
 
-    private void HandleMeleeCollision(Collider2D other)
-    {
-        Debug.Log("Melee weapon hit an enemy: " + other.name);
-        // 적에게 데미지를 입히는 로직 추가
-    }
-
     private bool IsInLayerMask(int layer, LayerMask layerMask)
     {
         return ((layerMask.value & (1 << layer)) != 0);
-    }
-
-    public void Attack()
-    {
-        if(currentState == State.Attacking)
-        {
-            if(poolType == PoolType.knight)
-            {
-
-            }
-        }
     }
 }

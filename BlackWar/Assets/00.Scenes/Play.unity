@@ -1776,6 +1776,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 0
+  playerController: {fileID: 0}
   detectionRadius: 10
 --- !u!61 &1360083437
 BoxCollider2D:
@@ -1931,6 +1932,7 @@ GameObject:
   - component: {fileID: 1431684899}
   - component: {fileID: 1431684898}
   - component: {fileID: 1431684900}
+  - component: {fileID: 1431684901}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -2040,6 +2042,30 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &1431684901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431684897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7569e280033d5cb4eb6c840168322290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolType: 0
+  sameLifeCycle: 0
+  stat: {fileID: 11400000, guid: aa4e7ed443b14e846b7957256498de94, type: 2}
+  WeaponBrain: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  CurrentHp: 0
+  isWalk: 0
+  isAttack: 0
+  isHit: 0
+  isDie: 0
 --- !u!1 &1480403217
 GameObject:
   m_ObjectHideFlags: 0
