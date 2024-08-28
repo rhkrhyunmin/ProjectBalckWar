@@ -68,7 +68,7 @@ public class Army : Entity
     #region ¿òÁ÷ÀÓ
     public void MoveArmy()
     {
-        transform.Translate(Vector2.right * _armyStat.MoveSpeed.GetValue() * Time.deltaTime);-
+        transform.Translate(Vector2.right * _armyStat.MoveSpeed.GetValue() * Time.deltaTime);
     }
 
     public bool CheckForAttack()
