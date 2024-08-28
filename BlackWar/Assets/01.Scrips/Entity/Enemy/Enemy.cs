@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : PoolableMono
+public class Enemy : Entity
 {
     [SerializeField] protected EnemyStat _enemyStat;
-    public LayerMask armyLayer;
 
     public EnemyStat Stat
     {
@@ -14,8 +13,27 @@ public class Enemy : PoolableMono
         set => _enemyStat = value;
     }
 
-    public Animator AnimatorCompo { get; protected set; }
+    #region Components
     public EnemyStateMachine StateMachine { get; private set; }
+    public EnemyEntityAttackData AttackCompo { get; private set; }
+    #endregion
+
+    protected override void Awake()
+    {
+        base.Awake();
+        AttackCompo = GetComponent<EnemyEntityAttackData>();
+        SetBaseState();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+    }
 
     public virtual void StateInit() { }
 
@@ -55,7 +73,7 @@ public class Enemy : PoolableMono
 
     public bool CheckForAttack()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _enemyStat.AttackDistance.GetValue(), armyLayer);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _enemyStat.AttackDistance.GetValue(), enemyLayer);
 
         if (enemies.Length > 0)
             return true;
