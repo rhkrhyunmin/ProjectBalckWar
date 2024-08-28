@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : WeaponBrain
+public class Arrow : MonoBehaviour
 {
     private Quaternion rotation;
 

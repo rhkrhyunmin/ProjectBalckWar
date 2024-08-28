@@ -6,6 +6,7 @@ using UnityEngine;
 public class CastleControl : RangedAttack
 {
     public float detectionRadius = 10f; // Å½Áö ¹Ý°æ
+    public LayerMask enemyLayer;
     private float timer = 0.0f;
 
     private void Update()

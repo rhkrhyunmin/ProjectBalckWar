@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class RangedAttack : WeaponBrain
+public class RangedAttack : MonoBehaviour
 {
     // 발사체 발사를 시작하는 함수
     public void StartShooting(Transform firePoint, PoolableMono Obj, Transform target, float fireRate, float projectileSpeed)

@@ -115,6 +115,4 @@ public class Army : Entity
     {
         //PoolManager.Instance.Push(this);
     }
-
-    
 }

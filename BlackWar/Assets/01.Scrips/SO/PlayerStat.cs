@@ -15,7 +15,6 @@ public enum PlayerStatType
 [CreateAssetMenu(menuName = "SO/Stat/Player")]
 public class PlayerStat : ScriptableObject
 {
-    private PlayerController _owner;
 
     private Dictionary<PlayerStatType, FieldInfo> _fieldInfoDictionary = new Dictionary<PlayerStatType, FieldInfo>();
 
@@ -50,11 +49,6 @@ public class PlayerStat : ScriptableObject
                 _fieldInfoDictionary.Add(statType, statField);
             }
         }
-    }
-
-    public void SetOwner(PlayerController owner)
-    {
-        _owner = owner;
     }
 
     public void InitializeAllModifiers()
