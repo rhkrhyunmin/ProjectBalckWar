@@ -3,10 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum WeaponType
+{
+    Melee,
+    Ranged
+}
+
 public class Army : PoolableMono
 {
     public PlayerStat _armyStat;
     public LayerMask enemyLayer;
+
+    public WeaponType weaponType;
 
     public PlayerStat Stat
     {
@@ -19,6 +27,9 @@ public class Army : PoolableMono
     public DamageCaster DamageCasterCompo { get; protected set; }
     public ArmyStateMachine StateMachine { get; private set; }
 
+    public float _currentHp;
+    public GameObject _weapon;
+
     protected virtual void Awake()
     {
         AnimatorCompo = GetComponentInChildren<Animator>();
@@ -28,7 +39,7 @@ public class Army : PoolableMono
 
     protected virtual void Start()
     {
-        
+        _currentHp = _armyStat.MaxHp.GetValue();
     }
 
     protected virtual void Update()
@@ -80,6 +91,22 @@ public class Army : PoolableMono
             return true;
         else
             return false;
+    }
+
+    #endregion
+
+    #region АјАн
+    public void Attack()
+    {
+        /*if (weaponType == WeaponType.Melee)
+        {
+            AttackCompo.MeleeAttack(_armyStat.AttackPower.GetValue());
+        }
+
+        else if (weaponType == WeaponType.Ranged)
+        {
+            AttackCompo.RangerAttack(_armyStat.AttackPower.GetValue());
+        }*/
     }
 
     #endregion

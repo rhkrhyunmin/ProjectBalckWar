@@ -27,7 +27,7 @@ public enum State
     Die
 }
 
-public class PlayerController : PlayerBrain
+public class PlayerController : PoolableMono
 {
     public PlayerStat stat;
 
@@ -39,6 +39,7 @@ public class PlayerController : PlayerBrain
     public float CurrentHp;
 
     private float attackCooldownTimer;
+    private Animator animator;
 
     [HideInInspector]
     public bool isWalk;
@@ -52,6 +53,7 @@ public class PlayerController : PlayerBrain
     private void Awake()
     {
         anmation = GetComponent<PlayerAnimation>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()

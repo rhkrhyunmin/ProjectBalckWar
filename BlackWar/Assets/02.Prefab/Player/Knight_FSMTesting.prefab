@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 5077150340070240726}
   - component: {fileID: 6328178318323722706}
   - component: {fileID: 7554673915864180331}
-  - component: {fileID: 3048673475982815741}
   m_Layer: 0
   m_Name: sword
   m_TagString: Untagged
@@ -202,28 +201,6 @@ PolygonCollider2D:
       - {x: -0.289382, y: -0.21415748}
       - {x: 0.282512, y: -0.056131687}
   m_UseDelaunayMesh: 0
---- !u!114 &3048673475982815741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500859790496852886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9623a2bb62bcfe4188b68f8d2f78f7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolType: 0
-  sameLifeCycle: 0
-  weaponType: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  rayDistance: 10
 --- !u!1 &1032868207635670845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1784,6 +1761,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  weaponType: 0
+  _currentHp: 0
+  _weapon: {fileID: 500859790496852886}
 --- !u!114 &6072397701881978561
 MonoBehaviour:
   m_ObjectHideFlags: 0

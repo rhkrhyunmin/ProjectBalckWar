@@ -349,7 +349,6 @@ GameObject:
   - component: {fileID: 9222892713896251648}
   - component: {fileID: 7646024471930631404}
   - component: {fileID: 2169672982873036035}
-  - component: {fileID: 2653045722140790702}
   m_Layer: 0
   m_Name: sword
   m_TagString: Untagged
@@ -508,28 +507,6 @@ PolygonCollider2D:
       - {x: -0.289382, y: -0.21415748}
       - {x: 0.282512, y: -0.056131687}
   m_UseDelaunayMesh: 0
---- !u!114 &2653045722140790702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2821684735651631453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9623a2bb62bcfe4188b68f8d2f78f7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolType: 0
-  sameLifeCycle: 0
-  weaponType: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  playerController: {fileID: -5201271619770513990}
 --- !u!1 &2979208165617414362
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,9 +827,8 @@ GameObject:
   - component: {fileID: 5643647976791866830}
   - component: {fileID: -7884565348444729344}
   - component: {fileID: -8320669604275318494}
-  - component: {fileID: 1839671576602342893}
-  - component: {fileID: -5201271619770513990}
-  - component: {fileID: 1502417517165101266}
+  - component: {fileID: 8290370804132508335}
+  - component: {fileID: 7097289797294149342}
   m_Layer: 0
   m_Name: knight 1
   m_TagString: Untagged
@@ -971,7 +947,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1839671576602342893
+--- !u!114 &8290370804132508335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -980,12 +956,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3916098905896244238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a982fe4b09f564d4eb996a5d6d91b8b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d9181768fb12b540a15e9263a819369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 1
-  sameLifeCycle: 0
---- !u!114 &-5201271619770513990
+--- !u!114 &7097289797294149342
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -994,33 +968,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3916098905896244238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7569e280033d5cb4eb6c840168322290, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f9ec1216c57def4a8fed1703c8f864e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 1
   sameLifeCycle: 0
-  stat: {fileID: 11400000, guid: d0e1680959d7f774088166e5b774e303, type: 2}
-  WeaponBrain: {fileID: 2653045722140790702}
+  _armyStat: {fileID: 11400000, guid: d0e1680959d7f774088166e5b774e303, type: 2}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  CurrentHp: 0
-  isWalk: 0
-  isAttack: 0
-  isHit: 0
-  isDie: 0
---- !u!114 &1502417517165101266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3916098905896244238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c4e05fe8fe9031448290eb0f528a2f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  weaponType: 0
+  _currentHp: 0
+  _weapon: {fileID: 2821684735651631453}
 --- !u!1 &3929798876839599658
 GameObject:
   m_ObjectHideFlags: 0

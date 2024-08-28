@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ArmyEntityAttackData : MonoBehaviour
 {
     protected Army army;
@@ -12,17 +13,22 @@ public class ArmyEntityAttackData : MonoBehaviour
         army = GetComponent<Army>();
     }
 
-    public virtual void MeleeAttack()
+    private void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, army._armyStat.AttackDistance.GetValue(), army.enemyLayer);
 
+    }
+
+    public virtual void MeleeAttack(float damage)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(army._weapon.transform.position, army._weapon.transform.right, army._armyStat.AttackDistance.GetValue(), army.enemyLayer);
         if (hit.collider != null)
         {
+
             Debug.Log("123");
         }
     }
 
-    public virtual void RangerAttack()
+    public virtual void RangerAttack(float damage)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, army._armyStat.AttackDistance.GetValue(), army.enemyLayer);
 
