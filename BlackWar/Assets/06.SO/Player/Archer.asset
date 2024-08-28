@@ -19,7 +19,7 @@ MonoBehaviour:
     _baseValue: 0
     modifiers: []
   AttackPower:
-    _baseValue: 0
+    _baseValue: 5
     modifiers: []
   AttackTimer:
     _baseValue: 0

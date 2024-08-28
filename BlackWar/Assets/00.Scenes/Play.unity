@@ -2059,7 +2059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da1f660f09b11144abe37adb3228ea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 2
+  poolType: 0
   sameLifeCycle: 0
   enemyLayer:
     serializedVersion: 2

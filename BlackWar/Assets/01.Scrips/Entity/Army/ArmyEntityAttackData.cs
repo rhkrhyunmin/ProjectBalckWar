@@ -22,10 +22,18 @@ public class ArmyEntityAttackData : MonoBehaviour
     {
         if (other.CompareTag("Weapon"))
         {
-            army.OnHit(army._armyStat.AttackPower.GetValue());
-            Debug.Log("123");
+            Army weaponArmy = other.GetComponentInParent<Army>();
+
+            if (weaponArmy != null)
+            {
+                float attackPower = weaponArmy._armyStat.AttackPower.GetValue();
+                army.OnHit(attackPower);
+            }
         }
     }
+
+
+
 
 
     public virtual void RangerAttack(float damage)
@@ -38,7 +46,7 @@ public class ArmyEntityAttackData : MonoBehaviour
 
             if (IsInLayerMask(hitLayer, army.enemyLayer))
             { 
-                PoolManager.Instance.Push(army);
+                //PoolManager.Instance.Push(army);
             }
            /* // 장애물을 맞췄을 경우
             else if (IsInLayerMask(hitLayer, obstacleLayer))

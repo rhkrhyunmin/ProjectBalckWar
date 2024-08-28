@@ -103,6 +103,7 @@ public class Army : Entity
     public void OnHit(float damager)
     {   
         _currentHp -= damager;
+        Debug.Log("55");
 
         if(_currentHp < 0)
         {
@@ -112,7 +113,7 @@ public class Army : Entity
 
     public void OnDie()
     {
-        PoolManager.Instance.Push(this);
+        //PoolManager.Instance.Push(this);
     }
 
     
