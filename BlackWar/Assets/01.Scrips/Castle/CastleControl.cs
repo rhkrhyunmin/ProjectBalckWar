@@ -7,7 +7,15 @@ public class CastleControl : RangedAttack
 {
     public float detectionRadius = 10f; // Å½Áö ¹Ý°æ
     public LayerMask enemyLayer;
+    public float currentHp;
+
+    private float MaxHp = 100;
     private float timer = 0.0f;
+
+    private void Awake()
+    {
+        currentHp = MaxHp;
+    }
 
     private void Update()
     {
@@ -62,5 +70,10 @@ public class CastleControl : RangedAttack
         }
 
         transform.eulerAngles = currentRotation;
+    }
+
+    public void OnHit(float damage)
+    {
+        currentHp -= damage;
     }
 }
