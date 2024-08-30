@@ -6,6 +6,7 @@ using UnityEngine;
 public class CastleControl : RangedAttack
 {
     public float detectionRadius = 10f; // Å½Áö ¹Ý°æ
+    public GameObject Bow;
     public LayerMask enemyLayer;
     public float currentHp;
 
@@ -39,7 +40,7 @@ public class CastleControl : RangedAttack
 
         if (timer > 0.5f)
         {
-            StartShooting(transform, PoolManager.Instance.Pop(PoolType.Arrow, transform.position), enemy.transform, 5, 5);
+            StartShooting(transform, PoolManager.Instance.Pop(PoolType.Arrow, Bow.transform.position), enemy.transform, 5, 5);
             timer = 0;
         }
     }
