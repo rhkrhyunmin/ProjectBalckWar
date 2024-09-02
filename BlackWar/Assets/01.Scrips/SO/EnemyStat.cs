@@ -11,7 +11,7 @@ public enum EnemyStatType
     AttackPower,
 }
 
-[CreateAssetMenu(menuName = "SO/Stat/Player")]
+[CreateAssetMenu(menuName = "SO/Stat/Enemy")]
 public class EnemyStat : ScriptableObject
 {
     private Enemy _owner;
