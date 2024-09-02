@@ -32,10 +32,6 @@ public class ArmyEntityAttackData : MonoBehaviour
         }
     }
 
-
-
-
-
     public virtual void RangerAttack(float damage)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, army._armyStat.AttackDistance.GetValue(), army.enemyLayer);
@@ -46,13 +42,8 @@ public class ArmyEntityAttackData : MonoBehaviour
 
             if (IsInLayerMask(hitLayer, army.enemyLayer))
             { 
-                //PoolManager.Instance.Push(army);
+                PoolManager.Instance.Push(army);
             }
-           /* // 장애물을 맞췄을 경우
-            else if (IsInLayerMask(hitLayer, obstacleLayer))
-            {
-                PoolManager.Instance.Push(this);
-            }*/
         }
     }
 

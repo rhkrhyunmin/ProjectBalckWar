@@ -13,7 +13,6 @@ public class ArmyAnimationTrigger : MonoBehaviour
 
     public void AttackTrigger()
     {
-        //Debug.Log("123");
-        //_army.AttackCompo.OnTriggerEnter2D();
+
     }
 }
