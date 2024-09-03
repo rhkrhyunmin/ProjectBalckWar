@@ -1,5 +1,7 @@
 public enum ArmyStateEnum
 {
     Move,
-    Attack
+    Attack,
+    Hit,
+    Die,
 }
