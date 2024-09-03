@@ -16,20 +16,20 @@ MonoBehaviour:
     _baseValue: 15
     modifiers: []
   MoveSpeed:
-    _baseValue: 0
+    _baseValue: 5
     modifiers: []
   AttackPower:
     _baseValue: 5
     modifiers: []
   AttackTimer:
-    _baseValue: 0
+    _baseValue: 4
     modifiers: []
   AttackDistance:
-    _baseValue: 0
+    _baseValue: 10
     modifiers: []
   AttackDelay:
-    _baseValue: 0
+    _baseValue: 5
     modifiers: []
   UseCost:
-    _baseValue: 0
+    _baseValue: 5
     modifiers: []

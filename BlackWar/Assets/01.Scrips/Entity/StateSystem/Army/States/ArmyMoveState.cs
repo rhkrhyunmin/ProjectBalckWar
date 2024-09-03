@@ -22,6 +22,7 @@ public class ArmyMoveState : ArmyState
         if (_army.CheckForAttack())
         {
             _stateMachine.ChangeState(ArmyStateEnum.Attack);
+            //Debug.Log("88");
         }
     }
 

@@ -13,6 +13,6 @@ public class ArmyAnimationTrigger : MonoBehaviour
 
     public void AttackTrigger()
     {
-
+        
     }
 }
