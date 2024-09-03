@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 361016122008258102}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AnchorWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2131569431152499905}
   - component: {fileID: 6044697602633668112}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LegFrontL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 4160550918902297427}
   - component: {fileID: 1095825222976725720}
   - component: {fileID: 3451348503543221161}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4964513147623027954}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AnchorBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8742506513415956604}
   - component: {fileID: 5524215051064426245}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LegBackL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 4775269986378525451}
   - component: {fileID: 7502815708218348285}
   - component: {fileID: 7236012352439316496}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,7 +436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5886118740421140497}
   - component: {fileID: 2370896815081554417}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -528,7 +528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4474356971719170096}
   - component: {fileID: 4563758441140644438}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LegFrontR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +612,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7015632460768734540}
   - component: {fileID: 9107638083455316705}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DamageCaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,7 +656,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3277962511941546206}
   - component: {fileID: 7948079961706755580}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -740,7 +740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6486107442446644104}
   - component: {fileID: 6411006259395382975}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LegBackR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -823,7 +823,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4653452763445346544}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AnchorStatus
   m_TagString: Untagged
   m_Icon: {fileID: 0}

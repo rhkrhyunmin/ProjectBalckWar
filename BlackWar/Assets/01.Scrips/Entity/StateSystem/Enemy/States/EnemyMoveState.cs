@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class EnemyMoveState : EnemyState
@@ -11,13 +12,18 @@ public class EnemyMoveState : EnemyState
     public override void OnEnterState()
     {
         base.OnEnterState();
-
-        MoveEnter();
     }
 
     public override void OnUpdateState()
     {
         base.OnUpdateState();
+
+        MoveEnter();
+
+        if (_enemy.CheckForAttack())
+        {
+            _stateMachine.ChangeState(EnemyStateEnum.Attack);
+        }
     }
 
     public override void OnExitState()
