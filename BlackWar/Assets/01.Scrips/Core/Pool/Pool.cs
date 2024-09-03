@@ -9,7 +9,7 @@ public class Pool<T> where T : PoolableMono
     private PoolType _poolType;
     private Transform _parent;
 
-    public Pool(T prefab, PoolType poolType, Transform parent, int itemAmount = 10)
+    public Pool(T prefab, PoolType poolType, Transform parent, int itemAmount = 20)
     {
         _poolType = poolType;
         _prefab = prefab;

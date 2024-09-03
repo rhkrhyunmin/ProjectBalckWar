@@ -22,6 +22,7 @@ public class EnemyState
     protected void MoveEnter()
     {
         _triggerCalled = true;
+        _enemy.MoveEnemy();
     }
 
     protected void AttackEnter()

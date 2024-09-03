@@ -6,6 +6,8 @@ using UnityEngine;
 public class CastleControl : RangedAttack
 {
     public float detectionRadius = 10f; // 탐지 반경
+    public GameObject BowSpawn;
+    public GameObject Bow;
     public LayerMask enemyLayer;
     public float currentHp;
 
@@ -39,7 +41,7 @@ public class CastleControl : RangedAttack
 
         if (timer > 0.5f)
         {
-            StartShooting(transform, PoolManager.Instance.Pop(PoolType.Arrow, transform.position), enemy.transform, 5, 5);
+            StartShooting(Bow.transform, PoolManager.Instance.Pop(PoolType.Arrow, Bow.transform.position), enemy.transform, 5,5);
             timer = 0;
         }
     }
@@ -47,7 +49,7 @@ public class CastleControl : RangedAttack
     public void UpRotation()
     {
         // 현재 각도를 eulerAngles로 변환
-        Vector3 currentRotation = transform.eulerAngles;
+        Vector3 currentRotation = BowSpawn.transform.eulerAngles;
 
         // Z축의 각도가 0에서 80 사이일 때만 증가
         if (currentRotation.z > -40 || currentRotation.z < 0)
@@ -55,13 +57,13 @@ public class CastleControl : RangedAttack
             currentRotation.z -= 1f;  
         }
 
-        transform.eulerAngles = currentRotation;
+        BowSpawn.transform.eulerAngles = currentRotation;
     }
 
     public void DownRotation()
     {
         // 현재 각도를 eulerAngles로 변환
-        Vector3 currentRotation = transform.eulerAngles;
+        Vector3 currentRotation = BowSpawn.transform.eulerAngles;
 
         // Z축의 각도가 0에서 80 사이일 때만 증가
         if (currentRotation.z > 40 || currentRotation.z < 0)
@@ -69,7 +71,7 @@ public class CastleControl : RangedAttack
             currentRotation.z += 1f;
         }
 
-        transform.eulerAngles = currentRotation;
+        BowSpawn.transform.eulerAngles = currentRotation;
     }
 
     public void OnHit(float damage)
