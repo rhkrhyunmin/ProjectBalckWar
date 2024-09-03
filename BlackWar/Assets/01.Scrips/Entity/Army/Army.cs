@@ -79,6 +79,7 @@ public class Army : Entity
     public bool CheckForAttack()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _armyStat.AttackDistance.GetValue(), enemyLayer);
+        Debug.Log(_armyStat.AttackDistance.GetValue());
 
         if(enemies.Length > 0)
             return true;

@@ -1762,7 +1762,7 @@ MonoBehaviour:
     m_Bits: 64
   _armyStat: {fileID: 11400000, guid: d0e1680959d7f774088166e5b774e303, type: 2}
   _currentHp: 0
-  _weapon: {fileID: 500859790496852886}
+  _weapon: {fileID: 0}
 --- !u!114 &6072397701881978561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1825,7 +1825,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1836,7 +1836,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &9207840379061659280
 GameObject:
   m_ObjectHideFlags: 0
