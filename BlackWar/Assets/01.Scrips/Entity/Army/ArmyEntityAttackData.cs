@@ -4,11 +4,6 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public enum AttackType
-{
-    ShortRange,
-    LongRange
-}
 
 
 public class ArmyEntityAttackData : RangedAttack
@@ -24,7 +19,7 @@ public class ArmyEntityAttackData : RangedAttack
         army = GetComponent<Army>();
     }
 
-    public virtual void OnTriggerEnter2D(Collider2D other)
+    /*public virtual void OnTriggerEnter2D(Collider2D other)
     {
         timer += Time.deltaTime;
         if (other.CompareTag("Weapon"))
@@ -38,7 +33,7 @@ public class ArmyEntityAttackData : RangedAttack
                 timer = 0;
             }
         }
-    }
+    }*/
 
 
     public virtual void RangerAttack()

@@ -3,11 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GetType
-{
-    Friend,
-    Enemy,
-}
+
 
 public class Army : Entity
 {

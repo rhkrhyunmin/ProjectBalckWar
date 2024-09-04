@@ -2659,9 +2659,9 @@ GameObject:
   - component: {fileID: 1431684899}
   - component: {fileID: 1431684898}
   - component: {fileID: 1431684900}
-  - component: {fileID: 1431684901}
   - component: {fileID: 1431684902}
-  - component: {fileID: 1431684903}
+  - component: {fileID: 1431684905}
+  - component: {fileID: 1431684906}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -2771,28 +2771,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &1431684901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1431684897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2da1f660f09b11144abe37adb3228ea9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolType: 0
-  sameLifeCycle: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  _armyStat: {fileID: 11400000, guid: aa4e7ed443b14e846b7957256498de94, type: 2}
-  _col: {fileID: 0}
-  _currentHp: 0
-  _weapon: {fileID: 0}
-  _enemy: {fileID: 0}
 --- !u!50 &1431684902
 Rigidbody2D:
   serializedVersion: 4
@@ -2820,7 +2798,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1431684903
+--- !u!114 &1431684905
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2829,10 +2807,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1431684897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d9181768fb12b540a15e9263a819369, type: 3}
+  m_Script: {fileID: 11500000, guid: 99f3ad358866b964c83a0d610ee6a077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackType: 0
+--- !u!114 &1431684906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431684897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e20451710091994d84598a9bbf790e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolType: 0
+  sameLifeCycle: 0
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _enemyStat: {fileID: 11400000, guid: da3d3ae8099ed724d936079aceecd4d6, type: 2}
 --- !u!1 &1465176379
 GameObject:
   m_ObjectHideFlags: 0

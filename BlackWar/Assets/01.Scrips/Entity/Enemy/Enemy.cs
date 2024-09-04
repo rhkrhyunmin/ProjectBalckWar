@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    [SerializeField] protected EnemyStat _enemyStat;
+    public EnemyStat _enemyStat;
+
+    public float currentHp;
 
     public EnemyStat Stat
     {
@@ -28,6 +30,7 @@ public class Enemy : Entity
     protected override void Start()
     {
         base.Start();
+        currentHp = _enemyStat.MaxHp.GetValue();
     }
 
     protected override void Update()
@@ -82,4 +85,20 @@ public class Enemy : Entity
     }
 
     #endregion
+
+    public void OnHit(float damager)
+    {
+        currentHp -= damager;
+        Debug.Log("55");
+
+        if (currentHp < 0)
+        {
+            OnDie();
+        }
+    }
+
+    public void OnDie()
+    {
+        //PoolManager.Instance.Push(this);
+    }
 }
