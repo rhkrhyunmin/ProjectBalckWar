@@ -5,6 +5,7 @@ using UnityEngine;
 public class Entity : PoolableMono
 {
     public LayerMask enemyLayer;
+    public float currentHp;
 
     public Animator AnimatorCompo { get; protected set; }
     public DamageCaster DamageCasterCompo { get; protected set; }
@@ -23,5 +24,16 @@ public class Entity : PoolableMono
     protected virtual void Update()
     {
 
+    }
+
+    public virtual void OnHit(float damage)
+    {
+        
+    }
+
+
+    public virtual void OnDie()
+    {
+        //PoolManager.Instance.Push(this);
     }
 }

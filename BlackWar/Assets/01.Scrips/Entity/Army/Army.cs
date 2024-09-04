@@ -10,6 +10,8 @@ public class Army : Entity
     public PlayerStat _armyStat;
     [HideInInspector]
     public Collider2D _col;
+    [HideInInspector]
+    public Enemy enemy;
 
     //public WeaponType weaponType;
 
@@ -23,8 +25,6 @@ public class Army : Entity
     public ArmyEntityAttackData AttackCompo { get; private set; }
     public ArmyStateMachine StateMachine { get; private set; }
     #endregion
-
-    public float _currentHp;
     public GameObject _weapon;
 
     [HideInInspector]
@@ -39,7 +39,7 @@ public class Army : Entity
 
     protected override void Start()
     {
-        _currentHp = _armyStat.MaxHp.GetValue();
+        currentHp = _armyStat.MaxHp.GetValue();
         _col = GetComponent<Collider2D>();
     }
 
@@ -86,40 +86,30 @@ public class Army : Entity
 
     public bool CheckForAttack()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _armyStat.AttackDistance.GetValue(), enemyLayer);
-        if(enemies.Length > 0)
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _armyStat.AttackDistance.GetValue(), enemyLayer);
+        List<Enemy> enemies = new List<Enemy>();
+
+        foreach (Collider2D collider in colliders)
         {
-            foreach(Collider2D enemy in enemies)
+            enemy = collider.GetComponent<Enemy>();
+            if (enemy != null)
             {
-                _enemy = enemy;
+                enemies.Add(enemy);
+                _enemy = collider;
             }
-            Debug.Log("1");
+        }
+
+        if (enemies.Count > 0)
+        {
+            // 여기서 enemies 리스트를 사용하여 원하는 로직을 수행할 수 있습니다.
             return true;
         }
         else
-            return false;
-    }
-
-    #endregion
-
-    public void OnHit(float damager)
-    {   
-        _currentHp -= damager;
-        Debug.Log("55");
-
-        if(_currentHp < 0)
         {
-            OnDie();
+            return false;
         }
     }
 
-    public void OnDie()
-    {
-        //PoolManager.Instance.Push(this);
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        
-    }
+    #endregion
 }

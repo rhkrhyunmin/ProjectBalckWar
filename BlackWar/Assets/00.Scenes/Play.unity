@@ -611,9 +611,10 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  currentHp: 0
   _armyStat: {fileID: 0}
   _col: {fileID: 0}
-  _currentHp: 0
+  enemy: {fileID: 0}
   _weapon: {fileID: 0}
   _enemy: {fileID: 0}
 --- !u!212 &356718360
@@ -2662,6 +2663,7 @@ GameObject:
   - component: {fileID: 1431684902}
   - component: {fileID: 1431684905}
   - component: {fileID: 1431684906}
+  - component: {fileID: 1431684907}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -2827,7 +2829,21 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
+  currentHp: 0
   _enemyStat: {fileID: 11400000, guid: da3d3ae8099ed724d936079aceecd4d6, type: 2}
+--- !u!114 &1431684907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431684897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2a4bdc24d40c841b2dd8f4f4ca1e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orginType: 1
 --- !u!1 &1465176379
 GameObject:
   m_ObjectHideFlags: 0

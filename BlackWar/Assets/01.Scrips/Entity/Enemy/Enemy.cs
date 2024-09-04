@@ -7,8 +7,6 @@ public class Enemy : Entity
 {
     public EnemyStat _enemyStat;
 
-    public float currentHp;
-
     public EnemyStat Stat
     {
         get => _enemyStat;
@@ -85,20 +83,4 @@ public class Enemy : Entity
     }
 
     #endregion
-
-    public void OnHit(float damager)
-    {
-        currentHp -= damager;
-        Debug.Log("55");
-
-        if (currentHp < 0)
-        {
-            OnDie();
-        }
-    }
-
-    public void OnDie()
-    {
-        //PoolManager.Instance.Push(this);
-    }
 }
