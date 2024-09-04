@@ -21,7 +21,6 @@ public class ArmyAnimationTrigger : MonoBehaviour
         if(AttackType.LongRange == _army.AttackType)
         {
             _army.AttackCompo.RangerAttack();
-            Debug.Log("123");
         }
         else if(AttackType.ShortRange == _army.AttackType)
         {
