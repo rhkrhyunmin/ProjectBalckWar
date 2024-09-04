@@ -91,31 +91,18 @@ public class Army : Entity
     public bool CheckForAttack()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _armyStat.AttackDistance.GetValue(), enemyLayer);
-        
-
         if(enemies.Length > 0)
         {
             foreach(Collider2D enemy in enemies)
             {
                 _enemy = enemy;
             }
+            Debug.Log("1");
             return true;
         }
         else
             return false;
     }
-
-    #endregion
-
-    #region ����
-/*    public void Attack(float damage, LayerMask enemy)
-    {
-        if(enemyLayer == enemy)
-        {
-           
-        }
-        _currentHp -= damage;
-    }*/
 
     #endregion
 

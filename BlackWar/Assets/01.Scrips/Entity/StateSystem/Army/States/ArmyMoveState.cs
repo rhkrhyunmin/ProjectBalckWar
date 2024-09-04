@@ -17,14 +17,14 @@ public class ArmyMoveState : ArmyState
     {
         base.OnUpdateState();
         
-        _army._col.isTrigger = true;
+        //_army._col.isTrigger = true;
         MoveEnter();
 
         if (_army.CheckForAttack())
         {
             _stateMachine.ChangeState(ArmyStateEnum.Attack);
-            _army._col.isTrigger = true;
-            //Debug.Log("88");
+            //_army._col.isTrigger = true;
+            Debug.Log("88");
         }
     }
 
