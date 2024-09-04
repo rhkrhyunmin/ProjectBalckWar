@@ -34,6 +34,6 @@ public class DamageCaster : MonoBehaviour
 
     public void CastDamage()
     {
-        
+        //if(AttackType)
     }
 }

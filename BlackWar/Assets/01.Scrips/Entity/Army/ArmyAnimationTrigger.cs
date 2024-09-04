@@ -11,8 +11,21 @@ public class ArmyAnimationTrigger : MonoBehaviour
         _army = transform.parent.GetComponent<Army>();
     }
 
+    public void Update()
+    {
+        AttackTrigger();
+    }
+
     public void AttackTrigger()
     {
-        _army.AttackCompo.MeleeAttack();
+        if(AttackType.LongRange == _army.AttackType)
+        {
+            _army.AttackCompo.RangerAttack();
+            Debug.Log("123");
+        }
+        else if(AttackType.ShortRange == _army.AttackType)
+        {
+            _army.AttackCompo.MeleeAttack();
+        }
     }
 }

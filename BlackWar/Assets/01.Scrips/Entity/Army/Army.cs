@@ -8,12 +8,10 @@ using UnityEngine;
 public class Army : Entity
 {
     public PlayerStat _armyStat;
-    [HideInInspector]
-    public Collider2D _col;
+    public GameObject _weapon;
     [HideInInspector]
     public Enemy enemy;
-
-    //public WeaponType weaponType;
+    public AttackType AttackType;
 
     public PlayerStat Stat
     {
@@ -39,7 +37,6 @@ public class Army : Entity
     protected override void Start()
     {
         currentHp = _armyStat.MaxHp.GetValue();
-        _col = GetComponent<Collider2D>();
     }
 
     protected override void Update()
