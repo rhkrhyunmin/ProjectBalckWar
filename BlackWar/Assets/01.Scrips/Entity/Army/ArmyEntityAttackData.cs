@@ -40,18 +40,18 @@ public class ArmyEntityAttackData : RangedAttack
         }
     }
 
-    public void AttackBow()
-    {
-        timer += Time.deltaTime;
-
-        if (army.CheckForAttack() && timer > army._armyStat.AttackDelay.GetValue() && AttackType == AttackType.LongRange)
-        {
-            StartCoroutine(ShootProjectile(army._weapon.transform, PoolManager.Instance.Pop(PoolType.Arrow, army._weapon.transform.position), army._enemy.transform, 0, 10));
-            timer = 0;
-        }
-    }
 
     public virtual void RangerAttack()
+    {
+
+    }
+
+    public virtual void MeleeAttack()
+    {
+        DamageCasterCompo.CastDamage();
+    }
+
+    /*public virtual void RangerAttack(float damage)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, army._armyStat.AttackDistance.GetValue(), army.enemyLayer);
         Debug.Log("123");
@@ -64,7 +64,7 @@ public class ArmyEntityAttackData : RangedAttack
                 AttackBow();
             }
         }
-    }
+    }*/
 
     private bool IsInLayerMask(int layer, LayerMask layerMask)
     {
