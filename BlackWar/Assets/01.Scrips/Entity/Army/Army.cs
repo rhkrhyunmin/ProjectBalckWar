@@ -3,9 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GetType
+{
+    Friend,
+    Enemy,
+}
+
 public class Army : Entity
 {
     public PlayerStat _armyStat;
+    [HideInInspector]
+    public Collider2D _col;
 
     //public WeaponType weaponType;
 
@@ -23,6 +31,9 @@ public class Army : Entity
     public float _currentHp;
     public GameObject _weapon;
 
+    [HideInInspector]
+    public Collider2D _enemy;
+
     protected virtual void Awake()
     {
         base.Awake();
@@ -33,6 +44,7 @@ public class Army : Entity
     protected override void Start()
     {
         _currentHp = _armyStat.MaxHp.GetValue();
+        _col = GetComponent<Collider2D>();
     }
 
     protected override void Update()
@@ -79,10 +91,16 @@ public class Army : Entity
     public bool CheckForAttack()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _armyStat.AttackDistance.GetValue(), enemyLayer);
-        Debug.Log(_armyStat.AttackDistance.GetValue());
+        
 
         if(enemies.Length > 0)
+        {
+            foreach(Collider2D enemy in enemies)
+            {
+                _enemy = enemy;
+            }
             return true;
+        }
         else
             return false;
     }
@@ -115,5 +133,10 @@ public class Army : Entity
     public void OnDie()
     {
         //PoolManager.Instance.Push(this);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
     }
 }

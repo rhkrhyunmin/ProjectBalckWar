@@ -3,70 +3,55 @@ using UnityEngine;
 
 public class RangedAttack : MonoBehaviour
 {
-    // 발사체 발사를 시작하는 함수
-    public void StartShooting(Transform firePoint, PoolableMono Obj, Transform target, float fireRate, float projectileSpeed)
-    {
-        StartCoroutine(ShootProjectile(firePoint, Obj, target, fireRate, projectileSpeed));
-    }
-
-    // 발사체 발사를 멈추는 함수
-    public void StopShooting()
-    {
-        StopAllCoroutines();
-    }
-
-    // 발사체를 일정 시간 간격으로 발사하는 코루틴
-    IEnumerator ShootProjectile(Transform firePoint, PoolableMono Obj, Transform target, float fireRate, float projectileSpeed)
+    // 발사체를 일정 시간 간격으로 발사하는 코루틴 (성에서 발사)
+    public IEnumerator ShootProjectile(Transform firePoint, PoolableMono obj, Transform target, float fireRate, float projectileSpeed)
     {
         while (true)
         {
-            Fire(firePoint, Obj, target, projectileSpeed);
+            Fire(firePoint.position, target.position, obj, projectileSpeed);
             yield return new WaitForSeconds(fireRate);
         }
     }
 
-    void Fire(Transform firePoint, PoolableMono Obj, Transform target, float projectileSpeed)
+    void Fire(Vector3 startPosition, Vector3 targetPosition, PoolableMono obj, float projectileSpeed, bool isParabolic = true)
     {
-        Rigidbody2D rb = Obj.GetComponent<Rigidbody2D>();
+        Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
 
-        Vector2 launchVelocity = CalculateLaunchVelocity(firePoint.position, target.position, projectileSpeed);
+        Vector2 launchVelocity;
 
-        float initialAngle = firePoint.eulerAngles.x;
-        launchVelocity = RotateVectorByAngle(launchVelocity, initialAngle);
+        // 포물선 운동을 사용할지 여부에 따라 발사 속도를 계산
+        if (isParabolic)
+        {
+            launchVelocity = CalculateParabolicVelocity(startPosition, targetPosition, projectileSpeed);
+        }
+        else
+        {
+            launchVelocity = CalculateStraightlineVelocity(startPosition, targetPosition, projectileSpeed);
+        }
 
         rb.velocity = launchVelocity;
 
-        RotateTowardsTarget(Obj.transform, rb.velocity);
+        RotateTowardsTarget(obj.transform, rb.velocity);
 
-        if (Obj.TryGetComponent<ProjectileUpdater>(out ProjectileUpdater updater) == false)
+        if (obj.TryGetComponent<ProjectileUpdater>(out ProjectileUpdater updater) == false)
         {
-            updater = Obj.gameObject.AddComponent<ProjectileUpdater>();
+            updater = obj.gameObject.AddComponent<ProjectileUpdater>();
         }
 
         updater.Initialize(rb);
     }
 
-    Vector2 RotateVectorByAngle(Vector2 vector, float angle)
-    {
-        // Quaternion을 사용하여 회전 행렬 생성
-        Quaternion rotation = Quaternion.Euler(0, 0, angle);
-        Vector2 rotatedVector = rotation * vector;
-
-        return rotatedVector;
-    }
-
     // 포물선 운동의 발사 속도를 계산하는 함수
-    Vector2 CalculateLaunchVelocity(Vector3 startPosition, Vector3 targetPosition, float projectileSpeed)
+    Vector2 CalculateParabolicVelocity(Vector3 startPosition, Vector3 targetPosition, float projectileSpeed)
     {
         float displacementX = targetPosition.x - startPosition.x;
         float displacementY = targetPosition.y - startPosition.y;
 
         float gravity = Mathf.Abs(Physics2D.gravity.y);
 
-        float angle =  Mathf.Deg2Rad;
+        float angle = Mathf.Deg2Rad;
 
         float speedX = Mathf.Cos(angle) * projectileSpeed;
-
         float speedY = Mathf.Sin(angle) * projectileSpeed;
 
         float timeToTarget = Mathf.Abs(displacementX / speedX);
@@ -77,10 +62,22 @@ public class RangedAttack : MonoBehaviour
         return launchVelocity;
     }
 
+    // 직선으로 발사할 때의 발사 속도를 계산하는 함수
+    Vector2 CalculateStraightlineVelocity(Vector3 startPosition, Vector3 targetPosition, float projectileSpeed)
+    {
+        // 목표 위치로의 방향 계산
+        Vector2 direction = (targetPosition - startPosition).normalized;
+
+        // 방향 벡터에 발사 속도를 곱하여 발사 속도 벡터 생성
+        Vector2 launchVelocity = direction * projectileSpeed;
+
+        return launchVelocity;
+    }
+
+    // 발사체가 나아가는 방향으로 회전시키는 함수
     void RotateTowardsTarget(Transform objTransform, Vector2 velocity)
     {
         float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
-
         objTransform.rotation = Quaternion.Euler(0, 0, angle - 90f);
     }
 
@@ -113,7 +110,7 @@ public class ProjectileUpdater : PoolableMono
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Ground"))
+        if (collision.CompareTag("Ground"))
         {
             PoolManager.Instance.Push(this);
         }

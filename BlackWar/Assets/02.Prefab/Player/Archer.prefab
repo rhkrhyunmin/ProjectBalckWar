@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8979326233180231073}
   - component: {fileID: -4702339788245828633}
   - component: {fileID: 6714449035338865736}
+  - component: {fileID: 6552378438392390478}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -51,7 +52,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -81,8 +82,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _armyStat: {fileID: 11400000, guid: aa4e7ed443b14e846b7957256498de94, type: 2}
+  _col: {fileID: 0}
   _currentHp: 0
   _weapon: {fileID: 4544516135829043271}
+  _enemy: {fileID: 0}
 --- !u!114 &-4702339788245828633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +133,18 @@ CapsuleCollider2D:
   m_Offset: {x: -0.40257424, y: 1.1801547}
   m_Size: {x: 0.94135445, y: 2.4615476}
   m_Direction: 0
+--- !u!114 &6552378438392390478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4403649862053524381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b72bf6f893c707246ba5edd69080430b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4173617633953593652
 PrefabInstance:
   m_ObjectHideFlags: 0

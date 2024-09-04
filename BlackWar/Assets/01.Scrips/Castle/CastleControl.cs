@@ -41,7 +41,7 @@ public class CastleControl : RangedAttack
 
         if (timer > 0.5f)
         {
-            StartShooting(Bow.transform, PoolManager.Instance.Pop(PoolType.Arrow, Bow.transform.position), enemy.transform, 5,5);
+            StartCoroutine(ShootProjectile(BowSpawn.transform,PoolManager.Instance.Pop(PoolType.Arrow,Bow.transform.position), enemy.transform,5,10));
             timer = 0;
         }
     }
