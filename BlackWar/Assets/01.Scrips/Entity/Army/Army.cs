@@ -25,7 +25,6 @@ public class Army : Entity
     public ArmyEntityAttackData AttackCompo { get; private set; }
     public ArmyStateMachine StateMachine { get; private set; }
     #endregion
-    public GameObject _weapon;
 
     [HideInInspector]
     public Collider2D _enemy;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Magician : Army
+public class Ninja : Army
 {
     protected override void Awake()
     {

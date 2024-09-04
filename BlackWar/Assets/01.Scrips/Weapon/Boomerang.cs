@@ -1,18 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
-public class Boomerang : Magician
-{
-    private float speed = 5f;           // 부메랑의 이동 속도
-    
-    private Vector3 startPosition;      // 부메랑이 시작된 위치
+public class Boomerang : MonoBehaviour
+{   
+    private Vector3 startPosition;
+    public Ninja ninja;
 
-    private bool isReturning = false;   // 부메랑이 돌아오는 중인지 여부
-    private bool canThrow = true;       // 부메랑을 다시 던질 수 있는지 여부
+    private bool isReturning = false;   
+    private bool canThrow = true;       
 
-    protected virtual void Update()
+    private void Update()
     {
-        base.Update();
 
         if (isReturning)
         {
@@ -20,7 +18,7 @@ public class Boomerang : Magician
         }
         else
         {
-            if (CheckForAttack() && canThrow)  // 마우스 왼쪽 버튼으로 던지기
+            if (ninja.CheckForAttack() && canThrow)  // 마우스 왼쪽 버튼으로 던지기
             {
                 ThrowBoomerang();
             }
@@ -50,7 +48,7 @@ public class Boomerang : Magician
 
         while (elapsedTime < travelTime)
         {
-            transform.position += Vector3.right * speed * Time.deltaTime;
+            transform.position += Vector3.right * ninja._armyStat.AttackTimer.GetValue() * Time.deltaTime;
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -62,7 +60,7 @@ public class Boomerang : Magician
     void ReturnToPlayer()
     {
         // 부메랑이 시작 위치로 돌아오는 로직
-        transform.position = Vector3.MoveTowards(transform.position, startPosition, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, startPosition, ninja._armyStat.AttackTimer.GetValue() * Time.deltaTime);
 
         // 부메랑이 시작 위치에 도달하면 다시 던질 수 있도록 설정
         if (Vector3.Distance(transform.position, startPosition) < 0.1f)

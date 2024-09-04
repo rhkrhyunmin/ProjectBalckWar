@@ -21,6 +21,10 @@ MonoBehaviour:
     type: 3
     prefab: {fileID: 8979326233180231073, guid: 23c295a26212292478c1e467cec05f05, type: 3}
     itemAmount: 10
+  - name: Ninja
+    type: 100
+    prefab: {fileID: 3373194623228901422, guid: 6d8c29a3f8f096b4997e550035dde94a, type: 3}
+    itemAmount: 10
   - name: Arrow
     type: 101
     prefab: {fileID: 7415778321604365205, guid: 5528e65f10716994094811a796d85749, type: 3}
