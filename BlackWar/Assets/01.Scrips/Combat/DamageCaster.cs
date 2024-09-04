@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class DamageCaster : MonoBehaviour
 {
+    public LayerMask TargetLayer;
+
+    public void SetPostion()
+    {
+        transform.localPosition = Vector3.zero;
+    }
+
     //공격들 구현
 
     //기본공격
-    public void MeleeAttack()
+    public void CastDamage()
     {
-        //내용 채우기
+
     }
 }

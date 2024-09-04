@@ -32,6 +32,11 @@ public class ArmyEntityAttackData : MonoBehaviour
         }
     }
 
+    public virtual void MeleeAttack()
+    {
+        DamageCasterCompo.CastDamage();
+    }
+
     public virtual void RangerAttack(float damage)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, army._armyStat.AttackDistance.GetValue(), army.enemyLayer);
