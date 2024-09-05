@@ -22,10 +22,13 @@ public class ArmyEntityAttackData : RangedAttack
     public virtual void RangerAttack()
     {
         timer += Time.deltaTime;
-        if(timer > army.Stat.AttackDelay.GetValue())
+        if (army.poolType == PoolType.Archer)
         {
-            StartCoroutine(ShootProjectile(army._weapon.transform, PoolManager.Instance.Pop(PoolType.Arrow, army._weapon.transform.transform.position), army._enemy.transform, 0, 7));
-            timer = 0;
+            if (timer > army.Stat.AttackDelay.GetValue())
+            {
+                StartCoroutine(ShootProjectile(army._weapon.transform, PoolManager.Instance.Pop(PoolType.Arrow, army._weapon.transform.transform.position), army._enemy.transform, 0, 7));
+                timer = 0;
+            }
         }
     }
 

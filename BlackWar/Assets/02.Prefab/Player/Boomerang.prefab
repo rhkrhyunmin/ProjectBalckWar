@@ -110,7 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9181768fb12b540a15e9263a819369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackType: 1
 --- !u!114 &3373194623228901422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,8 +129,9 @@ MonoBehaviour:
     m_Bits: 64
   currentHp: 0
   _armyStat: {fileID: 11400000, guid: ff6a87504b851914e86bed0279a1638f, type: 2}
-  _col: {fileID: 0}
+  _weapon: {fileID: 8826878765003240198}
   enemy: {fileID: 0}
+  AttackType: 1
   _enemy: {fileID: 0}
 --- !u!1001 &3481582540197873667
 PrefabInstance:
