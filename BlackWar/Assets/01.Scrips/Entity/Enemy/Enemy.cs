@@ -79,12 +79,14 @@ public class Enemy : Entity
     public bool CheckForAttack()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, EnemyStat.AttackDistance.GetValue(), enemyLayer);
+        Collider2D castle = Physics2D.OverlapCircle(transform.position, EnemyStat.AttackDistance.GetValue(), castleLayer);
 
-        if (enemies.Length > 0)
+        if (enemies.Length > 0 || castle != null)  // 적이 있거나 성이 있을 때 true 반환
             return true;
         else
             return false;
     }
+
 
     #endregion
 }
