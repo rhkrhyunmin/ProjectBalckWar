@@ -18,13 +18,18 @@ public class ArmyAnimationTrigger : MonoBehaviour
 
     public void AttackTrigger()
     {
-        if(AttackType.LongRange == _army.AttackType)
+        /*if(AttackType.LongRange == _army.AttackType)
         {
             _army.AttackCompo.RangerAttack();
         }
         else if(AttackType.ShortRange == _army.AttackType)
         {
             _army.AttackCompo.MeleeAttack();
-        }
+        }*/
+    }
+
+    public void RangeAttackTrigger()
+    {
+        _army.AttackCompo.RangerAttack();
     }
 }
