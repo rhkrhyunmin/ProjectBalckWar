@@ -26,7 +26,7 @@ public class ArmyEntityAttackData : RangedAttack
         {
             if (timer > army.Stat.AttackDelay.GetValue())
             {
-                StartCoroutine(ShootProjectile(army._weapon.transform, PoolManager.Instance.Pop(PoolType.Arrow, army._weapon.transform.transform.position), army._enemy.transform, 0, 7));
+                StartCoroutine(ShootProjectile(army._weapon.transform, PoolManager.Instance.Pop(PoolType.Arrow, army._weapon.transform.transform.position), army._enemy.transform, 0, 7, true));
                 timer = 0;
             }
         }
