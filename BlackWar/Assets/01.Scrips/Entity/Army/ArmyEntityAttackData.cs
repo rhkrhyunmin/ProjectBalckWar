@@ -30,6 +30,11 @@ public class ArmyEntityAttackData : RangedAttack
                 timer = 0;
             }
         }
+
+        else if(army.poolType == PoolType.Ninja)
+        {
+
+        }
     }
 
     public virtual void MeleeAttack()
