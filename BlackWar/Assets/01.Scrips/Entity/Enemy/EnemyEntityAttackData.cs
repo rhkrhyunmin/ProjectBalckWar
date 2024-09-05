@@ -14,6 +14,6 @@ public class EnemyEntityAttackData : MonoBehaviour
 
     public virtual void MeleeAttack()
     {
-        DamageCasterCompo.CastDamage();
+        DamageCasterCompo.EnemyCastDamage();
     }
 }

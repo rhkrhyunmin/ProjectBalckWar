@@ -26,7 +26,7 @@ public class EnemyManagement : MonoBehaviour
     }
 
     // 모든 적들을 처리하는 메서드 (예: 모든 적들에게 데미지를 줄 때)
-    public void DamageAllEnemies(float damage)
+    /*public void DamageAllEnemies(float damage)
     {
         foreach (Enemy enemy in enemies)
         {
@@ -35,7 +35,7 @@ public class EnemyManagement : MonoBehaviour
                 enemy.OnHit(damage);
             }
         }
-    }
+    }*/
 
     // 현재 적의 리스트를 가져오는 메서드
     public List<Enemy> GetEnemies()

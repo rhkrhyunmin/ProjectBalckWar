@@ -80,20 +80,9 @@ public class Army : Entity
 
     public bool CheckForAttack()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _armyStat.AttackDistance.GetValue(), enemyLayer);
-        List<Enemy> enemies = new List<Enemy>();
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _armyStat.AttackDistance.GetValue(), enemyLayer);
 
-        foreach (Collider2D collider in colliders)
-        {
-            enemy = collider.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                enemies.Add(enemy);
-                _enemy = collider;
-            }
-        }
-
-        if (enemies.Count > 0)
+        if (enemies.Length > 0)
         {
             // 여기서 enemies 리스트를 사용하여 원하는 로직을 수행할 수 있습니다.
             return true;

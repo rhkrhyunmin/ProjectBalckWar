@@ -17,12 +17,18 @@ public enum Origin
 public class DamageCaster : MonoBehaviour
 {
     public Origin orginType;
+    private float _detectRange = 1f;
+    public LayerMask TargetLayer;
 
-    Entity entity;
+    private Entity _target;
 
-    private void Start()
+    private Army _army;
+    private Enemy _enemy;
+
+    private void Awake()
     {
-        entity = GetComponent<Entity>();
+        _army = GetComponentInParent<Army>();
+        _enemy = GetComponentInParent<Enemy>();
     }
 
     public void SetPostion()
@@ -31,9 +37,32 @@ public class DamageCaster : MonoBehaviour
     }
 
     //공격들 구현
-
-    public void CastDamage()
+    public void EnemyCastDamage()
     {
-        
+        var Colls = Physics.OverlapSphere(transform.position, _detectRange, TargetLayer);
+
+        int damage = (int)_enemy.Stat.AttackPower.GetValue();
+        Debug.Log($"Enemy Damage = {damage}");
+
+        foreach(var col in Colls)
+        {
+            _target = col.GetComponentInParent<Entity>();
+            _target.currentHp -= damage;
+            Debug.Log(_target.currentHp);
+        }
+    }
+
+    public void ArmyCastDamage()
+    {
+        var Colls = Physics.OverlapSphere(transform.position, _detectRange, TargetLayer);
+
+        int damage = (int)_army.Stat.AttackPower.GetValue();
+        Debug.Log($"Army Damage = {damage}");
+
+        foreach (var col in Colls)
+        {
+            _target = col.GetComponentInParent<Entity>();
+            _target.currentHp -= damage;
+        }
     }
 }

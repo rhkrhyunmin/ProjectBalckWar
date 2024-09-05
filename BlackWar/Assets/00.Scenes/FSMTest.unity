@@ -231,6 +231,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4690648073924213222, guid: 4693ebd4a6cb7c541a57799ec078f5a0, type: 3}
+      propertyPath: TargetLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 5042800200824666280, guid: 4693ebd4a6cb7c541a57799ec078f5a0, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -445,7 +449,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3975112265255286707, guid: 7f7c02afda5ac174f91f50b8235351cd, type: 3}
+      propertyPath: EnemyStat
+      value: 
+      objectReference: {fileID: 11400000, guid: da3d3ae8099ed724d936079aceecd4d6, type: 2}
+    - target: {fileID: 3975112265255286707, guid: 7f7c02afda5ac174f91f50b8235351cd, type: 3}
       propertyPath: enemyLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107638083455316705, guid: 7f7c02afda5ac174f91f50b8235351cd, type: 3}
+      propertyPath: TargetLayer.m_Bits
       value: 128
       objectReference: {fileID: 0}
     m_RemovedComponents: []
