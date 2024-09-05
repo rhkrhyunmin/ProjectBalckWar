@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3201876156588494189, guid: 4693ebd4a6cb7c541a57799ec078f5a0, type: 3}
+      propertyPath: ArmyStat
+      value: 
+      objectReference: {fileID: 11400000, guid: d0e1680959d7f774088166e5b774e303, type: 2}
     - target: {fileID: 3380844962766112895, guid: 4693ebd4a6cb7c541a57799ec078f5a0, type: 3}
       propertyPath: m_GravityScale
       value: 0
@@ -307,7 +311,10 @@ PrefabInstance:
     - {fileID: 4634215774619116901, guid: 4693ebd4a6cb7c541a57799ec078f5a0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8400833099812204935, guid: 4693ebd4a6cb7c541a57799ec078f5a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1642000532}
   m_SourcePrefab: {fileID: 100100000, guid: 4693ebd4a6cb7c541a57799ec078f5a0, type: 3}
 --- !u!1 &1135252160
 GameObject:
@@ -446,6 +453,48 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!1 &1431127280 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3095433561074947400, guid: 7f7c02afda5ac174f91f50b8235351cd, type: 3}
+  m_PrefabInstance: {fileID: 5463475100239358774}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1431127286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431127280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f756375c530c3224e8bd064c2338001c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMaxHealth: 0
+  enemyMaxHealth: 0
+  playerCurrentHealth: 0
+  enemyCurrentHealth: 0
+--- !u!1 &1642000526 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8400833099812204935, guid: 4693ebd4a6cb7c541a57799ec078f5a0, type: 3}
+  m_PrefabInstance: {fileID: 394700982}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1642000532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642000526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f756375c530c3224e8bd064c2338001c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMaxHealth: 0
+  enemyMaxHealth: 0
+  playerCurrentHealth: 0
+  enemyCurrentHealth: 0
 --- !u!1001 &5463475100239358774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -521,7 +570,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3095433561074947400, guid: 7f7c02afda5ac174f91f50b8235351cd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1431127286}
   m_SourcePrefab: {fileID: 100100000, guid: 7f7c02afda5ac174f91f50b8235351cd, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

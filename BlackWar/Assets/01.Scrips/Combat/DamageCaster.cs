@@ -36,39 +36,46 @@ public class DamageCaster : MonoBehaviour
         transform.localPosition = Vector3.zero;
     }
 
-    //공격들 구현
+    //아군이 공격
+    public void ArmyCastDamage()
+    {
+        var colliders = Physics2D.OverlapCircleAll(transform.position, _detectRange, TargetLayer);
+
+        if (colliders.Length == 0)
+            return;
+        else
+        {
+            foreach (var collider in colliders)
+            {
+                IDamageable damageable = collider.GetComponent<IDamageable>();
+                if(damageable != null)
+                {
+                    int damage = (int)_army.Stat.AttackPower.GetValue();
+                    damageable.EnemyApplyDamage(damage);
+                }
+            }
+        }
+    }
+
+    //적이 공격
     public void EnemyCastDamage()
     {
         var colliders = Physics2D.OverlapCircleAll(transform.position, _detectRange, TargetLayer);
 
-        int damage = (int)_enemy.Stat.AttackPower.GetValue();
-
         if (colliders.Length == 0)
             return;
         else
         {
-            foreach (var col in colliders)
+            foreach (var collider in colliders)
             {
-                _target = col.GetComponentInParent<Army>();
-                _target.currentHp -= damage;
+                IDamageable damageable = collider.GetComponent<IDamageable>();
+                if(damageable != null)
+                {
+                    int damage = (int)_enemy.Stat.AttackPower.GetValue();
+                    damageable.ArmyApplyDamage(damage);
+                }
             }
         }
     }
 
-    public void ArmyCastDamage()
-    {
-        var colliders = Physics2D.OverlapCircleAll(transform.position, _detectRange, TargetLayer);
-        int damage = (int)_army.Stat.AttackPower.GetValue();
-
-        if (colliders.Length == 0)
-            return;
-        else
-        {
-            foreach (var col in colliders)
-            {
-                _target = col.GetComponentInParent<Enemy>();
-                _target.currentHp -= damage;
-            }
-        }
-    }
 }
