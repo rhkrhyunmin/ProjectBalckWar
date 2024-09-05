@@ -48,7 +48,7 @@ public class Boomerang : MonoBehaviour
 
         while (elapsedTime < travelTime)
         {
-            transform.position += Vector3.right * ninja._armyStat.AttackTimer.GetValue() * Time.deltaTime;
+            transform.position += Vector3.right * ninja.ArmyStat.AttackTimer.GetValue() * Time.deltaTime;
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -60,7 +60,7 @@ public class Boomerang : MonoBehaviour
     void ReturnToPlayer()
     {
         // 부메랑이 시작 위치로 돌아오는 로직
-        transform.position = Vector3.MoveTowards(transform.position, startPosition, ninja._armyStat.AttackTimer.GetValue() * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, startPosition, ninja.ArmyStat.AttackTimer.GetValue() * Time.deltaTime);
 
         // 부메랑이 시작 위치에 도달하면 다시 던질 수 있도록 설정
         if (Vector3.Distance(transform.position, startPosition) < 0.1f)

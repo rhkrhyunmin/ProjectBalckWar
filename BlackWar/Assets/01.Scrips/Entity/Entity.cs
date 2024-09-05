@@ -5,7 +5,6 @@ using UnityEngine;
 public class Entity : PoolableMono
 {
     public LayerMask enemyLayer;
-    public float currentHp;
 
     public Animator AnimatorCompo { get; protected set; }
     public DamageCaster DamageCasterCompo { get; protected set; }

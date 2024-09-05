@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Army : Entity
 {
-    public PlayerStat _armyStat;
+    public PlayerStat ArmyStat;
     public GameObject _weapon;
     [HideInInspector]
     public Enemy enemy;
@@ -13,13 +13,14 @@ public class Army : Entity
 
     public PlayerStat Stat
     {
-        get => _armyStat;
-        set => _armyStat = value;
+        get => ArmyStat;
+        set => ArmyStat = value;
     }
 
     #region Components
     public ArmyEntityAttackData AttackCompo { get; private set; }
     public ArmyStateMachine StateMachine { get; private set; }
+    public Health HealthCompo { get; private set; }
     #endregion
 
     [HideInInspector]
@@ -29,12 +30,16 @@ public class Army : Entity
     {
         base.Awake();
         AttackCompo = GetComponent<ArmyEntityAttackData>();
+        HealthCompo = GetComponent<Health>();
         SetBaseState();
+
+        HealthCompo?.PlayerSetHealth(ArmyStat);
+        ArmyStat = Instantiate(ArmyStat);
     }
 
     protected override void Start()
     {
-        currentHp = _armyStat.MaxHp.GetValue();
+        
     }
 
     protected override void Update()
@@ -75,12 +80,12 @@ public class Army : Entity
     #region ������
     public void MoveArmy()
     {
-        transform.Translate(Vector2.right * _armyStat.MoveSpeed.GetValue() * Time.deltaTime);
+        transform.Translate(Vector2.right * ArmyStat.MoveSpeed.GetValue() * Time.deltaTime);
     }
 
     public bool CheckForAttack()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _armyStat.AttackDistance.GetValue(), enemyLayer);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, ArmyStat.AttackDistance.GetValue(), enemyLayer);
 
         if (enemies.Length > 0)
         {

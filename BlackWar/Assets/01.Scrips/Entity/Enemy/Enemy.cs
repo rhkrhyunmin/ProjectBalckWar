@@ -16,19 +16,23 @@ public class Enemy : Entity
     #region Components
     public EnemyStateMachine StateMachine { get; private set; }
     public EnemyEntityAttackData AttackCompo { get; private set; }
+    public Health HealthCompo { get; private set; }
     #endregion
 
     protected override void Awake()
     {
         base.Awake();
         AttackCompo = GetComponent<EnemyEntityAttackData>();
+        HealthCompo = GetComponent<Health>();
         SetBaseState();
+
+        HealthCompo?.EnemySetHealth(EnemyStat);
+        EnemyStat = Instantiate(EnemyStat);
     }
 
     protected override void Start()
     {
         base.Start();
-        currentHp = EnemyStat.MaxHp.GetValue();
     }
 
     protected override void Update()
