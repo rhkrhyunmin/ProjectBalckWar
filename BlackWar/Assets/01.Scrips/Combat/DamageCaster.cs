@@ -17,7 +17,7 @@ public enum Origin
 public class DamageCaster : MonoBehaviour
 {
     public Origin orginType;
-    private float _detectRange = 1f;
+    private float _detectRange = 5f;
     public LayerMask TargetLayer;
 
     private Entity _target;
@@ -39,30 +39,36 @@ public class DamageCaster : MonoBehaviour
     //공격들 구현
     public void EnemyCastDamage()
     {
-        var Colls = Physics.OverlapSphere(transform.position, _detectRange, TargetLayer);
+        var colliders = Physics2D.OverlapCircleAll(transform.position, _detectRange, TargetLayer);
 
         int damage = (int)_enemy.Stat.AttackPower.GetValue();
-        Debug.Log($"Enemy Damage = {damage}");
 
-        foreach(var col in Colls)
+        if (colliders.Length == 0)
+            return;
+        else
         {
-            _target = col.GetComponentInParent<Entity>();
-            _target.currentHp -= damage;
-            Debug.Log(_target.currentHp);
+            foreach (var col in colliders)
+            {
+                _target = col.GetComponentInParent<Army>();
+                _target.currentHp -= damage;
+            }
         }
     }
 
     public void ArmyCastDamage()
     {
-        var Colls = Physics.OverlapSphere(transform.position, _detectRange, TargetLayer);
-
+        var colliders = Physics2D.OverlapCircleAll(transform.position, _detectRange, TargetLayer);
         int damage = (int)_army.Stat.AttackPower.GetValue();
-        Debug.Log($"Army Damage = {damage}");
 
-        foreach (var col in Colls)
+        if (colliders.Length == 0)
+            return;
+        else
         {
-            _target = col.GetComponentInParent<Entity>();
-            _target.currentHp -= damage;
+            foreach (var col in colliders)
+            {
+                _target = col.GetComponentInParent<Enemy>();
+                _target.currentHp -= damage;
+            }
         }
     }
 }
