@@ -26,12 +26,6 @@ public class Entity : PoolableMono
 
     }
 
-    public virtual void OnHit(float damage)
-    {
-        
-    }
-
-
     public virtual void OnDie()
     {
         //PoolManager.Instance.Push(this);

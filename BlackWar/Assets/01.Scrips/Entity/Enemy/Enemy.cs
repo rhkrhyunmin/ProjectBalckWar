@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    public EnemyStat _enemyStat;
+    public EnemyStat EnemyStat;
 
     public EnemyStat Stat
     {
-        get => _enemyStat;
-        set => _enemyStat = value;
+        get => EnemyStat;
+        set => EnemyStat = value;
     }
 
     #region Components
@@ -28,7 +28,7 @@ public class Enemy : Entity
     protected override void Start()
     {
         base.Start();
-        currentHp = _enemyStat.MaxHp.GetValue();
+        currentHp = EnemyStat.MaxHp.GetValue();
     }
 
     protected override void Update()
@@ -69,12 +69,12 @@ public class Enemy : Entity
     #region ¿òÁ÷ÀÓ
     public void MoveEnemy()
     {
-        transform.Translate(Vector2.left * _enemyStat.MoveSpeed.GetValue() * Time.deltaTime);
+        transform.Translate(Vector2.left * EnemyStat.MoveSpeed.GetValue() * Time.deltaTime);
     }
 
     public bool CheckForAttack()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _enemyStat.AttackDistance.GetValue(), enemyLayer);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, EnemyStat.AttackDistance.GetValue(), enemyLayer);
 
         if (enemies.Length > 0)
             return true;

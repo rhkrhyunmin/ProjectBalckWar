@@ -39,6 +39,6 @@ public class ArmyEntityAttackData : RangedAttack
 
     public virtual void MeleeAttack()
     {
-        DamageCasterCompo.CastDamage();
+        DamageCasterCompo.ArmyCastDamage();
     }
 }
