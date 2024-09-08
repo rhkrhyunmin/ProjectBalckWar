@@ -1765,10 +1765,12 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  castleLayer:
+    serializedVersion: 2
+    m_Bits: 0
   ArmyStat: {fileID: 11400000, guid: d0e1680959d7f774088166e5b774e303, type: 2}
   _weapon: {fileID: 0}
   enemy: {fileID: 0}
-  AttackType: 0
   _enemy: {fileID: 0}
 --- !u!114 &6072397701881978561
 MonoBehaviour:
@@ -1832,7 +1834,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

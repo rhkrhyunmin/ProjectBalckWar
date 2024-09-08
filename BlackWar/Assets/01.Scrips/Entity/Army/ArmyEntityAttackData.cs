@@ -21,25 +21,24 @@ public class ArmyEntityAttackData : RangedAttack
 
     public virtual void RangerAttack()
     {
+        DamageCasterCompo.ArmyCastDamage();
         timer += Time.deltaTime;
+        Debug.Log("555");
         if (army.poolType == PoolType.Archer)
         {
             if (timer > army.Stat.AttackDelay.GetValue())
             {
                 StartCoroutine(ShootProjectile(army._weapon.transform, PoolManager.Instance.Pop(PoolType.Arrow, army._weapon.transform.transform.position), army._enemy.transform, 0, 7, true));
+
                 Debug.Log("123");
                 timer = 0;
             }
-        }
-
-        else if(army.poolType == PoolType.Ninja)
-        {
-
         }
     }
 
     public virtual void MeleeAttack()
     {
+        Debug.Log("123");
         DamageCasterCompo.ArmyCastDamage();
     }
 }

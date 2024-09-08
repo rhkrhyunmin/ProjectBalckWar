@@ -812,6 +812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BowSpawn: {fileID: 121411039}
+  HpSlider: {fileID: 1896567803}
   castleStat: {fileID: 11400000, guid: db2bf308f6ec0784891d8217c803e794, type: 2}
   enemyLayer:
     serializedVersion: 2
@@ -2927,6 +2928,9 @@ MonoBehaviour:
   poolType: 0
   sameLifeCycle: 0
   enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  castleLayer:
     serializedVersion: 2
     m_Bits: 0
   EnemyStat: {fileID: 11400000, guid: da3d3ae8099ed724d936079aceecd4d6, type: 2}

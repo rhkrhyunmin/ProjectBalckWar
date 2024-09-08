@@ -129,6 +129,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  castleLayer:
+    serializedVersion: 2
+    m_Bits: 0
   ArmyStat: {fileID: 11400000, guid: ff6a87504b851914e86bed0279a1638f, type: 2}
   _weapon: {fileID: 8826878765003240198}
   enemy: {fileID: 0}
@@ -684,7 +687,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8826878765003240198}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d1592e9ddee44843968c958278060dc, type: 3}
   m_Name: 
