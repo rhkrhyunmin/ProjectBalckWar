@@ -14,17 +14,19 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(SpawnEnemies());
         TowerStat = Instantiate(TowerStat);
         currentHealth = TowerStat.MaxHp.GetValue();
+        StartCoroutine(SpawnEnemies());
     }
 
     IEnumerator SpawnEnemies()
     {
+        Debug.Log(currentHealth);
         while (currentHealth > 0)
         {
+            Debug.Log("생성 실행됨");
             SpawnBasedOnTowerHealth();
-            yield return new WaitForSeconds(5f); // 5초마다 적을 소환
+            yield return new WaitForSeconds(2f); // 2초마다 적을 소환
         }
     }
 
