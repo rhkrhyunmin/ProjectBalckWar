@@ -10,10 +10,10 @@ public class Health : MonoBehaviour, IDamageable
     protected readonly int HASH_DEAD = Animator.StringToHash("Dead");
 
     protected Army _owner;
+    protected Enemy _enemyOwner;
 
     protected Animator _anim;
-    protected NavMeshAgent _agent;
-    protected Collider _collider;
+    protected Collider2D _collider;
 
     public int playerMaxHealth;
     public int enemyMaxHealth;
@@ -27,7 +27,8 @@ public class Health : MonoBehaviour, IDamageable
     protected virtual void Awake()
     {
         _owner = GetComponent<Army>();
-        _collider = GetComponent<Collider>();
+        _enemyOwner = GetComponent<Enemy>();
+        _collider = GetComponent<Collider2D>();
         _anim = transform.Find("Visual").GetComponent<Animator>();
     }
 
@@ -49,7 +50,7 @@ public class Health : MonoBehaviour, IDamageable
 
         if (playerCurrentHealth < 0)
         {
-            OnDied();
+            OnArmyDied();
         }
     }
 
@@ -59,10 +60,11 @@ public class Health : MonoBehaviour, IDamageable
 
         if (enemyCurrentHealth < 0)
         {
-            OnDied();
+            OnEnemyDied();
         }
     }
-    public void OnDied()
+
+    public void OnArmyDied()
     {
         // 모든 bool 변수를 순회하며 비활성화하기
         var parameters = _anim.parameters;
@@ -73,13 +75,29 @@ public class Health : MonoBehaviour, IDamageable
 
         //죽는 애니메이션 처리
         _anim.SetBool(HASH_DEAD, true);
-        //엔티티 네브메쉬와 콜라이더 꺼줌
-        _agent.enabled = false;
         _collider.enabled = false;
         //엔티티 죽음 처리
         _owner.IsDead = true;
         //엔티티 스크립트 꺼줌
         _owner.enabled = false;
+    }
+
+    public void OnEnemyDied()
+    {
+        // 모든 bool 변수를 순회하며 비활성화하기
+        var parameters = _anim.parameters;
+        foreach (var param in parameters)
+            _anim.SetBool(param.name, false);
+
+        _anim.speed = 1f;
+
+        //죽는 애니메이션 처리
+        _anim.SetBool(HASH_DEAD, true);
+        _collider.enabled = false;
+        //엔티티 죽음 처리
+        _enemyOwner.IsDead = true;
+        //엔티티 스크립트 꺼줌
+        _enemyOwner.enabled = false;
     }
 
     public void Dead()
