@@ -8,7 +8,6 @@ public class ArmyState
     protected ArmyStateMachine _stateMachine;
     protected Army _army;
     protected int _animBoolHash;
-    protected bool _triggerCalled = true;
 
     public ArmyState(Army army, ArmyStateMachine stateMachine, string animationBoolName)
     {
@@ -21,13 +20,12 @@ public class ArmyState
     #region Enter
     protected void MoveEnter()
     {
-        _triggerCalled = true;
         _army.MoveArmy();
     }
 
     protected void AttackEnter()
     {
-        _triggerCalled = false;
+
     }
     #endregion
 
@@ -60,6 +58,6 @@ public class ArmyState
 
     public virtual void AnimationTrigger()
     {
-        _triggerCalled = true;
+
     }
 }
