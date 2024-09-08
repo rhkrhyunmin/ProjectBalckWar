@@ -87,4 +87,19 @@ public class DamageCaster : MonoBehaviour
             damageable.ArmyApplyDamage(damage);
         }
     }
+
+    public void ArmyRangeCastDamage()
+    {
+        var colliders = Physics2D.OverlapCircleAll(transform.position, _detectRange, TargetLayer);
+
+        if (colliders.Length == 0)
+            return;
+
+        IDamageable damageable = colliders[0].GetComponent<IDamageable>();
+        if (damageable != null)
+        {
+            int damage = (int)_enemy.Stat.AttackPower.GetValue();
+            damageable.ArmyApplyDamage(damage);
+        }
+    }
 }

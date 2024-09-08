@@ -16,7 +16,7 @@ public class ArmyAnimationTrigger : MonoBehaviour
         _army.AttackCompo.MeleeAttack();
     }
 
-    public void RangeTrigger()
+    public void ArcherRangeAttackTrigger()
     {
         _army.AttackCompo.RangerAttack();
     }

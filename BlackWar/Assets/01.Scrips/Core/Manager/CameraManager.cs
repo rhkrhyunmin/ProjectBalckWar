@@ -34,12 +34,14 @@ public class CameraManager : MonoBehaviour
             }
 
             // 키보드 방향키 처리
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKeyDown(KeyCode.D))
             {
+                Debug.Log("123");
                 MoveCamera(-moveSpeed * Time.deltaTime);
             }
-            else if (Input.GetKey(KeyCode.RightArrow))
+            else if (Input.GetKeyDown(KeyCode.A))
             {
+                Debug.Log("123");
                 MoveCamera(moveSpeed * Time.deltaTime);
             }
         }
