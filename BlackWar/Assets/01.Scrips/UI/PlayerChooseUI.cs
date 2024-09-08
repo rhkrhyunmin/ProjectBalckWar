@@ -53,10 +53,6 @@ public class PlayerChooseUI : MonoBehaviour
                 // 비용을 차감
                 GameManager.Instance.currentCost -= cost;
             }
-            else
-            {
-                Debug.Log("Not enough cost to spawn.");
-            }
         }
     }
 
