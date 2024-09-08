@@ -164,7 +164,7 @@ Transform:
   m_GameObject: {fileID: 540678287611645149}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.614, y: -0.37, z: 0}
+  m_LocalPosition: {x: -0.074, y: 0.222, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -968,7 +968,7 @@ MonoBehaviour:
   _firePos: {fileID: 3721592652963502480}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
 --- !u!1 &4471059580184598665
 GameObject:
   m_ObjectHideFlags: 0
