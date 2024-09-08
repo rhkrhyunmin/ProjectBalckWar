@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    //0 = 원거리 적, 1 ~ 3 = 근거리 적
-    [SerializeField] List<GameObject> enemies;
-    [SerializeField] Transform spawnPoint; // 적이 생성될 위치들
-    
+    // 0 = 원거리 적, 1 ~ 3 = 근거리 적
+    [SerializeField] List<Enemy> enemies;
+    [SerializeField] Transform spawnPoint; // 적이 생성될 위치
+
     public CastleSO TowerStat;
 
     private float currentHealth;
@@ -25,12 +25,13 @@ public class EnemySpawner : MonoBehaviour
         while (currentHealth > 0)
         {
             Debug.Log("생성 실행됨");
-            SpawnBasedOnTowerHealth();
-            yield return new WaitForSeconds(2f); // 2초마다 적을 소환
+            // 적들을 한 번에 소환하지 않고 차례대로 소환
+            yield return StartCoroutine(SpawnBasedOnTowerHealth());
+            yield return new WaitForSeconds(2f); // 2초마다 소환 주기
         }
     }
 
-    void SpawnBasedOnTowerHealth()
+    IEnumerator SpawnBasedOnTowerHealth()
     {
         // 타워의 체력을 기반으로 소환할 적의 밸런스 조정
         float healthPercentage = currentHealth / TowerStat.MaxHp.GetValue();
@@ -48,9 +49,9 @@ public class EnemySpawner : MonoBehaviour
             {
                 // 체력이 75% 이상일 때: 약한 적 위주
                 if (randomValue < 0.6f)
-                    SpawnEnemy(enemies[0]);
-                else
                     SpawnEnemy(enemies[1]);
+                else
+                    SpawnEnemy(enemies[0]);
             }
             else if (healthPercentage > 0.6f)
             {
@@ -74,17 +75,20 @@ public class EnemySpawner : MonoBehaviour
             }
             else
             {
-                // 체력이 50% 이하일 때: 강한 적 위주
+                // 체력이 45% 이하일 때: 강한 적 위주
                 if (randomValue < 0.3f)
                     SpawnEnemy(enemies[2]);
                 else
                     SpawnEnemy(enemies[3]);
             }
+
+            // 적 하나를 소환하고 잠시 대기
+            yield return new WaitForSeconds(0.5f); // 각 적 사이의 대기 시간 (0.5초)
         }
     }
 
-    void SpawnEnemy(GameObject enemyPrefab)
+    void SpawnEnemy(Enemy enemyPrefab)
     {
-        Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        PoolManager.Instance.Pop(enemyPrefab.poolType, spawnPoint.position);
     }
 }

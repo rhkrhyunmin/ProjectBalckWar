@@ -29,3 +29,11 @@ MonoBehaviour:
     type: 101
     prefab: {fileID: 7415778321604365205, guid: 5528e65f10716994094811a796d85749, type: 3}
     itemAmount: 10
+  - name: Hog
+    type: 102
+    prefab: {fileID: 3975112265255286707, guid: 7f7c02afda5ac174f91f50b8235351cd, type: 3}
+    itemAmount: 10
+  - name: CannonHog
+    type: 103
+    prefab: {fileID: 4535622760353507876, guid: ead93015b8a94184195781c4960e035b, type: 3}
+    itemAmount: 10
