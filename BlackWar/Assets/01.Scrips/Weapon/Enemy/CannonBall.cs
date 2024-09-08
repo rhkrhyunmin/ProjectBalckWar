@@ -29,7 +29,7 @@ public class CannonBall : MonoBehaviour
         Destroy(gameObject);
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D coll)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         _damageCaster.EnemyRangeCastDamage();
         Destroy(gameObject);

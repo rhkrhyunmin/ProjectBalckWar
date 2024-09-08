@@ -13,6 +13,20 @@ public class Enemy : Entity
         set => EnemyStat = value;
     }
 
+    public bool IsDead
+    {
+        get
+        {
+            if (HealthCompo != null)
+                return HealthCompo.IsDead;
+            return false;
+        }
+        set
+        {
+            HealthCompo.IsDead = value;
+        }
+    }
+
     #region Components
     public EnemyStateMachine StateMachine { get; private set; }
     public EnemyEntityAttackData AttackCompo { get; private set; }
