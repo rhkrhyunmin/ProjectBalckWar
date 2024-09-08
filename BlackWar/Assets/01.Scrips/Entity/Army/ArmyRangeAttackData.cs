@@ -18,7 +18,7 @@ public class ArmyRangeAttackData : ArmyEntityAttackData
             Vector2 targetDir = _firePos.transform.position - hit.transform.position;
 
             PlayerArrow _arrowPrefab = Instantiate(_arrow, _firePos.position, _firePos.rotation);
-            Debug.Log("5");
+            
             _arrowPrefab.Fire(targetDir);
         }
     }

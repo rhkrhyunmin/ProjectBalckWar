@@ -20,7 +20,6 @@ public class PlayerArrow : MonoBehaviour
         Vector2 normalizedDir = targetDir.normalized;
 
         _rigid.velocity = normalizedDir * _arrowPower;
-        Debug.Log("3333");
       
         StartCoroutine(WaitForDestroy());
     }
