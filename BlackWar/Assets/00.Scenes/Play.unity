@@ -241,7 +241,6 @@ Transform:
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 740630066}
   - {fileID: 981448592}
   - {fileID: 1465176380}
   - {fileID: 2028144352}
@@ -1275,8 +1274,8 @@ MonoBehaviour:
   camera: {fileID: 519420031}
   moveSpeed: 5
   dragSpeed: 0.1
-  MaxDictance: 0
-  MinDictance: 0
+  MaxDictance: 10
+  MinDictance: -60
 --- !u!1 &696376557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,13 +1696,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740630065}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 67.1, z: 220}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 14.113334, y: 35.38, z: 73.333336}
+  m_LocalScale: {x: 0.26666668, y: 0.26666668, z: 0.33333334}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 739187987}
-  m_Father: {fileID: 118963365}
+  m_Father: {fileID: 1431684899}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!210 &740630067
 SortingGroup:
@@ -2738,7 +2737,8 @@ Transform:
   m_LocalPosition: {x: -42.34, y: -64.46, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 740630066}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &1431684900
