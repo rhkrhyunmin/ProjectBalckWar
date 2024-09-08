@@ -15,7 +15,8 @@ public class CameraManager : MonoBehaviour
 
     void Update()
     {
-        if (camera.transform.position.x < MaxDictance && camera.transform.position.x > MinDictance)
+        // 카메라의 x 좌표가 MaxDistance + 3 이하이면서 MinDistance - 3 이상인 경우에만 이동 가능
+        if (camera.transform.position.x <= MaxDictance + 3 && camera.transform.position.x >= MinDictance - 3)
         {
             if (Input.touchCount == 1)
             {
@@ -34,21 +35,32 @@ public class CameraManager : MonoBehaviour
             }
 
             // 키보드 방향키 처리
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                Debug.Log("123");
-                MoveCamera(-moveSpeed * Time.deltaTime);
-            }
-            else if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKey(KeyCode.D))
             {
                 Debug.Log("123");
                 MoveCamera(moveSpeed * Time.deltaTime);
             }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                Debug.Log("123");
+                MoveCamera(-moveSpeed * Time.deltaTime);
+            }
         }
     }
 
-    void MoveCamera(float amount)
+    void MoveCamera(float deltaX)
     {
-        camera.transform.Translate(new Vector3(amount, 0, 0), Space.World);
+        // 카메라의 현재 위치를 가져옴
+        Vector3 newPosition = camera.transform.position;
+
+        // 새 위치 계산
+        newPosition.x += deltaX;
+
+        // 카메라의 위치를 MaxDistance와 MinDistance 사이로 제한
+        newPosition.x = Mathf.Clamp(newPosition.x, MinDictance, MaxDictance);
+
+        // 새로운 위치 적용
+        camera.transform.position = newPosition;
     }
+
 }
