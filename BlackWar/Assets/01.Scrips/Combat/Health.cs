@@ -23,7 +23,7 @@ public class Health : MonoBehaviour, IDamageable
 
     private PlayerStat _playerStat;
     private EnemyStat _enemyStat;
-    
+
     protected virtual void Awake()
     {
         _owner = GetComponent<Army>();
@@ -47,7 +47,7 @@ public class Health : MonoBehaviour, IDamageable
     {
         playerCurrentHealth -= damage;
 
-        if(playerCurrentHealth < 0)
+        if (playerCurrentHealth < 0)
         {
             OnDied();
         }
@@ -57,7 +57,7 @@ public class Health : MonoBehaviour, IDamageable
     {
         enemyCurrentHealth -= damage;
 
-        if(enemyCurrentHealth < 0)
+        if (enemyCurrentHealth < 0)
         {
             OnDied();
         }
@@ -80,5 +80,10 @@ public class Health : MonoBehaviour, IDamageable
         _owner.IsDead = true;
         //¿£Æ¼Æ¼ ½ºÅ©¸³Æ® ²¨ÁÜ
         _owner.enabled = false;
+    }
+
+    public void Dead()
+    {
+        Destroy(gameObject);
     }
 }
