@@ -18,11 +18,6 @@ public class EnemyAttackState : EnemyState
     public override void OnUpdateState()
     {
         base.OnUpdateState();
-
-        if (_triggerCalled) //공격
-        {
-            //코드 작성
-        }
     }
 
     public override void OnExitState()

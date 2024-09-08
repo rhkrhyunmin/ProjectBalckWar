@@ -2,12 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CastleStatType
-{
-    MaxHp,
-    AttackPower,
-}
-
 [CreateAssetMenu(menuName = "SO/Stat/Castle")]
 public class CastleSO : ScriptableObject
 {
@@ -19,6 +13,7 @@ public class CastleSO : ScriptableObject
     [Header("Attack")]
     public Stat AttackPower;
     public Stat AttackTimer;
-    public Stat AttackDistance;
-    public Stat AttackDelay;
+
+    [Header("Angle")]
+    public Stat angle;
 }

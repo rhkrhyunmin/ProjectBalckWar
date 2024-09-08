@@ -11,7 +11,8 @@ public enum PoolType
     Archer,
     Ninja = 100,
     Arrow,
-    Hog
+    Hog,
+    CannonHog
 }
 
 [Serializable]

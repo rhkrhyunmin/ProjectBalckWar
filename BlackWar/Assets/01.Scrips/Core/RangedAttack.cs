@@ -4,16 +4,17 @@ using UnityEngine;
 public class RangedAttack : MonoBehaviour
 {
     // 발사체를 일정 시간 간격으로 발사하는 코루틴 (성에서 발사)
-    public IEnumerator ShootProjectile(Transform firePoint, PoolableMono obj, Transform target, float fireRate, float projectileSpeed)
+    public IEnumerator ShootProjectile(Transform firePoint, PoolableMono obj, Transform target, float fireRate, float projectileSpeed, bool isParabolic)
     {
         while (true)
         {
-            Fire(firePoint.position, target.position, obj, projectileSpeed);
+            Fire(firePoint.position, target.position, obj, projectileSpeed, isParabolic); // isParabolic 값 false로 전달
             yield return new WaitForSeconds(fireRate);
         }
     }
 
-    void Fire(Vector3 startPosition, Vector3 targetPosition, PoolableMono obj, float projectileSpeed, bool isParabolic = true)
+
+    void Fire(Vector3 startPosition, Vector3 targetPosition, PoolableMono obj, float projectileSpeed, bool isParabolic = false)
     {
         Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
 
@@ -30,7 +31,6 @@ public class RangedAttack : MonoBehaviour
         }
 
         rb.velocity = launchVelocity;
-
         RotateTowardsTarget(obj.transform, rb.velocity);
 
         if (obj.TryGetComponent<ProjectileUpdater>(out ProjectileUpdater updater) == false)
@@ -40,6 +40,7 @@ public class RangedAttack : MonoBehaviour
 
         updater.Initialize(rb);
     }
+
 
     // 포물선 운동의 발사 속도를 계산하는 함수
     Vector2 CalculateParabolicVelocity(Vector3 startPosition, Vector3 targetPosition, float projectileSpeed)

@@ -2,32 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CastleControl : RangedAttack
 {
-    public float detectionRadius = 10f; // 탐지 반경
     public GameObject BowSpawn;
-    public GameObject Bow;
+    public Slider HpSlider;
+
+    public CastleSO castleStat;
     public LayerMask enemyLayer;
+
     public float currentHp;
 
-    private float MaxHp = 100;
     private float timer = 0.0f;
 
     private void Awake()
     {
-        currentHp = MaxHp;
+        currentHp = castleStat.MaxHp.GetValue();
     }
 
     private void Update()
     {
         CheckForEnemies();
+        HpSlider.value = currentHp;
     }
 
     private void CheckForEnemies()
     {
         // 캐슬 오브젝트의 위치를 기준으로 탐지 반경 내의 모든 적을 검사합니다.
-        Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(transform.position, detectionRadius, enemyLayer);
+        Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(transform.position, castleStat.angle.GetValue(), enemyLayer);
 
         foreach (Collider2D enemy in enemiesInRange)
         {
@@ -41,7 +44,7 @@ public class CastleControl : RangedAttack
 
         if (timer > 0.5f)
         {
-            StartCoroutine(ShootProjectile(BowSpawn.transform,PoolManager.Instance.Pop(PoolType.Arrow,Bow.transform.position), enemy.transform,2,10));
+            StartCoroutine(ShootProjectile(BowSpawn.transform,PoolManager.Instance.Pop(PoolType.Arrow,BowSpawn.transform.position), enemy.transform,2,10, false));
             timer = 0;
         }
     }

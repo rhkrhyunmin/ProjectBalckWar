@@ -16,15 +16,11 @@ public class ArmyMoveState : ArmyState
     public override void OnUpdateState()
     {
         base.OnUpdateState();
-        
-        //_army._col.isTrigger = true;
         MoveEnter();
 
         if (_army.CheckForAttack())
         {
             _stateMachine.ChangeState(ArmyStateEnum.Attack);
-            //_army._col.isTrigger = true;
-            Debug.Log("88");
         }
     }
 

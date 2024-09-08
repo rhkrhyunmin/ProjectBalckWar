@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3310601020238685719}
   - component: {fileID: 8979326233180231073}
   - component: {fileID: -4702339788245828633}
+  - component: {fileID: 3005027352833879104}
   - component: {fileID: 6714449035338865736}
   m_Layer: 7
   m_Name: Archer
@@ -33,6 +34,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1881051488817868033}
   - {fileID: 3369956044985450730}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,11 +82,12 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  currentHp: 0
-  _armyStat: {fileID: 11400000, guid: aa4e7ed443b14e846b7957256498de94, type: 2}
+  castleLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  ArmyStat: {fileID: 11400000, guid: aa4e7ed443b14e846b7957256498de94, type: 2}
   _weapon: {fileID: 4544516135829043271}
   enemy: {fileID: 0}
-  AttackType: 1
   _enemy: {fileID: 0}
 --- !u!114 &-4702339788245828633
 MonoBehaviour:
@@ -98,6 +101,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9181768fb12b540a15e9263a819369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3005027352833879104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4403649862053524381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f756375c530c3224e8bd064c2338001c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMaxHealth: 0
+  enemyMaxHealth: 0
+  playerCurrentHealth: 0
+  enemyCurrentHealth: 0
 --- !u!70 &6714449035338865736
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -133,6 +152,54 @@ CapsuleCollider2D:
   m_Offset: {x: -0.40257424, y: 1.1801547}
   m_Size: {x: 0.94135445, y: 2.4615476}
   m_Direction: 0
+--- !u!1 &8526309885542454167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1881051488817868033}
+  - component: {fileID: 667014418648266944}
+  m_Layer: 7
+  m_Name: DamageCaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1881051488817868033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8526309885542454167}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 886222079700213552}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &667014418648266944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8526309885542454167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2a4bdc24d40c841b2dd8f4f4ca1e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orginType: 0
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1001 &4173617633953593652
 PrefabInstance:
   m_ObjectHideFlags: 0

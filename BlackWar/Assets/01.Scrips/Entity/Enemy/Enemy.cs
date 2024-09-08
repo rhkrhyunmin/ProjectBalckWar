@@ -5,30 +5,34 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    public EnemyStat _enemyStat;
+    public EnemyStat EnemyStat;
 
     public EnemyStat Stat
     {
-        get => _enemyStat;
-        set => _enemyStat = value;
+        get => EnemyStat;
+        set => EnemyStat = value;
     }
 
     #region Components
     public EnemyStateMachine StateMachine { get; private set; }
     public EnemyEntityAttackData AttackCompo { get; private set; }
+    public Health HealthCompo { get; private set; }
     #endregion
 
     protected override void Awake()
     {
         base.Awake();
         AttackCompo = GetComponent<EnemyEntityAttackData>();
+        HealthCompo = GetComponent<Health>();
         SetBaseState();
+
+        HealthCompo?.EnemySetHealth(EnemyStat);
+        EnemyStat = Instantiate(EnemyStat);
     }
 
     protected override void Start()
     {
         base.Start();
-        currentHp = _enemyStat.MaxHp.GetValue();
     }
 
     protected override void Update()
@@ -69,18 +73,20 @@ public class Enemy : Entity
     #region 움직임
     public void MoveEnemy()
     {
-        transform.Translate(Vector2.left * _enemyStat.MoveSpeed.GetValue() * Time.deltaTime);
+        transform.Translate(Vector2.left * EnemyStat.MoveSpeed.GetValue() * Time.deltaTime);
     }
 
     public bool CheckForAttack()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _enemyStat.AttackDistance.GetValue(), enemyLayer);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, EnemyStat.AttackDistance.GetValue(), enemyLayer);
+        Collider2D castle = Physics2D.OverlapCircle(transform.position, EnemyStat.AttackDistance.GetValue(), castleLayer);
 
-        if (enemies.Length > 0)
+        if (enemies.Length > 0 || castle != null)  // 적이 있거나 성이 있을 때 true 반환
             return true;
         else
             return false;
     }
+
 
     #endregion
 }
