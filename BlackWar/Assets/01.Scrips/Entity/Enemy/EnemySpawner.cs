@@ -4,91 +4,94 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    // 0 = 원거리 적, 1 ~ 3 = 근거리 적
-    [SerializeField] List<Enemy> enemies;
     [SerializeField] Transform spawnPoint; // 적이 생성될 위치
-
     public CastleSO TowerStat;
 
     private float currentHealth;
+    private bool isSpawning = false; // 중복 실행 방지
 
     void Start()
     {
-        TowerStat = Instantiate(TowerStat);
         currentHealth = TowerStat.MaxHp.GetValue();
-        StartCoroutine(SpawnEnemies());
+        InvokeRepeating("StartSpawning", 0f, 10f); // 10초 간격으로 소환 주기 설정
+    }
+
+    void StartSpawning()
+    {
+        if (!isSpawning)
+        {
+            StartCoroutine(SpawnEnemies());
+        }
     }
 
     IEnumerator SpawnEnemies()
     {
+        isSpawning = true; // 코루틴이 실행 중임을 표시
         Debug.Log(currentHealth);
+
         while (currentHealth > 0)
         {
-            Debug.Log("생성 실행됨");
-            // 적들을 한 번에 소환하지 않고 차례대로 소환
+            Debug.Log("적 생성 실행됨");
             yield return StartCoroutine(SpawnBasedOnTowerHealth());
-            yield return new WaitForSeconds(2f); // 2초마다 소환 주기
+            yield return new WaitForSeconds(10); // 한 번 소환 후 10초 대기
         }
+
+        isSpawning = false; // 코루틴 완료 후 다시 소환 가능하게 설정
     }
 
     IEnumerator SpawnBasedOnTowerHealth()
     {
-        // 타워의 체력을 기반으로 소환할 적의 밸런스 조정
         float healthPercentage = currentHealth / TowerStat.MaxHp.GetValue();
-
-        int numEnemies = 4; // 기본 적 소환 수
-        if (healthPercentage < 0.75f) numEnemies += 1;
-        if (healthPercentage < 0.5f) numEnemies += 2;
-        if (healthPercentage < 0.25f) numEnemies += 3;
+        int numEnemies = CalculateNumEnemies(healthPercentage);
 
         for (int i = 0; i < numEnemies; i++)
         {
-            float randomValue = Random.Range(0f, 1f);
-
-            if (healthPercentage > 0.75f)
-            {
-                // 체력이 75% 이상일 때: 약한 적 위주
-                if (randomValue < 0.6f)
-                    SpawnEnemy(enemies[1]);
-                else
-                    SpawnEnemy(enemies[0]);
-            }
-            else if (healthPercentage > 0.6f)
-            {
-                // 체력이 60% 이상일 때: 중간 강도 적
-                if (randomValue < 0.5f)
-                    SpawnEnemy(enemies[0]);
-                else if (randomValue < 0.8f)
-                    SpawnEnemy(enemies[1]);
-                else
-                    SpawnEnemy(enemies[2]);
-            }
-            else if (healthPercentage > 0.45f)
-            {
-                // 체력이 45% 이상일 때: 강한 강도 적 생성 시작
-                if (randomValue < 0.5f)
-                    SpawnEnemy(enemies[0]);
-                else if (randomValue < 0.8f)
-                    SpawnEnemy(enemies[2]);
-                else
-                    SpawnEnemy(enemies[3]);
-            }
-            else
-            {
-                // 체력이 45% 이하일 때: 강한 적 위주
-                if (randomValue < 0.3f)
-                    SpawnEnemy(enemies[2]);
-                else
-                    SpawnEnemy(enemies[3]);
-            }
-
-            // 적 하나를 소환하고 잠시 대기
-            yield return new WaitForSeconds(0.5f); // 각 적 사이의 대기 시간 (0.5초)
+            PoolType enemyType = GetEnemyTypeBasedOnHealth(healthPercentage);
+            SpawnEnemy(enemyType);
+            yield return new WaitForSeconds(3); // 각 적 사이의 대기 시간
         }
     }
 
-    void SpawnEnemy(Enemy enemyPrefab)
+    int CalculateNumEnemies(float healthPercentage)
     {
-        PoolManager.Instance.Pop(enemyPrefab.poolType, spawnPoint.position);
+        int numEnemies = 4;
+        if (healthPercentage < 0.75f) numEnemies += 1;
+        if (healthPercentage < 0.5f) numEnemies += 2;
+        if (healthPercentage < 0.25f) numEnemies += 3;
+        return numEnemies;
+    }
+
+    PoolType GetEnemyTypeBasedOnHealth(float healthPercentage)
+    {
+        float randomValue = Random.Range(0f, 1f);
+
+        if (healthPercentage > 0.75f)
+        {
+            return (randomValue < 0.6f) ? PoolType.Hog : PoolType.CannonHog;
+        }
+        else if (healthPercentage > 0.6f)
+        {
+            return (randomValue < 0.5f) ? PoolType.CannonHog : PoolType.CannonHog;
+        }
+        else if (healthPercentage > 0.45f)
+        {
+            return (randomValue < 0.5f) ? PoolType.Hog : PoolType.CannonHog;
+        }
+        else
+        {
+            return (randomValue < 0.3f) ? PoolType.Hog : PoolType.CannonHog;
+        }
+    }
+
+    void SpawnEnemy(PoolType enemyType)
+    {
+        if (PoolManager.Instance != null)
+        {
+            PoolManager.Instance.Pop(enemyType, spawnPoint.transform.position);
+        }
+        else
+        {
+            Debug.LogError("PoolManager.Instance is null. Cannot spawn enemies.");
+        }
     }
 }
