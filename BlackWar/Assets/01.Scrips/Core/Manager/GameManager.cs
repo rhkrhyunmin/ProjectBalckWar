@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoSingleton<GameManager>
 {
     [Header("Cost")]
     public float MaxCost = 100;
     public float currentCost;
+
+    [Header("Time")]
+    public float time;
 
     // Increase cost by 1 every second
     public float costIncreaseRate = 1f; // 1 cost per second
@@ -27,5 +31,7 @@ public class GameManager : MonoSingleton<GameManager>
         }
 
         //Debug.Log(currentCost);
+
+        time += Time.deltaTime;
     }
 }
