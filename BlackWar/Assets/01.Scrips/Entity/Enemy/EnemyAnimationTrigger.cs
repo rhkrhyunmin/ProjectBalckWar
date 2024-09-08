@@ -15,4 +15,9 @@ public class EnemyAnimationTrigger : MonoBehaviour
     {
         _enemy.AttackCompo.MeleeAttack();
     }
+
+    public void ShotCannonTrigger()
+    {
+        _enemy.AttackCompo.CanonRangeAttack();
+    }
 }

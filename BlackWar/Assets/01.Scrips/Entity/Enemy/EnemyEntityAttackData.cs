@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyEntityAttackData : MonoBehaviour
 {
     protected Enemy enemy;
-    DamageCaster DamageCasterCompo => enemy.DamageCasterCompo;
+    protected DamageCaster DamageCasterCompo => enemy.DamageCasterCompo;
 
     private void Awake()
     {
@@ -15,5 +15,10 @@ public class EnemyEntityAttackData : MonoBehaviour
     public virtual void MeleeAttack()
     {
         DamageCasterCompo.EnemyCastDamage();
+    }
+
+    public virtual void CanonRangeAttack()
+    {
+        
     }
 }

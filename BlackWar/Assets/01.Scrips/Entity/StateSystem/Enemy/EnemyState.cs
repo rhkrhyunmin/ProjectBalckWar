@@ -8,7 +8,6 @@ public class EnemyState
     protected EnemyStateMachine _stateMachine;
     protected Enemy _enemy;
     protected int _animBoolHash;
-    protected bool _triggerCalled = true;
 
     public EnemyState(Enemy enemy, EnemyStateMachine stateMachine, string animationBoolName)
     {
@@ -20,14 +19,13 @@ public class EnemyState
 
     #region Enter
     protected void MoveEnter()
-    {
-        _triggerCalled = true;
+    { 
         _enemy.MoveEnemy();
     }
 
     protected void AttackEnter()
     {
-        _triggerCalled = false;
+
     }
     #endregion
 
@@ -61,6 +59,6 @@ public class EnemyState
 
     public virtual void AnimationTrigger()
     {
-        _triggerCalled = true;
+
     }
 }

@@ -18,12 +18,6 @@ public class ArmyAttackState : ArmyState
     public override void OnUpdateState()
     {
         base.OnUpdateState();
-
-        if(_triggerCalled) //공격
-        {
-            //코드 작성
-            Debug.Log("아니");
-        }
     }
 
     public override void OnExitState()
