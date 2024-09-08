@@ -1,11 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
 
-public class Health : MonoBehaviour, IDamageable
+public class ArmyDeadController : PoolableMono, IDeadable
 {
     protected readonly int HASH_DEAD = Animator.StringToHash("Dead");
 
@@ -15,15 +13,6 @@ public class Health : MonoBehaviour, IDamageable
     protected NavMeshAgent _agent;
     protected Collider _collider;
 
-    public int playerMaxHealth;
-    public int enemyMaxHealth;
-    public int playerCurrentHealth;
-    public int enemyCurrentHealth;
-    public bool IsDead = false;
-
-    private PlayerStat _playerStat;
-    private EnemyStat _enemyStat;
-    
     protected virtual void Awake()
     {
         _owner = GetComponent<Army>();
@@ -31,37 +20,6 @@ public class Health : MonoBehaviour, IDamageable
         _anim = transform.Find("Visual").GetComponent<Animator>();
     }
 
-    public void PlayerSetHealth(PlayerStat onwer)
-    {
-        _playerStat = onwer;
-        playerCurrentHealth = playerMaxHealth = (int)onwer.MaxHp.GetValue();
-    }
-
-    public void EnemySetHealth(EnemyStat onwer)
-    {
-        _enemyStat = onwer;
-        enemyCurrentHealth = enemyMaxHealth = (int)onwer.MaxHp.GetValue();
-    }
-
-    public void ArmyApplyDamage(int damage)
-    {
-        playerCurrentHealth -= damage;
-
-        if(playerCurrentHealth < 0)
-        {
-            OnDied();
-        }
-    }
-
-    public void EnemyApplyDamage(int damage)
-    {
-        enemyCurrentHealth -= damage;
-
-        if(enemyCurrentHealth < 0)
-        {
-            OnDied();
-        }
-    }
     public void OnDied()
     {
         // 모든 bool 변수를 순회하며 비활성화하기

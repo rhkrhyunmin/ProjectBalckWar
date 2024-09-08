@@ -917,6 +917,7 @@ MonoBehaviour:
   enemyMaxHealth: 0
   playerCurrentHealth: 0
   enemyCurrentHealth: 0
+  IsDead: 0
 --- !u!70 &6714449035338865736
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -15,6 +15,19 @@ public class Army : Entity
         get => ArmyStat;
         set => ArmyStat = value;
     }
+    public bool IsDead
+    {
+        get
+        {
+            if (HealthCompo != null)
+                return HealthCompo.IsDead;
+            return false;
+        }
+        set
+        {
+            HealthCompo.IsDead = value;
+        }
+    }
 
     #region Components
     public ArmyEntityAttackData AttackCompo { get; private set; }
