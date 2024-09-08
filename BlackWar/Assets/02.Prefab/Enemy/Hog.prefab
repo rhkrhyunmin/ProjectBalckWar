@@ -143,7 +143,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5886118740421140497}
@@ -328,8 +328,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4160550918902297427}
   - {fileID: 7015632460768734540}
@@ -352,6 +352,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  castleLayer:
+    serializedVersion: 2
+    m_Bits: 0
   EnemyStat: {fileID: 11400000, guid: da3d3ae8099ed724d936079aceecd4d6, type: 2}
 --- !u!114 &4775269986378525451
 MonoBehaviour:
@@ -397,8 +400,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.07, y: -0.099999964}
-  m_Size: {x: 2.1073277, y: 1.5510924}
+  m_Offset: {x: -0.048685092, y: -0.07335572}
+  m_Size: {x: 3.769966, y: 2.4357204}
   m_Direction: 1
 --- !u!50 &7236012352439316496
 Rigidbody2D:
