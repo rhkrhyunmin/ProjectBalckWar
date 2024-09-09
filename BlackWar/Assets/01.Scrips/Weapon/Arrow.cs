@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Arrow : PoolableMono
 {
     private Quaternion rotation;
     private Rigidbody2D rb;
+
+    public DamageCaster damagecast;
 
     public Quaternion Rotation
     {
@@ -53,5 +56,7 @@ public class Arrow : PoolableMono
         {
             PoolManager.Instance.Push(this);
         }
+
+        damagecast.ArmyRangeCastDamage();
     }
 }

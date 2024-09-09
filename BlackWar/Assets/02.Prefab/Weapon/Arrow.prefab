@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7000056457531869523}
   - component: {fileID: 7415778321604365205}
   - component: {fileID: 130385911218846217}
+  - component: {fileID: 2181774478020243291}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -187,6 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolType: 101
   sameLifeCycle: 0
+  damagecast: {fileID: 2181774478020243291}
 --- !u!114 &130385911218846217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,3 +201,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243b6abb3f78ecc4baea83120e7533f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2181774478020243291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110698442132420229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2a4bdc24d40c841b2dd8f4f4ca1e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orginType: 0
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  castleTargetLayer:
+    serializedVersion: 2
+    m_Bits: 1024

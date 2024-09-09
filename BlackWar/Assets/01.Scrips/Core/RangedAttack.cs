@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class RangedAttack : MonoBehaviour
 {
+
     public void Fire(Vector3 startPosition, PoolableMono obj, float projectileSpeed)
     {
         Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
