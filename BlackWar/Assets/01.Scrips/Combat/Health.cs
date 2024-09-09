@@ -1,9 +1,19 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour, IDamageable
 {
+    protected readonly int HASH_DEAD = Animator.StringToHash("Dead");
+
+    protected Army _owner;
+
+    protected Animator _anim;
+    protected NavMeshAgent _agent;
+    protected Collider _collider;
+
     public int playerMaxHealth;
     public int enemyMaxHealth;
     public int playerCurrentHealth;
@@ -17,17 +27,35 @@ public class Health : MonoBehaviour, IDamageable
     private EnemyStat _enemyStat;
     private CastleSO _playercastleStat;
     private EnemyCastleSo _enemyCastleStat;
-    
+
+    public bool IsDead;
+
+    protected virtual void Awake()
+    {
+        _owner = GetComponent<Army>();
+        _collider = GetComponent<Collider>();
+        _anim = transform.Find("Visual").GetComponent<Animator>();
+    }
+
     public void PlayerSetHealth(PlayerStat onwer)
     {
         _playerStat = onwer;
         playerCurrentHealth = playerMaxHealth = (int)onwer.MaxHp.GetValue();
+
+        if(playerCurrentHealth < 0)
+        {
+            OnDied();
+        }
     }
 
     public void EnemySetHealth(EnemyStat onwer)
     {
         _enemyStat = onwer;
         enemyCurrentHealth = enemyMaxHealth = (int)onwer.MaxHp.GetValue();
+        if(enemyCurrentHealth < 0)
+        {
+            OnDied();
+        }
     }
 
     public void ArmyCastleSetHealth(CastleSO onwer)
@@ -52,6 +80,21 @@ public class Health : MonoBehaviour, IDamageable
         enemyCurrentHealth -= damage;
     }
 
+    public void OnDied()
+    {
+        var parameters = _anim.parameters;
+        foreach (var param in parameters)
+            _anim.SetBool(param.name, false);
+
+        _anim.speed = 1f;
+
+        _anim.SetBool(HASH_DEAD, true);
+        _agent.enabled = false;
+        _collider.enabled = false;
+        _owner.IsDead = true;
+        _owner.enabled = false;
+    }
+
     public void ArmyCastleApplyDamage(int damage)
     {
         armyCastleCurrentHealth -= damage;
@@ -60,5 +103,10 @@ public class Health : MonoBehaviour, IDamageable
     public void EnemyCastleApplyDamage(int damage)
     {
         enemyCastleCurrentHealth -= damage;
+    }
+
+    public void Dead()
+    {
+        Destroy(gameObject);
     }
 }
