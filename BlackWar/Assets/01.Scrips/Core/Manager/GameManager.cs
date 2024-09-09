@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoSingleton<GameManager>
@@ -12,8 +13,9 @@ public class GameManager : MonoSingleton<GameManager>
 
     [Header("Time")]
     public float time;
-
     public bool TimeTick;
+
+    public bool Win; //우리가 이길까
 
     // Increase cost by 1 every second
     public float costIncreaseRate = 1f; // 1 cost per second
@@ -37,5 +39,12 @@ public class GameManager : MonoSingleton<GameManager>
 
         if (TimeTick)
             time += Time.deltaTime;
+    }
+
+    public void EndGame(bool win)
+    {
+        TimeTick = false;
+        SceneManager.LoadScene("UI");
+        Win = win;
     }
 }

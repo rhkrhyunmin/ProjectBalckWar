@@ -6,13 +6,29 @@ using UnityEngine.UI;
 public class TimeUI : MonoBehaviour
 {
     [Header("Time")]
-    [SerializeField] GameObject endUI;
+    [SerializeField] GameObject WinUI;
+    [SerializeField] GameObject LoseUI;
     [SerializeField] Text timeText;
+    [SerializeField] Text timeText2;
 
     private void Start()
     {
+        if (GameManager.Instance.Win)
+        {
+            WinUI.SetActive(true);
+            LoseUI.SetActive(false);
+        }
+        else
+        {
+            LoseUI.SetActive(true);
+            WinUI.SetActive(false);
+        }
         int time = (int)GameManager.Instance.time;
         timeText.text = time < 60
+            ? $"시간 : {time:D2}"
+            : $"시간 : {time / 60}:{time % 60:D2}";
+
+        timeText2.text = time < 60
             ? $"시간 : {time:D2}"
             : $"시간 : {time / 60}:{time % 60:D2}";
     }
