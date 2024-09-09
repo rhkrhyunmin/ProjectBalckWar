@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemyAttackState : EnemyState
@@ -18,6 +19,11 @@ public class EnemyAttackState : EnemyState
     public override void OnUpdateState()
     {
         base.OnUpdateState();
+
+        if(!_enemy.CheckForAttack())
+        {
+            _stateMachine.ChangeState(EnemyStateEnum.Move);
+        }
     }
 
     public override void OnExitState()

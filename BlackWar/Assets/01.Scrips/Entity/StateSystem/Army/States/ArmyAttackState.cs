@@ -18,6 +18,11 @@ public class ArmyAttackState : ArmyState
     public override void OnUpdateState()
     {
         base.OnUpdateState();
+
+        if(!_army.CheckForAttack())
+        {
+            _stateMachine.ChangeState(ArmyStateEnum.Move);
+        }
     }
 
     public override void OnExitState()
