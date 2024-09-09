@@ -100,7 +100,7 @@ public class DamageCaster : MonoBehaviour
         IDamageable damageable = colliders[0].GetComponent<IDamageable>();
         if (damageable != null)
         {
-            int damage = (int)_army.Stat.AttackPower.GetValue();
+            int damage = 10;
             damageable.EnemyApplyDamage(damage);
         }
     }

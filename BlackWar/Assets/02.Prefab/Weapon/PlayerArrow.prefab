@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4545351729576635519}
   - component: {fileID: 4780184170078731718}
   - component: {fileID: 821785002001878769}
+  - component: {fileID: 4034795636991797396}
   m_Layer: 0
   m_Name: PlayerArrow
   m_TagString: Untagged
@@ -173,6 +174,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _arrowPower: 10
+--- !u!114 &4034795636991797396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110698442132420229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2a4bdc24d40c841b2dd8f4f4ca1e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orginType: 0
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  castleTargetLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &6334773258429015532
 GameObject:
   m_ObjectHideFlags: 0
