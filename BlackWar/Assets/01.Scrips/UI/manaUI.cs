@@ -6,8 +6,12 @@ using UnityEngine.UI;
 
 public class manaUI : MonoBehaviour
 {
-    public TextMeshProUGUI _manaText;
-    public Slider _manaSlider;
+    private Text _manaText;
+
+    private void Start()
+    {
+        _manaText = transform.Find("MaNa").GetComponent<Text>();
+    }
 
     public void Update()
     {
@@ -17,8 +21,8 @@ public class manaUI : MonoBehaviour
     public void UpdateMana()
     {
         float currentMana = GameManager.Instance.currentCost;
-        _manaText.text = currentMana + " / "; //여기에 추후 넣을 성 업글하면 최대마나 증가 같은거 넣기
+        _manaText.text = "MANA : " + (int)currentMana + " / " + GameManager.Instance.MaxCost; //여기에 추후 넣을 성 업글하면 최대마나 증가 같은거 넣기
 
-        _manaSlider.value = currentMana;
+        //_manaSlider.value = currentMana;
     }
 }
