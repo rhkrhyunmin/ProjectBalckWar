@@ -35,6 +35,12 @@ public class GameManager : MonoSingleton<GameManager>
             currentCost = Mathf.Clamp(currentCost, 0, MaxCost); // Ensure it stays within bounds
         }
 
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            currentCost = MaxCost;
+            Debug.Log(currentCost);
+        }
+
         //Debug.Log(currentCost);
 
         if (TimeTick)
