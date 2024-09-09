@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6402255917901068319}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AnchorBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,8 @@ GameObject:
   - component: {fileID: 6018591920527633761}
   - component: {fileID: 1149008794842587065}
   - component: {fileID: 2713594313853767831}
-  m_Layer: 0
+  - component: {fileID: 2207614958015487202}
+  m_Layer: 6
   m_Name: CannonHog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +118,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.00035832138, y: -0.33642912}
@@ -167,6 +168,27 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &2207614958015487202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422348415031619636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f756375c530c3224e8bd064c2338001c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMaxHealth: 0
+  enemyMaxHealth: 0
+  playerCurrentHealth: 0
+  enemyCurrentHealth: 0
+  armyCastleMaxHealth: 0
+  enemyCastleMaxHealth: 0
+  armyCastleCurrentHealth: 0
+  enemyCastleCurrentHealth: 0
+  IsDead: 0
 --- !u!1 &1525621633266811797
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8230367339903022570}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 650900340292211991}
   - component: {fileID: 2770150091726358118}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Chain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4227275914309927211}
   - component: {fileID: 5869178723176438918}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -391,7 +413,7 @@ GameObject:
   - component: {fileID: 3290889908791310693}
   - component: {fileID: 96029873316217787}
   - component: {fileID: 5168785885157116323}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +479,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1053775077686020521}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +511,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3434095932234452434}
   - component: {fileID: 941346465270219280}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LegBackR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -573,7 +595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2998922105272207032}
   - component: {fileID: 6526476862077448390}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LegFrontR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -657,7 +679,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8987311086626699056}
   - component: {fileID: 3539610284390092658}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SideBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -741,7 +763,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8575728702542015230}
   - component: {fileID: 9169617399322117695}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -826,7 +848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7757035810302469478}
   - component: {fileID: 6096820855607418363}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -910,7 +932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2269144850998801710}
   - component: {fileID: 2394763144269921992}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SideFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -994,7 +1016,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3036206176683531760}
   - component: {fileID: 8150260760312450142}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PirateHat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1077,7 +1099,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4220803734254403633}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AnchorWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1109,7 +1131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 237732516688523353}
   - component: {fileID: 332133172296047773}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LegBackL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1193,7 +1215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7669428282710004560}
   - component: {fileID: 4843679686815929340}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LegFrontL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1276,7 +1298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4251046950427161552}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AnchorStatus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1308,7 +1330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3866975036960786198}
   - component: {fileID: 950031386374096636}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}

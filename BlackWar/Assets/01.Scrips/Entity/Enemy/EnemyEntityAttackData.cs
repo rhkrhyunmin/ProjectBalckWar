@@ -20,7 +20,7 @@ public class EnemyEntityAttackData : MonoBehaviour
 
     public virtual void CanonRangeAttack()
     {
-        DamageCasterCompo.EnemyCastDamage();
+        DamageCasterCompo.EnemyRangeCastDamage();
         DamageCasterCompo.EnemyCastleCastDamage();
     }
 }

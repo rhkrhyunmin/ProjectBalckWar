@@ -183,6 +183,10 @@ MonoBehaviour:
   enemyMaxHealth: 0
   playerCurrentHealth: 0
   enemyCurrentHealth: 0
+  armyCastleMaxHealth: 0
+  enemyCastleMaxHealth: 0
+  armyCastleCurrentHealth: 0
+  enemyCastleCurrentHealth: 0
   IsDead: 0
 --- !u!1 &712224957378720374
 GameObject:
@@ -1359,6 +1363,9 @@ MonoBehaviour:
   TargetLayer:
     serializedVersion: 2
     m_Bits: 64
+  castleTargetLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &6246365743427107479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1737,7 +1744,6 @@ GameObject:
   - component: {fileID: 7930902962743476478}
   - component: {fileID: 8626943224722774967}
   - component: {fileID: 5973636837013426719}
-  - component: {fileID: 1784795076541312442}
   - component: {fileID: 6624311076189961985}
   m_Layer: 7
   m_Name: pizza
@@ -1833,41 +1839,6 @@ MonoBehaviour:
     m_Extent: {x: 0.535, y: 0.5707699, z: 0}
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
---- !u!58 &1784795076541312442
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8826878765003240198}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -1.6765426, y: -0.6724143}
-  serializedVersion: 2
-  m_Radius: 0.5654558
 --- !u!114 &6624311076189961985
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -56,7 +56,7 @@ public class DamageCaster : MonoBehaviour
     public void EnemyCastDamage()
     {
         var colliders = Physics2D.OverlapCircleAll(transform.position, _detectRange, TargetLayer);
-
+        
         if (colliders.Length == 0)
             return;
         else
@@ -75,7 +75,7 @@ public class DamageCaster : MonoBehaviour
 
     public void EnemyRangeCastDamage()
     {
-        var colliders = Physics2D.OverlapCircleAll(transform.position, _detectRange * 300, TargetLayer);
+        var colliders = Physics2D.OverlapCircleAll(transform.position, _detectRange, TargetLayer);
 
         if (colliders.Length == 0)
             return;
@@ -83,7 +83,9 @@ public class DamageCaster : MonoBehaviour
         IDamageable damageable = colliders[0].GetComponent<IDamageable>();
         if (damageable != null)
         {
-            int damage = (int)_enemy.Stat.AttackPower.GetValue();
+            Debug.Log("µ¥¹ÌÁö");
+            //int damage = (int)_enemy.Stat.AttackPower.GetValue();
+            int damage = 10;
             damageable.ArmyApplyDamage(damage);
         }
     }
