@@ -34,6 +34,7 @@ public class Health : MonoBehaviour, IDamageable
     {
         _owner = GetComponent<Army>();
         _collider = GetComponent<Collider>();
+        if(_owner != null )
         _anim = transform.Find("Visual").GetComponent<Animator>();
     }
 
@@ -42,7 +43,7 @@ public class Health : MonoBehaviour, IDamageable
         _playerStat = onwer;
         playerCurrentHealth = playerMaxHealth = (int)onwer.MaxHp.GetValue();
 
-        if(playerCurrentHealth < 0)
+        if(playerCurrentHealth <= 0)
         {
             OnDied();
         }
@@ -52,7 +53,7 @@ public class Health : MonoBehaviour, IDamageable
     {
         _enemyStat = onwer;
         enemyCurrentHealth = enemyMaxHealth = (int)onwer.MaxHp.GetValue();
-        if(enemyCurrentHealth < 0)
+        if(enemyCurrentHealth <= 0)
         {
             OnDied();
         }
@@ -107,6 +108,13 @@ public class Health : MonoBehaviour, IDamageable
 
     public void Dead()
     {
-        Destroy(gameObject);
+        if(_owner != null)
+        {
+            PoolManager.Instance.Push(_owner);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

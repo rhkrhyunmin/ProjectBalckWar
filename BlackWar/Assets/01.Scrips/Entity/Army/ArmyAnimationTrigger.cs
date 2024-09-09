@@ -23,6 +23,7 @@ public class ArmyAnimationTrigger : MonoBehaviour
 
     public void DeadTrigger()
     {
+        Debug.Log("¾ö");
         _army.HealthCompo.Dead();
     }
 }
