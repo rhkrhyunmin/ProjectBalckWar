@@ -75,7 +75,7 @@ public class DamageCaster : MonoBehaviour
 
     public void EnemyRangeCastDamage()
     {
-        var colliders = Physics2D.OverlapCircleAll(transform.position, _detectRange, TargetLayer);
+        var colliders = Physics2D.OverlapCircleAll(transform.position, _detectRange * 300, TargetLayer);
 
         if (colliders.Length == 0)
             return;

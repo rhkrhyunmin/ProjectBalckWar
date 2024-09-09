@@ -6,18 +6,24 @@ using UnityEngine.UI;
 public class TimeUI : MonoBehaviour
 {
     [Header("Time")]
-    public float time;
     [SerializeField] GameObject endUI;
     [SerializeField] Text timeText;
 
     private void Start()
     {
-        endUI.SetActive(false);
+        int time = (int)GameManager.Instance.time;
+        timeText.text = time < 60
+            ? $"시간 : {time:D2}"
+            : $"시간 : {time / 60}:{time % 60:D2}";
     }
-
-    public void EndGame()
+    private void Update()
     {
-        endUI.SetActive(true);
-        timeText.text = $"시간 : {(int)time}";
+        //if(Input.GetMouseButtonDown(0))
+        //{
+        //    int time = (int)GameManager.Instance.time;
+        //    timeText.text = time < 60
+        //        ? $"시간 : {time:D2}"
+        //        : $"시간 : {time / 60}:{time % 60:D2}";
+        //}
     }
 }

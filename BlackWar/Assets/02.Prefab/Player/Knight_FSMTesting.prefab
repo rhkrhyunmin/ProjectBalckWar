@@ -1862,6 +1862,7 @@ MonoBehaviour:
   enemyMaxHealth: 0
   playerCurrentHealth: 0
   enemyCurrentHealth: 0
+  IsDead: 0
 --- !u!1 &9207840379061659280
 GameObject:
   m_ObjectHideFlags: 0

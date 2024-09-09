@@ -20,4 +20,9 @@ public class ArmyAnimationTrigger : MonoBehaviour
     {
         _army.AttackCompo.RangerAttack();
     }
+
+    public void DeadTrigger()
+    {
+        _army.HealthCompo.Dead();
+    }
 }

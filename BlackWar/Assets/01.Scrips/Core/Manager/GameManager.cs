@@ -13,12 +13,15 @@ public class GameManager : MonoSingleton<GameManager>
     [Header("Time")]
     public float time;
 
+    public bool TimeTick;
+
     // Increase cost by 1 every second
     public float costIncreaseRate = 1f; // 1 cost per second
 
     public void Start()
     {
         currentCost = 0;
+        TimeTick = true;
     }
 
     public void Update()
@@ -32,6 +35,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         //Debug.Log(currentCost);
 
-        time += Time.deltaTime;
+        if (TimeTick)
+            time += Time.deltaTime;
     }
 }
