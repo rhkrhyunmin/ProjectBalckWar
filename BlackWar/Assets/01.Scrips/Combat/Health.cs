@@ -35,10 +35,10 @@ public class Health : MonoBehaviour, IDamageable
         _owner = GetComponent<Army>();
         _enemyOwner = GetComponent<Enemy>();
         _collider = GetComponent<Collider2D>();
-        if(_owner != null )
-        _anim = transform.Find("Visual").GetComponent<Animator>();
-        if(_enemyOwner != null )
-        _enemyAnim = transform.Find("Visual").GetComponent<Animator>();
+        if (_owner != null)
+            _anim = transform.Find("Visual").GetComponent<Animator>();
+        if (_enemyOwner != null)
+            _enemyAnim = transform.Find("Visual").GetComponent<Animator>();
     }
 
     public void PlayerSetHealth(PlayerStat onwer)
@@ -68,8 +68,8 @@ public class Health : MonoBehaviour, IDamageable
     public void ArmyApplyDamage(int damage)
     {
         playerCurrentHealth -= damage;
-        
-        if(playerCurrentHealth <= 0)
+
+        if (playerCurrentHealth <= 0)
         {
             OnArmyDied();
         }
@@ -116,10 +116,18 @@ public class Health : MonoBehaviour, IDamageable
     public void ArmyCastleApplyDamage(int damage)
     {
         armyCastleCurrentHealth -= damage;
+        if (armyCastleCurrentHealth <= 0)
+        {
+            GameManager.Instance.EndGame(false);
+        }
     }
 
     public void EnemyCastleApplyDamage(int damage)
     {
         enemyCastleCurrentHealth -= damage;
+        if (enemyCastleCurrentHealth <= 0)
+        {
+            GameManager.Instance.EndGame(true);
+        }
     }
 }
