@@ -18,7 +18,7 @@ public class Entity : PoolableMono
 
     protected virtual void Start()
     {
-
+        
     }
 
     protected virtual void Update()

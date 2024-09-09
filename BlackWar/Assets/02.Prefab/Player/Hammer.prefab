@@ -128,6 +128,10 @@ MonoBehaviour:
   enemyMaxHealth: 0
   playerCurrentHealth: 0
   enemyCurrentHealth: 0
+  armyCastleMaxHealth: 0
+  enemyCastleMaxHealth: 0
+  armyCastleCurrentHealth: 0
+  enemyCastleCurrentHealth: 0
 --- !u!114 &6362325159317346717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,15 +144,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48c1e4a88090f94aa8fd95b8f75b925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 0
+  poolType: 2
   sameLifeCycle: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  castleLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   ArmyStat: {fileID: 11400000, guid: 3a1376ec988720d4582410a8356a39ed, type: 2}
   _weapon: {fileID: 1819951805585926739}
   enemy: {fileID: 0}
-  AttackType: 0
   _enemy: {fileID: 0}
 --- !u!1 &8374615657892350195
 GameObject:
@@ -198,6 +204,9 @@ MonoBehaviour:
   TargetLayer:
     serializedVersion: 2
     m_Bits: 64
+  castleTargetLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1001 &3430853386626435614
 PrefabInstance:
   m_ObjectHideFlags: 0

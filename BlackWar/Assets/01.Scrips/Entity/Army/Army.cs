@@ -89,7 +89,6 @@ public class Army : Entity
 
         if (enemies.Length > 0 || castle != null)
         {
-            // 여기서 enemies 리스트를 사용하여 원하는 로직을 수행할 수 있습니다.
             return true;
         }
         else

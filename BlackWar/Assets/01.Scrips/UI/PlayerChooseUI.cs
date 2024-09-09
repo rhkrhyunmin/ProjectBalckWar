@@ -68,7 +68,7 @@ public class PlayerChooseUI : MonoBehaviour
             case 2:
                 return (CostType.NinjaCost, PoolType.Ninja);
             case 3:
-                return (CostType.SpearmanCost, PoolType.Spearman);
+                return (CostType.SpearmanCost, PoolType.Hammer);
             default:
                 return (CostType.None, PoolType.None);
         }

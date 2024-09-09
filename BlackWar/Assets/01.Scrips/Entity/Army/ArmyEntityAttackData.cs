@@ -22,10 +22,12 @@ public class ArmyEntityAttackData : RangedAttack
     public virtual void MeleeAttack()
     {
         DamageCasterCompo.ArmyCastDamage();
+        DamageCasterCompo.ArmyCastleCastDamage();
     }
 
     public virtual void RangerAttack()
     {
         DamageCasterCompo.ArmyRangeCastDamage();
+        DamageCasterCompo.ArmyCastleCastDamage();
     }
 }

@@ -7,7 +7,7 @@ public enum PoolType
 {
     None,
     knight,
-    Spearman,
+    Hammer,
     Archer,
     Ninja = 100,
     Arrow,

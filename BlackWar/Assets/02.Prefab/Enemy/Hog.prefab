@@ -354,7 +354,7 @@ MonoBehaviour:
     m_Bits: 128
   castleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   EnemyStat: {fileID: 11400000, guid: da3d3ae8099ed724d936079aceecd4d6, type: 2}
 --- !u!114 &4775269986378525451
 MonoBehaviour:

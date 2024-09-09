@@ -7,4 +7,8 @@ public interface IDamageable
     public void ArmyApplyDamage(int damage);
 
     public void EnemyApplyDamage(int damage);
+
+    public void ArmyCastleApplyDamage(int damage);
+
+    public void EnemyCastleApplyDamage(int damage);
 }

@@ -13,9 +13,9 @@ public class DamageCaster : MonoBehaviour
 {
     public Origin orginType;
     private float _detectRange = 5f;
-    public LayerMask TargetLayer;
 
-    private Entity _target;
+    public LayerMask TargetLayer;
+    public LayerMask castleTargetLayer;
 
     private Army _army;
     private Enemy _enemy;
@@ -102,4 +102,50 @@ public class DamageCaster : MonoBehaviour
             damageable.ArmyApplyDamage(damage);
         }
     }
+
+    //¼º °ø°Ý
+
+    public void ArmyCastleCastDamage()
+    {
+        Debug.Log("333");
+
+            var _castleColliders = Physics2D.OverlapCircleAll(transform.position, _detectRange, _army.castleLayer);
+
+            if (_castleColliders.Length == 0)
+                return;
+            else
+            {
+                foreach (var collider in _castleColliders)
+                {
+                    IDamageable damageable = collider.GetComponent<IDamageable>();
+                    if (damageable != null)
+                    {
+                        int damage = (int)_army.Stat.AttackPower.GetValue();
+                        damageable.EnemyCastleApplyDamage(damage);
+                    }
+                }
+            }
+        
+    }
+
+    public void EnemyCastleCastDamage()
+    {
+            var _castleColliders = Physics2D.OverlapCircleAll(transform.position, _detectRange, _enemy.castleLayer);
+
+            if (_castleColliders.Length == 0)
+                return;
+            else
+            {
+                foreach (var collider in _castleColliders)
+                {
+                    IDamageable damageable = collider.GetComponent<IDamageable>();
+                    if (damageable != null)
+                    {
+                        int damage = (int)_enemy.Stat.AttackPower.GetValue();
+                        damageable.ArmyCastleApplyDamage(damage);
+                    }
+                }
+            }
+        }
+    
 }

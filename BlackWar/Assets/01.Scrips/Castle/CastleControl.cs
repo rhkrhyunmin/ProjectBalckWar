@@ -2,29 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CastleControl : RangedAttack
 {
     public GameObject BowSpawn;
-    public Slider HpSlider;
+
 
     public CastleSO castleStat;
     public LayerMask enemyLayer;
+    public SlideFollow slideFollow;
 
-    public float currentHp;
+    public Health HealthCompo { get; private set; }
 
     private float timer = 0.0f;
 
     private void Awake()
     {
-        currentHp = castleStat.MaxHp.GetValue();
+        HealthCompo = GetComponent<Health>();
+        HealthCompo?.ArmyCastleSetHealth(castleStat);
     }
 
     private void Update()
     {
         CheckForEnemies();
-        HpSlider.value = currentHp;
+        slideFollow.slider.value = HealthCompo.armyCastleCurrentHealth;
     }
 
     private void CheckForEnemies()
@@ -77,8 +78,8 @@ public class CastleControl : RangedAttack
         BowSpawn.transform.eulerAngles = currentRotation;
     }
 
-    public void OnHit(float damage)
+    /*public void OnHit(float damage)
     {
         currentHp -= damage;
-    }
+    }*/
 }

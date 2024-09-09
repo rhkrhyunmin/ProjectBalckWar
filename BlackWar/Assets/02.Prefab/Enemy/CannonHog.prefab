@@ -86,7 +86,7 @@ MonoBehaviour:
     m_Bits: 128
   castleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   EnemyStat: {fileID: 11400000, guid: 4ec2dbcebf7559947a5a912cc86cc4e0, type: 2}
 --- !u!70 &6018591920527633761
 CapsuleCollider2D:

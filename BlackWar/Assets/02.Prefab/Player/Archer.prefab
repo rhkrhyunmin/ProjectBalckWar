@@ -896,7 +896,7 @@ MonoBehaviour:
     m_Bits: 64
   castleLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1536
   ArmyStat: {fileID: 11400000, guid: aa4e7ed443b14e846b7957256498de94, type: 2}
   _weapon: {fileID: 4544516135829043271}
   enemy: {fileID: 0}
@@ -917,6 +917,10 @@ MonoBehaviour:
   enemyMaxHealth: 0
   playerCurrentHealth: 0
   enemyCurrentHealth: 0
+  armyCastleMaxHealth: 0
+  enemyCastleMaxHealth: 0
+  armyCastleCurrentHealth: 0
+  enemyCastleCurrentHealth: 0
 --- !u!70 &6714449035338865736
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2186,6 +2190,9 @@ MonoBehaviour:
   TargetLayer:
     serializedVersion: 2
     m_Bits: 64
+  castleTargetLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &8892773661626937559
 GameObject:
   m_ObjectHideFlags: 0

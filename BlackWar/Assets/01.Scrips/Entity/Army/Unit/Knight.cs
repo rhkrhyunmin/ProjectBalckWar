@@ -13,6 +13,7 @@ public class Knight : Army
     protected override void Awake()
     {
         base.Awake();
+        Debug.Log(castleLayer.value);
     }
 
     protected override void Start()

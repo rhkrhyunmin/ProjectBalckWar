@@ -15,10 +15,12 @@ public class EnemyEntityAttackData : MonoBehaviour
     public virtual void MeleeAttack()
     {
         DamageCasterCompo.EnemyCastDamage();
+        DamageCasterCompo.EnemyCastleCastDamage();
     }
 
     public virtual void CanonRangeAttack()
     {
-        
+        DamageCasterCompo.EnemyCastDamage();
+        DamageCasterCompo.EnemyCastleCastDamage();
     }
 }

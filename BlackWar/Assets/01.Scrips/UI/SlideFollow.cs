@@ -7,7 +7,7 @@ public class SlideFollow : MonoBehaviour
 {
     public GameObject targetObject;  
     public Slider slider;           
-    private Vector3 offset = new Vector3(0, -8, 0);  
+    private Vector3 offset = new Vector3(0, -20, 0);  
 
     private Camera mainCamera;       
 
