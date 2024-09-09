@@ -22,7 +22,7 @@ public class EnemyCastleControl : MonoBehaviour
 
     void Start()
     {
-        //StartCoroutine(SpawnEnemiesPeriodically()); // 코루틴으로 적 주기적으로 소환
+        StartCoroutine(SpawnEnemiesPeriodically()); // 코루틴으로 적 주기적으로 소환
     }
 
     private void Update()

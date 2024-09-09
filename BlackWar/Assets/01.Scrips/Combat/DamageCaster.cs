@@ -98,8 +98,8 @@ public class DamageCaster : MonoBehaviour
         IDamageable damageable = colliders[0].GetComponent<IDamageable>();
         if (damageable != null)
         {
-            int damage = (int)_enemy.Stat.AttackPower.GetValue();
-            damageable.ArmyApplyDamage(damage);
+            int damage = (int)_army.Stat.AttackPower.GetValue();
+            damageable.EnemyApplyDamage(damage);
         }
     }
 
@@ -107,8 +107,6 @@ public class DamageCaster : MonoBehaviour
 
     public void ArmyCastleCastDamage()
     {
-        Debug.Log("333");
-
             var _castleColliders = Physics2D.OverlapCircleAll(transform.position, _detectRange, _army.castleLayer);
 
             if (_castleColliders.Length == 0)

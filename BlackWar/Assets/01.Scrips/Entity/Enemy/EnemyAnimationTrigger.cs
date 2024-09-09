@@ -23,6 +23,6 @@ public class EnemyAnimationTrigger : MonoBehaviour
 
     public void DeadTrigger()
     {
-        _enemy.HealthCompo.Dead();
+        PoolManager.Instance.Push(_enemy);
     }
 }

@@ -94,9 +94,9 @@ public class Health : MonoBehaviour, IDamageable
         _anim.speed = 1f;
 
         _anim.SetBool(HASH_DEAD, true);
-        _collider.enabled = false;
+        //_collider.enabled = false;
         _owner.IsDead = true;
-        _owner.enabled = false;
+        //_owner.enabled = false;
     }
 
     public void OnEnemyDied()
@@ -108,9 +108,9 @@ public class Health : MonoBehaviour, IDamageable
         _enemyAnim.speed = 1f;
 
         _enemyAnim.SetBool(HASH_DEAD, true);
-        _collider.enabled = false;
+        //_collider.enabled = false;
         _enemyOwner.IsDead = true;
-        _enemyOwner.enabled = false;
+        //_enemyOwner.enabled = false;
     }
 
     public void ArmyCastleApplyDamage(int damage)
@@ -121,17 +121,5 @@ public class Health : MonoBehaviour, IDamageable
     public void EnemyCastleApplyDamage(int damage)
     {
         enemyCastleCurrentHealth -= damage;
-    }
-
-    public void Dead()
-    {
-        if(_owner != null)
-        {
-            PoolManager.Instance.Push(_owner);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 }
