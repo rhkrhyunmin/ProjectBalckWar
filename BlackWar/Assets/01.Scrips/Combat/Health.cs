@@ -11,7 +11,7 @@ public class Health : MonoBehaviour, IDamageable
     protected Army _owner;
     protected Enemy _enemyOwner;
 
-    protected Animator _anim;
+    protected Animator _anim, _enemyAnim;
     protected Collider2D _collider;
 
     public int playerMaxHealth;
@@ -37,6 +37,8 @@ public class Health : MonoBehaviour, IDamageable
         _collider = GetComponent<Collider2D>();
         if(_owner != null )
         _anim = transform.Find("Visual").GetComponent<Animator>();
+        if(_enemyOwner != null )
+        _enemyAnim = transform.Find("Visual").GetComponent<Animator>();
     }
 
     public void PlayerSetHealth(PlayerStat onwer)
@@ -99,13 +101,13 @@ public class Health : MonoBehaviour, IDamageable
 
     public void OnEnemyDied()
     {
-        var parameters = _anim.parameters;
+        var parameters = _enemyAnim.parameters;
         foreach (var param in parameters)
-            _anim.SetBool(param.name, false);
+            _enemyAnim.SetBool(param.name, false);
 
-        _anim.speed = 1f;
+        _enemyAnim.speed = 1f;
 
-        _anim.SetBool(HASH_DEAD, true);
+        _enemyAnim.SetBool(HASH_DEAD, true);
         _collider.enabled = false;
         _enemyOwner.IsDead = true;
         _enemyOwner.enabled = false;
