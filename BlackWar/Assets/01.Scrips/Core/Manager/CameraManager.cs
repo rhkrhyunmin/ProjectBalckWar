@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public Camera camera;
+    private Camera camera;
     public float moveSpeed = 5f;
     public float dragSpeed = 0.1f;
 
@@ -13,8 +13,14 @@ public class CameraManager : MonoBehaviour
 
     private Vector2 dragOrigin;
 
+    private void Start()
+    {
+        
+    }
+
     void Update()
     {
+        camera = Camera.main;
         // 카메라의 x 좌표가 MaxDistance + 3 이하이면서 MinDistance - 3 이상인 경우에만 이동 가능
         if (camera.transform.position.x <= MaxDictance + 3 && camera.transform.position.x >= MinDictance - 3)
         {
@@ -37,12 +43,10 @@ public class CameraManager : MonoBehaviour
             // 키보드 방향키 처리
             if (Input.GetKey(KeyCode.D))
             {
-                Debug.Log("123");
                 MoveCamera(moveSpeed * Time.deltaTime);
             }
             else if (Input.GetKey(KeyCode.A))
             {
-                Debug.Log("123");
                 MoveCamera(-moveSpeed * Time.deltaTime);
             }
         }
