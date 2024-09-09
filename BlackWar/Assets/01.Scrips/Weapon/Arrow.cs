@@ -5,6 +5,7 @@ using UnityEngine;
 public class Arrow : PoolableMono
 {
     private Quaternion rotation;
+    private Rigidbody2D rb;
 
     public Quaternion Rotation
     {
@@ -25,4 +26,32 @@ public class Arrow : PoolableMono
         rotation = transform.rotation;
     }
 
+    // Rigidbody2D 초기화
+    public void Initialize(Rigidbody2D rigidbody2D)
+    {
+        rb = rigidbody2D;
+    }
+
+    void Update()
+    {
+        if (rb != null && rb.velocity != Vector2.zero)
+        {
+            RotateTowardsTarget(transform, rb.velocity);
+        }
+    }
+
+    // 발사체가 나아가는 방향으로 회전시키는 함수
+    void RotateTowardsTarget(Transform objTransform, Vector2 velocity)
+    {
+        float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+        objTransform.rotation = Quaternion.Euler(0, 0, angle - 90f);
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ground"))
+        {
+            PoolManager.Instance.Push(this);
+        }
+    }
 }

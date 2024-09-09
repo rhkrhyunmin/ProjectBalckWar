@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7276121630843132374}
   - component: {fileID: 4029230087814437051}
   - component: {fileID: 4545351729576635519}
+  - component: {fileID: 7000056457531869523}
   - component: {fileID: 7415778321604365205}
   m_Layer: 0
   m_Name: Arrow
@@ -99,15 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3587810c52fbd574e969dc2f65aa13a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 0
-  sameLifeCycle: 0
-  weaponType: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!50 &4545351729576635519
 Rigidbody2D:
   serializedVersion: 4
@@ -135,6 +127,51 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &7000056457531869523
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110698442132420229}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.000000059604645, y: -0.04048848}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.56, y: 2.56}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.4748429, y: 2.479023}
+  m_EdgeRadius: 0
 --- !u!114 &7415778321604365205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,10 +186,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolType: 101
   sameLifeCycle: 0
-  weaponType: 1
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 0

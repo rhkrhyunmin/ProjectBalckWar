@@ -7,7 +7,6 @@ public class CastleControl : RangedAttack
 {
     public GameObject BowSpawn;
 
-
     public CastleSO castleStat;
     public LayerMask enemyLayer;
     public SlideFollow slideFollow;

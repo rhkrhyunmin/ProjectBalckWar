@@ -32,13 +32,6 @@ public class RangedAttack : MonoBehaviour
 
         rb.velocity = launchVelocity;
         RotateTowardsTarget(obj.transform, rb.velocity);
-
-        if (obj.TryGetComponent<ProjectileUpdater>(out ProjectileUpdater updater) == false)
-        {
-            updater = obj.gameObject.AddComponent<ProjectileUpdater>();
-        }
-
-        updater.Initialize(rb);
     }
 
 
@@ -47,21 +40,19 @@ public class RangedAttack : MonoBehaviour
     {
         float displacementX = targetPosition.x - startPosition.x;
         float displacementY = targetPosition.y - startPosition.y;
-
         float gravity = Mathf.Abs(Physics2D.gravity.y);
 
-        float angle = Mathf.Deg2Rad;
+        float angle = 45 * Mathf.Deg2Rad;  // 45도 각도로 발사
 
         float speedX = Mathf.Cos(angle) * projectileSpeed;
-        float speedY = Mathf.Sin(angle) * projectileSpeed;
-
         float timeToTarget = Mathf.Abs(displacementX / speedX);
-        float velocityY = (displacementY + 0.5f * gravity * timeToTarget * timeToTarget) / timeToTarget;
 
+        float velocityY = (displacementY + 0.5f * gravity * timeToTarget * timeToTarget) / timeToTarget;
         Vector2 launchVelocity = new Vector2(speedX, velocityY);
 
         return launchVelocity;
     }
+
 
     // 직선으로 발사할 때의 발사 속도를 계산하는 함수
     Vector2 CalculateStraightlineVelocity(Vector3 startPosition, Vector3 targetPosition, float projectileSpeed)
@@ -79,41 +70,6 @@ public class RangedAttack : MonoBehaviour
     void RotateTowardsTarget(Transform objTransform, Vector2 velocity)
     {
         float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
-        objTransform.rotation = Quaternion.Euler(0, 0, angle - 90f);
-    }
-
-}
-
-public class ProjectileUpdater : PoolableMono
-{
-    private Rigidbody2D rb;
-
-    // Rigidbody2D 초기화
-    public void Initialize(Rigidbody2D rigidbody2D)
-    {
-        rb = rigidbody2D;
-    }
-
-    void Update()
-    {
-        if (rb != null && rb.velocity != Vector2.zero)
-        {
-            RotateTowardsTarget(transform, rb.velocity);
-        }
-    }
-
-    // 발사체가 나아가는 방향으로 회전시키는 함수
-    void RotateTowardsTarget(Transform objTransform, Vector2 velocity)
-    {
-        float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
-        objTransform.rotation = Quaternion.Euler(0, 0, angle - 90f);
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Ground"))
-        {
-            PoolManager.Instance.Push(this);
-        }
+        objTransform.rotation = Quaternion.Euler(0, 0, angle); // 각도 조정
     }
 }
