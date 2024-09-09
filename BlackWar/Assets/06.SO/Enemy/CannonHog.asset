@@ -25,7 +25,7 @@ MonoBehaviour:
     _baseValue: 0
     modifiers: []
   AttackDistance:
-    _baseValue: 40
+    _baseValue: 15
     modifiers: []
   AttackDelay:
     _baseValue: 0

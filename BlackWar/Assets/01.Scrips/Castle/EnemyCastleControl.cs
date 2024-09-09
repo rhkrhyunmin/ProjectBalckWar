@@ -84,19 +84,19 @@ public class EnemyCastleControl : MonoBehaviour
 
         if (healthPercentage > 0.75f)
         {
-            return (randomValue < 0.6f) ? PoolType.Hog : PoolType.CannonHog;
+            return (randomValue < 0.6f) ? PoolType.BigZombie : PoolType.BigZombie;
         }
         else if (healthPercentage > 0.6f)
         {
-            return (randomValue < 0.5f) ? PoolType.CannonHog : PoolType.CannonHog;
+            return (randomValue < 0.5f) ? PoolType.BigZombie : PoolType.BigZombie;
         }
         else if (healthPercentage > 0.45f)
         {
-            return (randomValue < 0.5f) ? PoolType.Hog : PoolType.CannonHog;
+            return (randomValue < 0.5f) ? PoolType.BigZombie : PoolType.BigZombie;
         }
         else
         {
-            return (randomValue < 0.3f) ? PoolType.Hog : PoolType.CannonHog;
+            return (randomValue < 0.3f) ? PoolType.BigZombie : PoolType.BigStrongZombie;
         }
     }
 

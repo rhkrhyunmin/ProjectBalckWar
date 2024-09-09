@@ -15,15 +15,27 @@ public class PlayerArrow : MonoBehaviour
         _damageCaster = GetComponent<DamageCaster>();
     }
 
-    public virtual void Fire(Vector2 targetDir)
+    public virtual void Fire(Transform targetDir)
     {
-        Vector2 normalizedDir = targetDir.normalized;
+        // Set the velocity
+        _rigid.velocity = targetDir.right * _arrowPower;
 
-        _rigid.velocity = normalizedDir * _arrowPower;
-      
+        // Rotate the arrow in the direction of the velocity
+        float angle = Mathf.Atan2(_rigid.velocity.y, _rigid.velocity.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+
         StartCoroutine(WaitForDestroy());
     }
 
+    void FixedUpdate()
+    {
+        // Continuously rotate the arrow to follow its velocity
+        if (_rigid.velocity.magnitude > 0.1f)
+        {
+            float angle = Mathf.Atan2(_rigid.velocity.y, _rigid.velocity.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, -90);
+        }
+    }
 
     IEnumerator WaitForDestroy()
     {

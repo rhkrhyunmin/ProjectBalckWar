@@ -12,14 +12,14 @@ public class ArmyRangeAttackData : ArmyEntityAttackData
     public override void RangerAttack()
     {
         RaycastHit2D hit = Physics2D.Raycast(_firePos.position, _firePos.right, Mathf.Infinity, enemyLayer);
-
+        
         if (hit.collider != null)
         {
-            Vector2 targetDir = _firePos.transform.position - hit.transform.position;
+            Transform target = hit.transform;
 
             PlayerArrow _arrowPrefab = Instantiate(_arrow, _firePos.position, _firePos.rotation);
-            
-            _arrowPrefab.Fire(targetDir);
+
+            _arrowPrefab.Fire(target);
         }
     }
 }
