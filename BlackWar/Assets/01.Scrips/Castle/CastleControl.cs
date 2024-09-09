@@ -42,7 +42,7 @@ public class CastleControl : RangedAttack
     {
         timer += Time.deltaTime; // timer에 경과 시간을 누적
 
-        if (timer > 0.5f)
+        if (timer > 2f)
         {
             Fire(BowSpawn.transform.position,PoolManager.Instance.Pop(PoolType.Arrow,BowSpawn.transform.position),5);
             timer = 0;
