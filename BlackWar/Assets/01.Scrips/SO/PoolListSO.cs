@@ -12,7 +12,9 @@ public enum PoolType
     Ninja = 100,
     Arrow,
     Hog,
-    CannonHog
+    CannonHog,
+    BigZombie,
+    BigStrongZombie
 }
 
 [Serializable]
