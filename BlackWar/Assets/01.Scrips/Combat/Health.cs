@@ -9,10 +9,10 @@ public class Health : MonoBehaviour, IDamageable
     protected readonly int HASH_DEAD = Animator.StringToHash("Dead");
 
     protected Army _owner;
+    protected Enemy _enemyOwner;
 
     protected Animator _anim;
-    protected NavMeshAgent _agent;
-    protected Collider _collider;
+    protected Collider2D _collider;
 
     public int playerMaxHealth;
     public int enemyMaxHealth;
@@ -33,7 +33,8 @@ public class Health : MonoBehaviour, IDamageable
     protected virtual void Awake()
     {
         _owner = GetComponent<Army>();
-        _collider = GetComponent<Collider>();
+        _enemyOwner = GetComponent<Enemy>();
+        _collider = GetComponent<Collider2D>();
         if(_owner != null )
         _anim = transform.Find("Visual").GetComponent<Animator>();
     }
@@ -42,21 +43,12 @@ public class Health : MonoBehaviour, IDamageable
     {
         _playerStat = onwer;
         playerCurrentHealth = playerMaxHealth = (int)onwer.MaxHp.GetValue();
-
-        if(playerCurrentHealth <= 0)
-        {
-            OnDied();
-        }
     }
 
     public void EnemySetHealth(EnemyStat onwer)
     {
         _enemyStat = onwer;
         enemyCurrentHealth = enemyMaxHealth = (int)onwer.MaxHp.GetValue();
-        if(enemyCurrentHealth <= 0)
-        {
-            OnDied();
-        }
     }
 
     public void ArmyCastleSetHealth(CastleSO onwer)
@@ -74,14 +66,24 @@ public class Health : MonoBehaviour, IDamageable
     public void ArmyApplyDamage(int damage)
     {
         playerCurrentHealth -= damage;
+        
+        if(playerCurrentHealth <= 0)
+        {
+            OnArmyDied();
+        }
     }
 
     public void EnemyApplyDamage(int damage)
     {
         enemyCurrentHealth -= damage;
+
+        if (enemyCurrentHealth <= 0)
+        {
+            OnEnemyDied();
+        }
     }
 
-    public void OnDied()
+    public void OnArmyDied()
     {
         var parameters = _anim.parameters;
         foreach (var param in parameters)
@@ -90,10 +92,23 @@ public class Health : MonoBehaviour, IDamageable
         _anim.speed = 1f;
 
         _anim.SetBool(HASH_DEAD, true);
-        _agent.enabled = false;
         _collider.enabled = false;
         _owner.IsDead = true;
         _owner.enabled = false;
+    }
+
+    public void OnEnemyDied()
+    {
+        var parameters = _anim.parameters;
+        foreach (var param in parameters)
+            _anim.SetBool(param.name, false);
+
+        _anim.speed = 1f;
+
+        _anim.SetBool(HASH_DEAD, true);
+        _collider.enabled = false;
+        _enemyOwner.IsDead = true;
+        _enemyOwner.enabled = false;
     }
 
     public void ArmyCastleApplyDamage(int damage)

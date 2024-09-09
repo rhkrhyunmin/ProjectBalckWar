@@ -21,7 +21,7 @@ public class EnemyAnimationTrigger : MonoBehaviour
         _enemy.AttackCompo.CanonRangeAttack();
     }
 
-    public void Dead()
+    public void DeadTrigger()
     {
         _enemy.HealthCompo.Dead();
     }

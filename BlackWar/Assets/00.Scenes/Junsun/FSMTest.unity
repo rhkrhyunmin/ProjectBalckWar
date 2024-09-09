@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3380844962766112895, guid: 4693ebd4a6cb7c541a57799ec078f5a0, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8400833099812204935, guid: 4693ebd4a6cb7c541a57799ec078f5a0, type: 3}
       propertyPath: m_Name
       value: Knight_FSMTesting
@@ -178,7 +182,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8400833099812204935, guid: 4693ebd4a6cb7c541a57799ec078f5a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1559992590}
   m_SourcePrefab: {fileID: 100100000, guid: 4693ebd4a6cb7c541a57799ec078f5a0, type: 3}
 --- !u!1 &1135252160
 GameObject:
@@ -317,6 +324,25 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!1 &1559992583 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8400833099812204935, guid: 4693ebd4a6cb7c541a57799ec078f5a0, type: 3}
+  m_PrefabInstance: {fileID: 394700982}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1559992590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559992583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49f710aee901ba64880a5e9f57000726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolType: 1
+  sameLifeCycle: 0
 --- !u!1001 &5463475100239358774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -385,6 +411,10 @@ PrefabInstance:
     - target: {fileID: 422348415031619636, guid: ead93015b8a94184195781c4960e035b, type: 3}
       propertyPath: m_Name
       value: CannonHog
+      objectReference: {fileID: 0}
+    - target: {fileID: 422348415031619636, guid: ead93015b8a94184195781c4960e035b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 558386476993645882, guid: ead93015b8a94184195781c4960e035b, type: 3}
       propertyPath: m_LocalPosition.x
