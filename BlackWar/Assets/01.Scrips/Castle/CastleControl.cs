@@ -44,7 +44,7 @@ public class CastleControl : RangedAttack
 
         if (timer > 0.5f)
         {
-            StartCoroutine(ShootProjectile(BowSpawn.transform,PoolManager.Instance.Pop(PoolType.Arrow,BowSpawn.transform.position), enemy.transform,2,10, false));
+            Fire(BowSpawn.transform.position,PoolManager.Instance.Pop(PoolType.Arrow,BowSpawn.transform.position),5);
             timer = 0;
         }
     }
@@ -76,9 +76,4 @@ public class CastleControl : RangedAttack
 
         BowSpawn.transform.eulerAngles = currentRotation;
     }
-
-    /*public void OnHit(float damage)
-    {
-        currentHp -= damage;
-    }*/
 }
