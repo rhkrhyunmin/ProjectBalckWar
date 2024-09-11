@@ -49,8 +49,9 @@ public class EnemyCastleControl : MonoBehaviour
 
         while (HealthCompo.enemyCastleCurrentHealth > 0)
         {
-            yield return StartCoroutine(SpawnBasedOnTowerHealth());
-            yield return new WaitForSeconds(10); // 한 번 소환 후 10초 대기
+            float randomValue = Random.Range(5, 10);
+            yield return StartCoroutine(SpawnBasedOnTowerHealth()); // 수정된 부분
+            yield return new WaitForSeconds(randomValue);
         }
 
         isSpawning = false; // 코루틴 완료 후 다시 소환 가능하게 설정
@@ -65,7 +66,7 @@ public class EnemyCastleControl : MonoBehaviour
         {
             PoolType enemyType = GetEnemyTypeBasedOnHealth(healthPercentage);
             SpawnEnemy(enemyType);
-            yield return new WaitForSeconds(3); // 각 적 사이의 대기 시간
+            yield return new WaitForSeconds(4); // 각 적 사이의 대기 시간
         }
     }
 
